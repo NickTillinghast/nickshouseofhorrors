@@ -1,0 +1,29 @@
+/*
+  Breakpoints (CSS variables don't work inside @media, so use these numbers directly)
+    sm   480px
+    md   768px
+    lg   1024px
+    xl   1280px
+    xxl  1536px
+
+  Mobile-first:   @media (min-width: 768px) { ... }   768px and wider
+  Smaller than:   @media (max-width: 767px) { ... }   narrower than 768px
+*/
+
+:root {
+  --color-background: #0a0a0a;
+  --color-surface: #141414;
+  --color-surface-raised: #1f1f1f;
+  --color-border: #2a2a2a;
+
+  --color-text: #ededed;
+  --color-text-muted: #999999;
+
+  --color-blood: #b00000;
+  --color-blood-dark: #7a0000;
+  --color-blood-light: #e03030;
+
+  --color-bone: #e8dfc8;
+  --color-success: #3a9a5b;
+  --color-warning: #d9a400;
+}

@@ -1,3 +1,5 @@
+@import "../layout/variables.css";
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
