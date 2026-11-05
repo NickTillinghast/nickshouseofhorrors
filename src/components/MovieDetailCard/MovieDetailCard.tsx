@@ -36,10 +36,21 @@ export default function MovieDetailCard({ movie, full = false }: MovieDetailCard
       )}
 
       <div className={styles.info}>
-        <h2 className={styles.title}>
-          {movie.title} {year && <span className={styles.year}>({year})</span>}
-        </h2>
-
+        <div className={styles.titleContainer}>
+          <div>
+            <h2 className={styles.title}>
+              {movie.title} {year && <span className={styles.year}>({year})</span>}
+            </h2>
+          </div>
+          <div>
+            <Image
+              src="/assets/anatomical-heart-svgrepo-com.svg"
+              alt="Nick's House of Horrors entrance"
+              width={30}
+              height={30}
+            />
+          </div>
+        </div>
         {movie.tagline && <p className={styles.tagline}>{movie.tagline}</p>}
 
         <ul className={styles.meta}>

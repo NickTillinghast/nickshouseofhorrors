@@ -1,150 +1,49 @@
-.page {
-  --background: #fafafa;
-  --foreground: #fff;
-
-  --text-primary: #000;
-  --text-secondary: #666;
-
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-  --button-secondary-border: #ebebeb;
-
+.splash {
   display: flex;
-  flex: 1;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-geist-sans);
-  background-color: var(--background);
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  background: #0b0303;
 }
 
-.main {
-  display: flex;
-  flex: 1;
-  width: 100%;
-  max-width: 800px;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  background-color: var(--foreground);
-  padding: 120px 60px;
+/* Matches the image's 3:2 shape and fits the screen, so the text stays in the mouth */
+.scene {
+  position: relative;
+  width: min(100vw, 150dvh);
+  aspect-ratio: 3 / 2;
+  flex-shrink: 0;
+  container-type: inline-size;
 }
 
-.intro {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  gap: 24px;
-}
-
-.intro h1 {
-  max-width: 320px;
-  font-size: 40px;
-  font-weight: 600;
-  line-height: 48px;
-  letter-spacing: -2.4px;
-  text-wrap: balance;
-  color: var(--text-primary);
-}
-
-.intro p {
-  max-width: 440px;
-  font-size: 18px;
-  line-height: 32px;
-  text-wrap: balance;
-  color: var(--text-secondary);
-}
-
-.intro a {
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-.ctas {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  max-width: 440px;
-  gap: 16px;
-  font-size: 14px;
-}
-
-.ctas a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  padding: 0 16px;
-  border-radius: 128px;
-  border: 1px solid transparent;
-  transition: 0.2s;
-  cursor: pointer;
-  width: fit-content;
-  font-weight: 500;
-}
-
-a.primary {
-  background: var(--text-primary);
-  color: var(--background);
-  gap: 8px;
-}
-
-a.secondary {
-  border-color: var(--button-secondary-border);
-}
-
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  a.primary:hover {
-    background: var(--button-primary-hover);
-    border-color: transparent;
-  }
-
-  a.secondary:hover {
-    background: var(--button-secondary-hover);
-    border-color: transparent;
+/* Phones held upright: zoom in on the middle so the sign and clown fill the width.
+   The curtains on the sides get cropped and the top and bottom edges fade into the background. */
+@media (orientation: portrait) {
+  .scene {
+    width: min(167vw, 150dvh);
+    mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
   }
 }
 
-@media (max-width: 600px) {
-  .main {
-    padding: 48px 24px;
-  }
-
-  .intro {
-    gap: 16px;
-  }
-
-  .intro h1 {
-    font-size: 32px;
-    line-height: 40px;
-    letter-spacing: -1.92px;
-  }
+/* Centered in the clown's mouth */
+.enter {
+  position: absolute;
+  left: 50%;
+  top: 67%;
+  transform: translate(-50%, -50%);
+  color: #ff1a1a;
+  font-size: 6cqw;
+  line-height: 0.95;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 0 0 0.15em #ff0000, 0 0 0.4em #8b0000, 0 0.05em 0.05em #000;
+  transition: color 0.2s, text-shadow 0.2s, transform 0.2s;
 }
 
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
-  }
-
-  .page {
-    --background: #000;
-    --foreground: #000;
-
-    --text-primary: #ededed;
-    --text-secondary: #999;
-
-    --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
-    --button-secondary-border: #1a1a1a;
-  }
-}
-
-.code {
-  font-family: var(--font-geist-mono);
-  font-size: 0.9em;
-  background: color-mix(in srgb, currentColor 8%, transparent);
-  padding: 0.1em 0.4em;
-  border-radius: 6px;
+.enter:hover,
+.enter:focus-visible {
+  color: #ff4d4d;
+  text-shadow: 0 0 0.25em #ff0000, 0 0 0.8em #ff0000, 0 0.05em 0.05em #000;
+  transform: translate(-50%, -50%) scale(1.06);
 }

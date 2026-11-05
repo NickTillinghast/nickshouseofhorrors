@@ -7,6 +7,10 @@
   color: var(--color-text);
 }
 
+.titleContainer {
+  display: flex;
+}
+
 .poster {
   width: 200px;
   height: auto;

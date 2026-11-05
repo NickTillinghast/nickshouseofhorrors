@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import styles from "./Navbar.module.css";
 
 const links = [
-  { href: "/", label: "Home" },
+  { href: "/home", label: "Home" },
   { href: "/movies", label: "Movies" },
   { href: "/search", label: "Search" },
   { href: "/about", label: "About" },
@@ -19,7 +19,7 @@ export default function Navbar() {
     <nav className={styles.navbar}>
       <ul className={styles.links}>
         {links.map(({ href, label }) => {
-          const isActive = href === "/" ? pathname === "/" : pathname.startsWith(href);
+          const isActive = pathname.startsWith(href);
 
           return (
             <li key={href}>
