@@ -22,6 +22,14 @@ export async function getHorrorMovies(page = 1, subgenreId?: number) {
   return { movies: res.results ?? [], totalPages: res.total_pages ?? 1 };
 }
 
+// Full details for one movie (runtime, genres, tagline) for its own page
+export async function getMovie(id: string) {
+  "use cache";
+  cacheLife("days");
+
+  return moviedb.movieInfo({ id });
+}
+
 // TMDB's /movie/top_rated can't filter by genre, so sort a horror discover by rating instead
 export async function getTopRatedHorrorMovies(count = 3, subgenreId?: number) {
   "use cache";

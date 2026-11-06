@@ -37,13 +37,22 @@
   line-height: 0.95;
   text-align: center;
   text-transform: uppercase;
-  text-shadow: 0 0 0.15em #ff0000, 0 0 0.4em #8b0000, 0 0.05em 0.05em #000;
-  transition: color 0.2s, text-shadow 0.2s, transform 0.2s;
+  text-shadow:
+    0 0 0.15em #ff0000,
+    0 0 0.4em #8b0000,
+    0 0.05em 0.05em #000;
+  transition:
+    color 0.2s,
+    text-shadow 0.2s,
+    transform 0.2s;
 }
 
 .enter:hover,
 .enter:focus-visible {
   color: #ff4d4d;
-  text-shadow: 0 0 0.25em #ff0000, 0 0 0.8em #ff0000, 0 0.05em 0.05em #000;
+  text-shadow:
+    0 0 0.25em #ff0000,
+    0 0 0.8em #ff0000,
+    0 0.05em 0.05em #000;
   transform: translate(-50%, -50%) scale(1.06);
 }

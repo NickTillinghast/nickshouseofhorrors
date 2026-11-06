@@ -3,7 +3,11 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
-    remotePatterns: [new URL("https://image.tmdb.org/t/p/**")],
+    remotePatterns: [
+      new URL("https://image.tmdb.org/t/p/**"),
+      // Google profile photos for signed-in users
+      new URL("https://lh3.googleusercontent.com/**"),
+    ],
   },
   experimental: {
     agentFeedback: true,

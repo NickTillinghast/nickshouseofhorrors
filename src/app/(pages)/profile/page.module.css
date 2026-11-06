@@ -1,0 +1,36 @@
+.header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border: 2px solid var(--color-blood);
+  border-radius: 50%;
+  background: var(--color-blood-dark);
+  color: var(--color-text);
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.name {
+  margin: 0;
+}
+
+.count {
+  margin: 4px 0 0;
+  color: var(--color-text-muted);
+}
+
+.empty {
+  color: var(--color-text-muted);
+}
+
+.empty a {
+  color: var(--color-blood-light);
+  text-decoration: underline;
+}

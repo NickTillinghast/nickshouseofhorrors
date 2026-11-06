@@ -4,5 +4,5 @@ export default function ListPage() {
       <h1>The Lists</h1>
       <p>This is the lists page.</p>
     </div>
-  )
+  );
 }

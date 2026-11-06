@@ -24,6 +24,60 @@
   color: var(--color-blood-light);
 }
 
+/* Sign in, or avatar + My Hearts + Sign out, pushed to the right */
+.signIn,
+.account {
+  margin-left: auto;
+}
+
+.account {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.signIn,
+.profileLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-text);
+  font-size: 0.9rem;
+  transition: color 0.15s;
+}
+
+.signIn:hover,
+.profileLink:hover,
+.profileLink.active {
+  color: var(--color-blood-light);
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-blood);
+  color: var(--color-text);
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.signOut {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--color-text-muted);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.signOut:hover {
+  color: var(--color-text);
+}
+
 /* below md (768px) */
 @media (max-width: 767px) {
   .navbar {

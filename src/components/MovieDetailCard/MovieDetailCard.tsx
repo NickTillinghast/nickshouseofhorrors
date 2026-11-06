@@ -75,7 +75,7 @@ export default function MovieDetailCard({
             </h2>
           </div>
           <div>
-            <FavoriteButton movieTitle={movie.title} />
+            <FavoriteButton movie={movie} />
           </div>
         </div>
         {movie.tagline && <p className={styles.tagline}>{movie.tagline}</p>}

@@ -1,0 +1,90 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: min(100%, 360px);
+}
+
+.google,
+.submit {
+  padding: 10px 16px;
+  border-radius: 999px;
+  font: inherit;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.google {
+  border: 1px solid var(--color-border);
+  background: var(--color-text);
+  color: var(--color-background);
+}
+
+.google:hover {
+  background: var(--color-bone);
+}
+
+.divider {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.emailForm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.input {
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-surface-raised);
+  color: var(--color-text);
+  font: inherit;
+}
+
+.input:focus-visible {
+  outline: 2px solid var(--color-blood-light);
+  outline-offset: 1px;
+}
+
+.submit {
+  border: 1px solid var(--color-blood);
+  background: none;
+  color: var(--color-text);
+}
+
+.submit:hover:not(:disabled) {
+  background: var(--color-blood);
+}
+
+.submit:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.sent {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.hint {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.error {
+  margin: 0;
+  color: var(--color-blood-light);
+}
