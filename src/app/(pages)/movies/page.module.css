@@ -10,3 +10,64 @@
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 480px), 1fr));
   gap: 20px;
 }
+
+.filter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.select {
+  /* Hide the browser's arrow so ours can sit closer to the text */
+  appearance: none;
+  padding: 8px 36px 8px 12px;
+  border: 1px solid var(--color-blood);
+  border-radius: 8px;
+  background: var(--color-surface)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23b00000' stroke-width='2'/%3E%3C/svg%3E")
+    no-repeat right 12px center;
+  color: var(--color-text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.select:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.pending {
+  color: var(--color-text-muted);
+}
+
+.loadMoreContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.loadMore {
+  padding: 10px 28px;
+  border: 1px solid var(--color-blood);
+  border-radius: 999px;
+  background: none;
+  color: var(--color-text);
+  font: inherit;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.loadMore:hover:not(:disabled) {
+  background: var(--color-blood);
+}
+
+.loadMore:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.error {
+  margin: 0;
+  color: var(--color-text-muted);
+}

@@ -1,0 +1,30 @@
+.favHeart {
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  /* Unsaved: gray and faded so it reads as "not picked yet" */
+  filter: grayscale(1);
+  opacity: 0.5;
+  transition:
+    filter 0.2s,
+    opacity 0.2s,
+    transform 0.2s;
+}
+
+.favHeart:hover {
+  opacity: 0.8;
+  transform: scale(1.25);
+}
+
+.favHeart:focus-visible {
+  outline: 2px solid var(--color-blood-light);
+  outline-offset: 2px;
+}
+
+/* Saved: full color */
+.saved,
+.saved:hover {
+  filter: none;
+  opacity: 1;
+}

@@ -1,7 +1,12 @@
 import Image from "next/image";
 import type { MovieResponse } from "moviedb-promise";
-import MovieModal from "./MovieModal";
+import MovieModal, { MovieModalTrigger } from "./MovieModal";
+import FavoriteButton from "./FavoriteButton";
+import WhereToWatch from "./WhereToWatch";
+import type { WatchState } from "../../hooks/useWatchSources";
 import styles from "./MovieDetailCard.module.css";
+import modalStyles from "./MovieModal.module.css";
+import watchStyles from "./WhereToWatch.module.css";
 
 const POSTER_BASE_URL = "https://image.tmdb.org/t/p/w500";
 const OVERVIEW_MAX_LENGTH = 200;
@@ -17,38 +22,60 @@ type MovieDetailCardProps = {
   movie: MovieResponse;
   // Show the whole description (used inside the modal)
   full?: boolean;
+  // Where-to-watch state from the modal, so it can load before the modal opens
+  whereToWatch?: WatchState;
+  // Top rated movies get a red border to stand out in the grid
+  featured?: boolean;
 };
 
-export default function MovieDetailCard({ movie, full = false }: MovieDetailCardProps) {
+export default function MovieDetailCard({
+  movie,
+  full = false,
+  whereToWatch,
+  featured = false,
+}: MovieDetailCardProps) {
   const year = movie.release_date?.slice(0, 4);
   const isTruncated = !full && (movie.overview?.length ?? 0) > OVERVIEW_MAX_LENGTH;
 
-  return (
-    <article className={styles.card}>
-      {movie.poster_path && (
-        <Image
-          className={styles.poster}
-          src={`${POSTER_BASE_URL}${movie.poster_path}`}
-          alt={`${movie.title} poster`}
-          width={300}
-          height={450}
-        />
-      )}
+  const poster = movie.poster_path && (
+    <Image
+      className={styles.poster}
+      src={`${POSTER_BASE_URL}${movie.poster_path}`}
+      alt={`${movie.title} poster`}
+      width={300}
+      height={450}
+    />
+  );
 
+  const card = (
+    <article
+      className={`${styles.card} ${full ? styles.cardFull : ""} ${featured ? styles.featured : ""}`}
+    >
+      {featured && <span className={styles.badge}>Top rated</span>}
+      {full
+        ? poster
+        : poster && (
+            <MovieModalTrigger
+              className={styles.posterButton}
+              aria-label={`Open details for ${movie.title}`}
+            >
+              {poster}
+            </MovieModalTrigger>
+          )}
       <div className={styles.info}>
-        <div className={styles.titleContainer}>
+        <div className={`${styles.titleContainer} ${full ? styles.titleContainerFull : ""}`}>
           <div>
             <h2 className={styles.title}>
-              {movie.title} {year && <span className={styles.year}>({year})</span>}
+              {full ? (
+                movie.title
+              ) : (
+                <MovieModalTrigger className={styles.titleButton}>{movie.title}</MovieModalTrigger>
+              )}{" "}
+              {year && <span className={styles.year}>({year})</span>}
             </h2>
           </div>
           <div>
-            <Image
-              src="/assets/anatomical-heart-svgrepo-com.svg"
-              alt="Nick's House of Horrors entrance"
-              width={30}
-              height={30}
-            />
+            <FavoriteButton movieTitle={movie.title} />
           </div>
         </div>
         {movie.tagline && <p className={styles.tagline}>{movie.tagline}</p>}
@@ -67,13 +94,27 @@ export default function MovieDetailCard({ movie, full = false }: MovieDetailCard
         )}
 
         {movie.overview && (
-          // A <div>, not a <p>, because the modal inside can't live in a paragraph
-          <div className={styles.overview}>
+          <p className={styles.overview}>
             {isTruncated ? truncate(movie.overview, OVERVIEW_MAX_LENGTH) : movie.overview}
-            {isTruncated && <MovieModal movie={movie} />}
-          </div>
+            {isTruncated && (
+              <MovieModalTrigger className={modalStyles.more}>More</MovieModalTrigger>
+            )}
+          </p>
         )}
+
+        {/* The grid only gets a button, the list of services lives in the modal */}
+        <div className={styles.watch}>
+          {full ? (
+            whereToWatch && <WhereToWatch {...whereToWatch} />
+          ) : (
+            <MovieModalTrigger className={watchStyles.button} whereToWatch>
+              How to watch
+            </MovieModalTrigger>
+          )}
+        </div>
       </div>
     </article>
   );
+
+  return full ? card : <MovieModal movie={movie}>{card}</MovieModal>;
 }

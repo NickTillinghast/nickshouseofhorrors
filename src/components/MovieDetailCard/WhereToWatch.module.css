@@ -1,0 +1,51 @@
+.button {
+  padding: 6px 14px;
+  border: 1px solid var(--color-blood);
+  border-radius: 999px;
+  background: none;
+  color: var(--color-text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.button:hover:not(:disabled) {
+  background: var(--color-blood);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.message {
+  margin: 4px 0 0;
+  color: var(--color-text-muted);
+}
+
+.sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sources a {
+  display: flex;
+  flex-direction: column;
+  padding: 6px 12px;
+  border: 1px solid var(--color-blood);
+  border-radius: 8px;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.sources a:hover {
+  background: var(--color-blood);
+}
+
+.type {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
