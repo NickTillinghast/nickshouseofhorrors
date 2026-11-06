@@ -1,0 +1,210 @@
+.reelArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.select {
+  appearance: none;
+  padding: 8px 36px 8px 12px;
+  border: 1px solid var(--color-blood);
+  border-radius: 8px;
+  background: var(--color-surface)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23b00000' stroke-width='2'/%3E%3C/svg%3E")
+    no-repeat right 12px center;
+  color: var(--color-text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.select:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.result {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: min(100%, 520px);
+  padding: 16px;
+  border: 2px solid var(--color-blood);
+  border-radius: 12px;
+  background: var(--color-surface);
+  animation: reveal 0.4s ease-out;
+}
+
+.resultPoster {
+  flex-shrink: 0;
+  width: 80px;
+  height: auto;
+  border-radius: 6px;
+}
+
+.resultInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.resultLabel {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.resultTitle {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.resultYear {
+  color: var(--color-text-muted);
+  font-weight: normal;
+}
+
+.resultActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Card sizes are a share of this frame's width (cqw), so the reel scales with the page */
+.frame {
+  width: min(100%, 760px);
+  container-type: inline-size;
+}
+
+/* The window the strip moves through; the side cards fade out at the edges */
+.viewport {
+  --card-width: 30cqw;
+  --step: 38cqw;
+
+  position: relative;
+  height: calc(var(--card-width) * 1.5 + 4.5rem);
+  overflow: hidden;
+  border-block: 2px solid var(--color-blood);
+  background: #000;
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
+/* Phones: bigger cards, the neighbors peek in from the edges */
+@container (max-width: 520px) {
+  .viewport {
+    --card-width: 46cqw;
+    --step: 54cqw;
+  }
+}
+
+.track {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  filter: url(#reel-motion-blur);
+}
+
+/* Every card sits in the center slot and is pushed sideways by --d (cards from center) */
+.card {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  width: var(--card-width);
+  margin-left: calc(var(--card-width) / -2);
+  transform: translateX(calc(var(--d) * var(--step))) scale(var(--scale));
+  transform-origin: 50% 40%;
+  opacity: var(--opacity);
+  will-change: transform;
+}
+
+.poster {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 6px;
+  background: var(--color-surface-raised);
+  box-shadow: 0 6px 18px #000;
+  user-select: none;
+}
+
+.cardTitle {
+  display: -webkit-box;
+  margin: 8px 0 0;
+  overflow: hidden;
+  color: var(--color-text);
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.25;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.spin {
+  min-width: 160px;
+  padding: 12px 32px;
+  border: 2px solid var(--color-bone);
+  border-radius: 999px;
+  background: var(--color-blood);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    scale 0.2s;
+}
+
+.spin:hover:not(:disabled) {
+  background: var(--color-blood-light);
+  scale: 1.05;
+}
+
+.spin:focus-visible {
+  outline: 3px solid var(--color-blood-light);
+  outline-offset: 3px;
+}
+
+.spin:disabled {
+  cursor: wait;
+  opacity: 0.8;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    translate: 0 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .result {
+    animation: none;
+  }
+}
