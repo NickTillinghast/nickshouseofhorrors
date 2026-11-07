@@ -8,5 +8,13 @@ import useWatchSources from "../../../../hooks/useWatchSources";
 export default function MovieDetails({ movie }: { movie: MovieResponse }) {
   const whereToWatch = useWatchSources(movie.id);
 
-  return <MovieDetailCard movie={movie} full whereToWatch={whereToWatch} />;
+  return (
+    <MovieDetailCard
+      movie={movie}
+      full
+      whereToWatch={whereToWatch}
+      showComments
+      commentsId={`comments-${movie.id}`}
+    />
+  );
 }

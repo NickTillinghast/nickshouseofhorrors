@@ -45,3 +45,28 @@ export async function getTopRatedHorrorMovies(count = 3, subgenreId?: number) {
 
   return (res.results ?? []).slice(0, count);
 }
+
+// What people are watching right now, TMDB's popularity changes daily
+export async function getPopularHorrorMovies(count = 50) {
+  "use cache";
+  cacheLife("hours");
+
+  const pages = Math.ceil(count / 20);
+  const results = await Promise.all(
+    Array.from({ length: pages }, (_, i) =>
+      moviedb.discoverMovie({
+        with_genres: HORROR_GENRE_ID,
+        sort_by: "popularity.desc",
+        // Keep out brand-new titles nobody has rated yet
+        "vote_count.gte": 50,
+        page: i + 1,
+      }),
+    ),
+  );
+
+  const seen = new Set<number>();
+  return results
+    .flatMap((res) => res.results ?? [])
+    .filter((movie) => movie.id !== undefined && !seen.has(movie.id) && seen.add(movie.id))
+    .slice(0, count);
+}

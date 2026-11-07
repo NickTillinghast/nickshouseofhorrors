@@ -2,6 +2,9 @@ import Image from "next/image";
 import type { MovieResponse } from "moviedb-promise";
 import MovieModal, { MovieModalTrigger } from "./MovieModal";
 import FavoriteButton from "./FavoriteButton";
+import CommentBubble from "../Comments/CommentBubble";
+import CommentSection from "../Comments/CommentSection";
+import { movieThread } from "../../lib/comments";
 import WhereToWatch from "./WhereToWatch";
 import type { WatchState } from "../../hooks/useWatchSources";
 import styles from "./MovieDetailCard.module.css";
@@ -26,6 +29,9 @@ type MovieDetailCardProps = {
   whereToWatch?: WatchState;
   // Top rated movies get a red border to stand out in the grid
   featured?: boolean;
+  // Show the comment section (full cards only)
+  showComments?: boolean;
+  commentsId?: string;
 };
 
 export default function MovieDetailCard({
@@ -33,6 +39,8 @@ export default function MovieDetailCard({
   full = false,
   whereToWatch,
   featured = false,
+  showComments = false,
+  commentsId,
 }: MovieDetailCardProps) {
   const year = movie.release_date?.slice(0, 4);
   const isTruncated = !full && (movie.overview?.length ?? 0) > OVERVIEW_MAX_LENGTH;
@@ -74,7 +82,14 @@ export default function MovieDetailCard({
               {year && <span className={styles.year}>({year})</span>}
             </h2>
           </div>
-          <div>
+          <div className={styles.cardActions}>
+            {movie.id !== undefined && (
+              <CommentBubble
+                thread={movieThread(movie.id)}
+                title={movie.title}
+                scrollTo={full ? commentsId : undefined}
+              />
+            )}
             <FavoriteButton movie={movie} />
           </div>
         </div>
@@ -112,6 +127,10 @@ export default function MovieDetailCard({
             </MovieModalTrigger>
           )}
         </div>
+
+        {/* {full && showComments && movie.id !== undefined && (
+          <CommentSection thread={movieThread(movie.id)} id={commentsId} />
+        )} */}
       </div>
     </article>
   );

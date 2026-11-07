@@ -1,0 +1,103 @@
+.listBox {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  border: 1px solid var(--color-border);
+  border-top: 3px solid var(--color-blood);
+  border-radius: 12px;
+  background: var(--color-surface);
+  overflow: hidden;
+  text-align: left;
+}
+
+.header {
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.title {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.description {
+  margin: 4px 0 0;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+/* The scrolling part; the fade at the bottom hints there's more */
+.scroller {
+  flex: 1;
+  min-height: 0;
+  max-height: 560px;
+  margin: 0;
+  padding: 6px 0;
+  overflow-y: auto;
+  list-style: none;
+  scrollbar-color: var(--color-blood-dark) transparent;
+  scrollbar-width: thin;
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 32px), transparent);
+}
+
+.scroller:focus-visible {
+  outline: 2px solid var(--color-blood-light);
+  outline-offset: -2px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 20px;
+  transition: background 0.15s;
+}
+
+.row:hover,
+.row:focus-visible {
+  background: var(--color-surface-raised);
+}
+
+.row:hover .movieTitle {
+  color: var(--color-blood-light);
+}
+
+.rank {
+  flex-shrink: 0;
+  width: 2ch;
+  color: var(--color-blood);
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.thumb {
+  flex-shrink: 0;
+  width: 40px;
+  height: 60px;
+  border-radius: 4px;
+  background: var(--color-surface-raised);
+  object-fit: cover;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.movieTitle {
+  overflow: hidden;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+
+.meta {
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+}

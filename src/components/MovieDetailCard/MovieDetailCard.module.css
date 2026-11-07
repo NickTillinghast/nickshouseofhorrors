@@ -35,6 +35,13 @@
   gap: 16px;
 }
 
+/* Comment bubble and heart, side by side */
+.cardActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 /* In the modal, keep the heart clear of the close button */
 .titleContainerFull {
   padding-right: 32px;

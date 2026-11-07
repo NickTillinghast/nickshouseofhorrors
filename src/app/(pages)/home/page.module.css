@@ -118,3 +118,43 @@
   color: var(--color-text-muted);
   line-height: 1.5;
 }
+
+/* Two columns on wide screens; the list matches the height of the heart steps */
+.split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  align-items: stretch;
+}
+
+@media (min-width: 900px) {
+  .split {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  }
+
+  /* The list takes no height of its own, so it stretches to the heart steps and scrolls inside */
+  .split > :last-child {
+    contain: size;
+  }
+}
+
+/* Next to the list, the steps sit in one column with the heart beside the text */
+.stepsStacked {
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.stepsStacked .step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 16px;
+  row-gap: 4px;
+  align-items: center;
+  padding: 16px 20px;
+  text-align: left;
+}
+
+.stepsStacked .step > :first-child {
+  grid-row: span 2;
+}

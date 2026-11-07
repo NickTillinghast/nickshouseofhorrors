@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Creepster } from "next/font/google";
 import HorrorReel from "../../../components/HorrorReel/HorrorReel";
-import { getTopRatedHorrorMovies } from "../../../lib/tmdb";
+import MovieList from "../../../components/MovieList/MovieList";
+import { getPopularHorrorMovies, getTopRatedHorrorMovies } from "../../../lib/tmdb";
 import HeartsCta from "./HeartsCta";
 import styles from "./page.module.css";
 
@@ -25,7 +26,10 @@ const HEART_STEPS = [
 
 export default async function HomePage() {
   // The reel starts with the best-loved classics, "New movies" swaps in a random set
-  const reelMovies = await getTopRatedHorrorMovies(10);
+  const [reelMovies, popularMovies] = await Promise.all([
+    getTopRatedHorrorMovies(10),
+    getPopularHorrorMovies(50),
+  ]);
 
   return (
     <main className={styles.page}>
@@ -40,29 +44,38 @@ export default async function HomePage() {
         </Link>
       </section>
 
-      <section className={styles.section} aria-labelledby="hearts-heading">
-        <h2 id="hearts-heading" className={styles.heading}>
-          How hearts work
-        </h2>
-        <ol className={styles.steps}>
-          {HEART_STEPS.map((step, i) => (
-            <li key={step.title} className={styles.step}>
-              <Image
-                className={i === 0 ? styles.stepHeartEmpty : styles.stepHeart}
-                src="/assets/anatomical-heart-svgrepo-com.svg"
-                alt=""
-                width={40}
-                height={40}
-              />
-              <h3 className={styles.stepTitle}>
-                <span className={styles.stepNumber}>{i + 1}</span> {step.title}
-              </h3>
-              <p className={styles.stepText}>{step.text}</p>
-            </li>
-          ))}
-        </ol>
-        <HeartsCta />
-      </section>
+      {/* Heart steps on the left, a scrolling top 50 on the right (stacked on phones) */}
+      <div className={styles.split}>
+        <section className={styles.section} aria-labelledby="hearts-heading">
+          <h2 id="hearts-heading" className={styles.heading}>
+            How hearts work
+          </h2>
+          <ol className={`${styles.steps} ${styles.stepsStacked}`}>
+            {HEART_STEPS.map((step, i) => (
+              <li key={step.title} className={styles.step}>
+                <Image
+                  className={i === 0 ? styles.stepHeartEmpty : styles.stepHeart}
+                  src="/assets/anatomical-heart-svgrepo-com.svg"
+                  alt=""
+                  width={40}
+                  height={40}
+                />
+                <h3 className={styles.stepTitle}>
+                  <span className={styles.stepNumber}>{i + 1}</span> {step.title}
+                </h3>
+                <p className={styles.stepText}>{step.text}</p>
+              </li>
+            ))}
+          </ol>
+          <HeartsCta />
+        </section>
+
+        <MovieList
+          title="Popular right now"
+          description="The 50 horror movies everyone's watching this week"
+          movies={popularMovies}
+        />
+      </div>
 
       <section className={styles.section} aria-labelledby="reel-heading">
         <h2 id="reel-heading" className={`${styles.heading} ${creepster.className}`}>

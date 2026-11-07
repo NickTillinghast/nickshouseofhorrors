@@ -12,6 +12,8 @@ type FavoritesContextValue = {
   user: User | null;
   isFavorite: (tmdbId?: number) => boolean;
   toggle: (movie: FavoriteMovie) => void;
+  // Opens the sign-in dialog and comes back to this page afterwards
+  openSignIn: () => void;
   signOut: () => Promise<void>;
 };
 
@@ -65,10 +67,14 @@ export default function FavoritesProvider({ children }: { children: ReactNode })
     });
   }
 
+  function openSignIn() {
+    setSignInNext(window.location.pathname + window.location.search);
+    signInRef.current?.showModal();
+  }
+
   async function toggle(movie: FavoriteMovie) {
     if (!user) {
-      setSignInNext(window.location.pathname + window.location.search);
-      signInRef.current?.showModal();
+      openSignIn();
       return;
     }
 
@@ -96,6 +102,7 @@ export default function FavoritesProvider({ children }: { children: ReactNode })
         user,
         isFavorite: (tmdbId) => tmdbId !== undefined && ids.has(tmdbId),
         toggle,
+        openSignIn,
         signOut,
       }}
     >
