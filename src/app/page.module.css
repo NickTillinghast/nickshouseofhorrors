@@ -1,4 +1,5 @@
 .splash {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -55,4 +56,49 @@
     0 0 0.8em #ff0000,
     0 0.05em 0.05em #000;
   transform: translate(-50%, -50%) scale(1.06);
+}
+
+/* A small strip of real text along the bottom, over a fade so it never fights the artwork */
+.intro {
+  position: absolute;
+  inset: auto 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 48px 16px 16px;
+  background: linear-gradient(to bottom, transparent, #0b0303 55%);
+  text-align: center;
+}
+
+.introTitle {
+  margin: 0;
+  color: #ff1a1a;
+  font-size: 1.4rem;
+  font-weight: normal;
+}
+
+.introText {
+  max-width: 520px;
+  margin: 0;
+  color: #b8a9a9;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.introLinks {
+  display: flex;
+  gap: 20px;
+  font-size: 0.85rem;
+}
+
+.introLinks a {
+  color: #ededed;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.introLinks a:hover,
+.introLinks a:focus-visible {
+  color: #ff4d4d;
 }

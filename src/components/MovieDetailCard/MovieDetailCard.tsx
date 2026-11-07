@@ -44,6 +44,8 @@ export default function MovieDetailCard({
 }: MovieDetailCardProps) {
   const year = movie.release_date?.slice(0, 4);
   const isTruncated = !full && (movie.overview?.length ?? 0) > OVERVIEW_MAX_LENGTH;
+  // A real link for search engines and new tabs, a plain click still opens the modal
+  const movieHref = movie.id !== undefined ? `/movies/${movie.id}` : undefined;
 
   const poster = movie.poster_path && (
     <Image
@@ -65,6 +67,7 @@ export default function MovieDetailCard({
         : poster && (
             <MovieModalTrigger
               className={styles.posterButton}
+              href={movieHref}
               aria-label={`Open details for ${movie.title}`}
             >
               {poster}
@@ -77,7 +80,9 @@ export default function MovieDetailCard({
               {full ? (
                 movie.title
               ) : (
-                <MovieModalTrigger className={styles.titleButton}>{movie.title}</MovieModalTrigger>
+                <MovieModalTrigger className={styles.titleButton} href={movieHref}>
+                  {movie.title}
+                </MovieModalTrigger>
               )}{" "}
               {year && <span className={styles.year}>({year})</span>}
             </h2>

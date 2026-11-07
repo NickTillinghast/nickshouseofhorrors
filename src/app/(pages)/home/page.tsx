@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Creepster } from "next/font/google";
@@ -8,6 +9,13 @@ import HeartsCta from "./HeartsCta";
 import styles from "./page.module.css";
 
 const creepster = Creepster({ weight: "400", subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  title: "Popular Horror Movies, Random Picks & Where to Watch",
+  description:
+    "See the 50 horror movies everyone's watching this week, spin the reel for a random scary movie, and heart your favorites.",
+  alternates: { canonical: "/home" },
+};
 
 const HEART_STEPS = [
   {

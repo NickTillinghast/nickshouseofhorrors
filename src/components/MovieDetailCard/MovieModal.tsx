@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
+import Link from "next/link";
 import type { MovieResponse } from "moviedb-promise";
 import MovieDetailCard from "./MovieDetailCard";
 import useWatchSources from "../../hooks/useWatchSources";
@@ -85,17 +86,39 @@ type MovieModalTriggerProps = {
   className?: string;
   whereToWatch?: boolean;
   comments?: boolean;
+  // Render a real link to the movie's page, so search engines can follow it
+  href?: string;
   "aria-label"?: string;
 };
 
-// A button that opens the nearest MovieModal
+// A button (or link) that opens the nearest MovieModal
 export function MovieModalTrigger({
   children,
   whereToWatch = false,
   comments = false,
+  href,
   ...props
 }: MovieModalTriggerProps) {
   const open = useContext(OpenModalContext);
+
+  if (href) {
+    return (
+      <Link
+        href={href}
+        // Dozens of cards per page, don't preload every movie page
+        prefetch={false}
+        onClick={(e) => {
+          // Cmd/Ctrl/Shift/middle click keep normal link behaviour (new tab, etc.)
+          if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+          e.preventDefault();
+          open?.({ whereToWatch, comments });
+        }}
+        {...props}
+      >
+        {children}
+      </Link>
+    );
+  }
 
   return (
     <button type="button" onClick={() => open?.({ whereToWatch, comments })} {...props}>

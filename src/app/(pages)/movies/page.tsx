@@ -1,9 +1,16 @@
 import { Suspense } from "react";
+import type { Metadata } from "next";
 import { getHorrorMovies, getTopRatedHorrorMovies } from "../../../lib/tmdb";
 import horrorFilters from "../../../data/horrorFilters.json";
 import MovieFeed from "./MovieFeed";
 import SubgenreFilter from "./SubgenreFilter";
 import styles from "./page.module.css";
+
+export const metadata: Metadata = {
+  title: "Horror Movies A–Z by Subgenre",
+  description:
+    "Browse horror movies from slashers and zombies to folk horror and found footage. Filter by subgenre and find out where to stream each one.",
+};
 
 // TMDB pages hold 20 movies, so start with the first two pages
 const INITIAL_PAGES = 2;

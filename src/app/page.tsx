@@ -23,6 +23,19 @@ export default function SplashPage() {
           Here
         </Link>
       </div>
+
+      {/* Real text and links, so search engines know what the site is about */}
+      <footer className={styles.intro}>
+        <h1 className={`${styles.introTitle} ${creepster.className}`}>Nicks House of Horrors</h1>
+        <p className={styles.introText}>
+          Find your next horror movie: browse by subgenre, see where to stream it, and spin the reel
+          for a random scare.
+        </p>
+        <nav className={styles.introLinks} aria-label="Explore">
+          <Link href="/movies">Browse horror movies</Link>
+          <Link href="/home">Popular this week</Link>
+        </nav>
+      </footer>
     </main>
   );
 }

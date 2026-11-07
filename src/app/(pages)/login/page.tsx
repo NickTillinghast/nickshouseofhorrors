@@ -1,10 +1,16 @@
 import { Suspense } from "react";
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { connection } from "next/server";
 import SignInForm from "../../../components/Auth/SignInForm";
 import { createClient } from "../../../lib/supabase/server";
 import { safeRedirect } from "../../../lib/safeRedirect";
 import styles from "./page.module.css";
+
+export const metadata: Metadata = {
+  title: "Sign in",
+  robots: { index: false },
+};
 
 export default function LoginPage(props: PageProps<"/login">) {
   return (
