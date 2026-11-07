@@ -1,0 +1,571 @@
+{
+  "title": "Nick's House of Horrors Trivia",
+  "version": 1,
+  "questions": [
+    {
+      "id": 1,
+      "question": "In Evil Dead II, what is the Book of the Dead called?",
+      "options": ["Codex Gigas", "Al Azif", "Necronomicon Ex-Mortis", "Liber Mortuorum"],
+      "answerIndex": 2,
+      "film": "Evil Dead II",
+      "year": 1987,
+      "difficulty": "medium",
+      "fact": "In the original 1981 film, the book was called the Naturom Demonto."
+    },
+    {
+      "id": 2,
+      "question": "What color does Herbert West's reanimation reagent glow?",
+      "options": ["Fluorescent green", "Electric blue", "Blood red", "Violet"],
+      "answerIndex": 0,
+      "film": "Re-Animator",
+      "year": 1985,
+      "difficulty": "easy",
+      "fact": "The film is loosely based on H.P. Lovecraft's story \"Herbert West–Reanimator.\""
+    },
+    {
+      "id": 3,
+      "question": "What flying weapon does the Tall Man send down the mortuary halls?",
+      "options": [
+        "A spinning saw blade",
+        "A silver sphere",
+        "A swarm of hornets",
+        "A bone-handled dagger"
+      ],
+      "answerIndex": 1,
+      "film": "Phantasm",
+      "year": 1979,
+      "difficulty": "easy",
+      "fact": "The mortuary in the film is called Morningside."
+    },
+    {
+      "id": 4,
+      "question": "Sergeant Howie flies to which island to search for a missing girl?",
+      "options": ["Lindisfarne", "Innisfree", "Skye", "Summerisle"],
+      "answerIndex": 3,
+      "film": "The Wicker Man",
+      "year": 1973,
+      "difficulty": "medium",
+      "fact": "Christopher Lee often called Lord Summerisle the best role of his career."
+    },
+    {
+      "id": 5,
+      "question": "In which German city is the ballet academy in Suspiria?",
+      "options": ["Munich", "Freiburg", "Berlin", "Hamburg"],
+      "answerIndex": 1,
+      "film": "Suspiria",
+      "year": 1977,
+      "difficulty": "hard",
+      "fact": "Dario Argento shot it on old Technicolor imbibition stock to get its saturated colors."
+    },
+    {
+      "id": 6,
+      "question": "Which future sitcom star narrates the opening crawl of The Texas Chain Saw Massacre?",
+      "options": ["Ted Danson", "Bob Saget", "John Larroquette", "Tony Danza"],
+      "answerIndex": 2,
+      "film": "The Texas Chain Saw Massacre",
+      "year": 1974,
+      "difficulty": "hard",
+      "fact": "Larroquette was reportedly paid for the narration in marijuana."
+    },
+    {
+      "id": 7,
+      "question": "Michael Myers' mask was a cheap store-bought mask of which character, painted white?",
+      "options": ["Captain Kirk", "Mr. Spock", "Emmett Kelly the clown", "Richard Nixon"],
+      "answerIndex": 0,
+      "film": "Halloween",
+      "year": 1978,
+      "difficulty": "easy",
+      "fact": "The mask reportedly cost $1.98."
+    },
+    {
+      "id": 8,
+      "question": "Who taunts \"They're coming to get you, Barbra\" in the cemetery?",
+      "options": ["Ben", "Harry", "Tom", "Johnny"],
+      "answerIndex": 3,
+      "film": "Night of the Living Dead",
+      "year": 1968,
+      "difficulty": "medium",
+      "fact": "A copyright mistake put the film in the public domain."
+    },
+    {
+      "id": 9,
+      "question": "What is the name of the puzzle box that summons the Cenobites?",
+      "options": [
+        "The Leviathan Engine",
+        "The Lament Configuration",
+        "The Lemarchand Key",
+        "The Gate of Desire"
+      ],
+      "answerIndex": 1,
+      "film": "Hellraiser",
+      "year": 1987,
+      "difficulty": "medium",
+      "fact": "The box was designed by a toymaker named Phillip Lemarchand."
+    },
+    {
+      "id": 10,
+      "question": "How does MacReady test everyone's blood for the alien?",
+      "options": [
+        "Under a UV lamp",
+        "By touching it with a heated wire",
+        "By letting a dog sniff it",
+        "By mixing it with salt"
+      ],
+      "answerIndex": 1,
+      "film": "The Thing",
+      "year": 1982,
+      "difficulty": "easy",
+      "fact": "It flopped in theaters, opening two weeks after E.T."
+    },
+    {
+      "id": 11,
+      "question": "\"Long live the new flesh\" comes from which David Cronenberg film?",
+      "options": ["Scanners", "The Brood", "eXistenZ", "Videodrome"],
+      "answerIndex": 3,
+      "film": "Videodrome",
+      "year": 1983,
+      "difficulty": "medium",
+      "fact": "Debbie Harry of Blondie co-stars as Nicki Brand."
+    },
+    {
+      "id": 12,
+      "question": "What's the name of Duane's deformed twin who lives in a wicker basket?",
+      "options": ["Belial", "Moloch", "Azazel", "Baal"],
+      "answerIndex": 0,
+      "film": "Basket Case",
+      "year": 1982,
+      "difficulty": "medium",
+      "fact": "It was shot on 16mm around Times Square by Frank Henenlotter."
+    },
+    {
+      "id": 13,
+      "question": "The Graboids attack which tiny Nevada town?",
+      "options": ["Paradise", "Perfection", "Harmony", "Serenity"],
+      "answerIndex": 1,
+      "film": "Tremors",
+      "year": 1990,
+      "difficulty": "medium",
+      "fact": "Burt and Heather Gummer's basement armory became a franchise favorite."
+    },
+    {
+      "id": 14,
+      "question": "What chemical leaks from a military drum and raises the dead?",
+      "options": ["Compound V", "Reagent X", "Trioxin", "Zyklon"],
+      "answerIndex": 2,
+      "film": "The Return of the Living Dead",
+      "year": 1985,
+      "difficulty": "medium",
+      "fact": "This film popularized the idea of zombies specifically craving brains."
+    },
+    {
+      "id": 15,
+      "question": "What creature's bite starts the zombie outbreak in Peter Jackson's Braindead (Dead Alive)?",
+      "options": [
+        "A Tasmanian blood-bat",
+        "A Sumatran rat-monkey",
+        "A Borneo fang-toad",
+        "A Peruvian spider-crab"
+      ],
+      "answerIndex": 1,
+      "film": "Braindead (Dead Alive)",
+      "year": 1992,
+      "difficulty": "easy",
+      "fact": "Lionel clears the house of zombies with a lawnmower."
+    },
+    {
+      "id": 16,
+      "question": "What is the name of the summer camp in Sleepaway Camp?",
+      "options": ["Camp Crystal Lake", "Camp Blackfoot", "Camp Redwood", "Camp Arawak"],
+      "answerIndex": 3,
+      "film": "Sleepaway Camp",
+      "year": 1983,
+      "difficulty": "hard",
+      "fact": "Its final shot is one of the most infamous twist endings in slasher history."
+    },
+    {
+      "id": 17,
+      "question": "Cropsy, the burned caretaker in The Burning, kills with what?",
+      "options": ["A machete", "Garden shears", "A pitchfork", "A fishing gaff"],
+      "answerIndex": 1,
+      "film": "The Burning",
+      "year": 1981,
+      "difficulty": "medium",
+      "fact": "Tom Savini did the effects, and it was the first film from Harvey and Bob Weinstein's Miramax."
+    },
+    {
+      "id": 18,
+      "question": "What do the Killer Klowns wrap their victims in?",
+      "options": ["Balloon animals", "Circus netting", "Cotton candy cocoons", "Popcorn shells"],
+      "answerIndex": 2,
+      "film": "Killer Klowns from Outer Space",
+      "year": 1988,
+      "difficulty": "easy",
+      "fact": "The Chiodo Brothers made it, and their spaceship looks like a circus big top."
+    },
+    {
+      "id": 19,
+      "question": "What do the Beverly Hills elite call their flesh-melding ritual in Society?",
+      "options": ["The Shunting", "The Melding", "The Gathering", "The Feast"],
+      "answerIndex": 0,
+      "film": "Society",
+      "year": 1989,
+      "difficulty": "hard",
+      "fact": "The surreal effects were by an artist credited as Screaming Mad George."
+    },
+    {
+      "id": 20,
+      "question": "In the Japanese fever dream House (Hausu), what is the white cat's name?",
+      "options": ["Yuki", "Shiro", "Blanche", "Kuro"],
+      "answerIndex": 2,
+      "film": "House (Hausu)",
+      "year": 1977,
+      "difficulty": "hard",
+      "fact": "Director Nobuhiko Obayashi built some ideas from his young daughter's nightmares."
+    },
+    {
+      "id": 21,
+      "question": "Andrzej Żuławski's Possession, with its infamous subway scene, is set in which city?",
+      "options": ["Paris", "Warsaw", "Vienna", "Berlin"],
+      "answerIndex": 3,
+      "film": "Possession",
+      "year": 1981,
+      "difficulty": "hard",
+      "fact": "Isabelle Adjani won Best Actress at Cannes for her role."
+    },
+    {
+      "id": 22,
+      "question": "Who sings \"In Heaven (Everything Is Fine)\" in Eraserhead?",
+      "options": [
+        "The Lady in the Radiator",
+        "The Man in the Planet",
+        "Mary X",
+        "The Beautiful Girl Across the Hall"
+      ],
+      "answerIndex": 0,
+      "film": "Eraserhead",
+      "year": 1977,
+      "difficulty": "medium",
+      "fact": "David Lynch shot it over roughly five years."
+    },
+    {
+      "id": 23,
+      "question": "The children of Gatlin, Nebraska worship whom?",
+      "options": [
+        "The Harvest Lord",
+        "He Who Walks Behind the Rows",
+        "The Corn King",
+        "The Scarecrow Father"
+      ],
+      "answerIndex": 1,
+      "film": "Children of the Corn",
+      "year": 1984,
+      "difficulty": "easy",
+      "fact": "It's based on a Stephen King story from Night Shift."
+    },
+    {
+      "id": 24,
+      "question": "How many times must you say his name in a mirror to summon Candyman?",
+      "options": ["Three", "Seven", "Thirteen", "Five"],
+      "answerIndex": 3,
+      "film": "Candyman",
+      "year": 1992,
+      "difficulty": "easy",
+      "fact": "Clive Barker's source story, \"The Forbidden,\" was set in Liverpool, not Chicago."
+    },
+    {
+      "id": 25,
+      "question": "Which mutant desert family member is played by Michael Berryman in The Hills Have Eyes?",
+      "options": ["Pluto", "Mars", "Jupiter", "Mercury"],
+      "answerIndex": 0,
+      "film": "The Hills Have Eyes",
+      "year": 1977,
+      "difficulty": "medium",
+      "fact": "Berryman's face became the film's iconic poster image."
+    },
+    {
+      "id": 26,
+      "question": "David and Jack are warned to \"stay on the road\" at which pub?",
+      "options": ["The Winchester", "The Slaughtered Lamb", "The Hanged Man", "The Black Dog"],
+      "answerIndex": 1,
+      "film": "An American Werewolf in London",
+      "year": 1981,
+      "difficulty": "easy",
+      "fact": "Rick Baker won the first competitive Oscar for Best Makeup for it."
+    },
+    {
+      "id": 27,
+      "question": "Which special-effects legend directed Pumpkinhead?",
+      "options": ["Rick Baker", "Tom Savini", "Rob Bottin", "Stan Winston"],
+      "answerIndex": 3,
+      "film": "Pumpkinhead",
+      "year": 1988,
+      "difficulty": "hard",
+      "fact": "It was Winston's directorial debut, after creature work on Aliens and The Terminator."
+    },
+    {
+      "id": 28,
+      "question": "In Larry Cohen's The Stuff, the parasitic goo is sold to the public as what?",
+      "options": ["A sports drink", "Hair gel", "A dessert", "Baby formula"],
+      "answerIndex": 2,
+      "film": "The Stuff",
+      "year": 1985,
+      "difficulty": "medium",
+      "fact": "Its tagline: \"Are you eating it... or is it eating you?\""
+    },
+    {
+      "id": 29,
+      "question": "Who stalks teens after hours in Chopping Mall?",
+      "options": ["A mannequin come to life", "Security robots", "A night janitor", "Mall Santa"],
+      "answerIndex": 1,
+      "film": "Chopping Mall",
+      "year": 1986,
+      "difficulty": "medium",
+      "fact": "Its original release title was Killbots."
+    },
+    {
+      "id": 30,
+      "question": "What is the name of the brain-eating parasite in Brain Damage?",
+      "options": ["Aylmer", "Gilbert", "Elroy", "Mortimer"],
+      "answerIndex": 0,
+      "film": "Brain Damage",
+      "year": 1988,
+      "difficulty": "hard",
+      "fact": "Aylmer was voiced by TV horror host John Zacherle."
+    },
+    {
+      "id": 31,
+      "question": "What cheap liquor melts the homeless who drink it in Street Trash?",
+      "options": ["Rotgut Red", "Tenafly Viper", "Bowery Blast", "Swamp Gin"],
+      "answerIndex": 1,
+      "film": "Street Trash",
+      "year": 1987,
+      "difficulty": "hard",
+      "fact": "The victims dissolve in brightly colored goo rather than blood."
+    },
+    {
+      "id": 32,
+      "question": "The Toxic Avenger protects which New Jersey town?",
+      "options": ["Tromaville", "Sludgeport", "Toxicton", "Wastewood"],
+      "answerIndex": 0,
+      "film": "The Toxic Avenger",
+      "year": 1984,
+      "difficulty": "easy",
+      "fact": "Before his toxic dip, Melvin was a mop boy at a health club."
+    },
+    {
+      "id": 33,
+      "question": "Dr. Frank-N-Furter is from the planet Transsexual in which galaxy?",
+      "options": ["Andromeda", "Transylvania", "Sirius", "Pandemonium"],
+      "answerIndex": 1,
+      "film": "The Rocky Horror Picture Show",
+      "year": 1975,
+      "difficulty": "easy",
+      "fact": "It holds the record for the longest continuous theatrical release."
+    },
+    {
+      "id": 34,
+      "question": "Which future movie star led the original 1958 The Blob?",
+      "options": ["James Dean", "Paul Newman", "Steve McQueen", "Robert Redford"],
+      "answerIndex": 2,
+      "film": "The Blob",
+      "year": 1958,
+      "difficulty": "medium",
+      "fact": "McQueen took a flat fee instead of a share of the profits and regretted it."
+    },
+    {
+      "id": 35,
+      "question": "In Carnival of Souls, what is Mary Henry's job?",
+      "options": ["Nurse", "Schoolteacher", "Switchboard operator", "Church organist"],
+      "answerIndex": 3,
+      "film": "Carnival of Souls",
+      "year": 1962,
+      "difficulty": "hard",
+      "fact": "It was made by industrial-film director Herk Harvey on a tiny budget."
+    },
+    {
+      "id": 36,
+      "question": "Black Christmas director Bob Clark later made which holiday classic?",
+      "options": ["A Christmas Story", "Home Alone", "Gremlins", "Scrooged"],
+      "answerIndex": 0,
+      "film": "Black Christmas",
+      "year": 1974,
+      "difficulty": "medium",
+      "fact": "It helped popularize the \"calls are coming from inside the house\" scare."
+    },
+    {
+      "id": 37,
+      "question": "What does Asami chant during the torture scene in Audition?",
+      "options": [
+        "\"Itai, itai, itai\"",
+        "\"Kiri kiri kiri\"",
+        "\"Shine, shine, shine\"",
+        "\"Motto, motto, motto\""
+      ],
+      "answerIndex": 1,
+      "film": "Audition",
+      "year": 1999,
+      "difficulty": "hard",
+      "fact": "\"Kiri kiri\" is usually translated as \"deeper, deeper.\""
+    },
+    {
+      "id": 38,
+      "question": "What is the name of the vengeful ghost in the original Japanese Ringu?",
+      "options": ["Kayako", "Tomie", "Samara", "Sadako"],
+      "answerIndex": 3,
+      "film": "Ringu",
+      "year": 1998,
+      "difficulty": "easy",
+      "fact": "Samara is her name in the 2002 American remake."
+    },
+    {
+      "id": 39,
+      "question": "The Latin message \"Liberate tutemet ex inferis\" translates to what?",
+      "options": [
+        "\"Hell is empty\"",
+        "\"We are already dead\"",
+        "\"Save yourself from hell\"",
+        "\"The gate is open\""
+      ],
+      "answerIndex": 2,
+      "film": "Event Horizon",
+      "year": 1997,
+      "difficulty": "medium",
+      "fact": "The crew first mishears the garbled message as \"Liberate me.\""
+    },
+    {
+      "id": 40,
+      "question": "Which missing horror novelist is investigated in In the Mouth of Madness?",
+      "options": ["Sutter Cane", "Thaddeus Grave", "Elias Thorne", "Morgan Blackwood"],
+      "answerIndex": 0,
+      "film": "In the Mouth of Madness",
+      "year": 1994,
+      "difficulty": "medium",
+      "fact": "The fictional town of Hobb's End is a nod to Quatermass and the Pit."
+    },
+    {
+      "id": 41,
+      "question": "In Fulci's The Beyond, the Louisiana hotel sits on one of how many gates of hell?",
+      "options": ["Three", "Six", "Seven", "Nine"],
+      "answerIndex": 2,
+      "film": "The Beyond",
+      "year": 1981,
+      "difficulty": "medium",
+      "fact": "It's the middle chapter of Fulci's unofficial Gates of Hell trilogy."
+    },
+    {
+      "id": 42,
+      "question": "Zombi 2 features an infamous underwater fight between a zombie and what?",
+      "options": ["A giant squid", "A shark", "A scuba diver's harpoon gun", "A moray eel"],
+      "answerIndex": 1,
+      "film": "Zombi 2 (Zombie Flesh Eaters)",
+      "year": 1979,
+      "difficulty": "easy",
+      "fact": "The zombie in the scene was played by an underwater stuntman, with a real tiger shark."
+    },
+    {
+      "id": 43,
+      "question": "Why did Cannibal Holocaust director Ruggero Deodato have to bring his actors to court?",
+      "options": [
+        "To prove they weren't actually killed",
+        "To testify about unpaid wages",
+        "To prove they were adults",
+        "To dispute a copyright claim"
+      ],
+      "answerIndex": 0,
+      "film": "Cannibal Holocaust",
+      "year": 1980,
+      "difficulty": "medium",
+      "fact": "The cast had signed contracts to stay out of the media for a year after release."
+    },
+    {
+      "id": 44,
+      "question": "In Romero's Dawn of the Dead, survivors hole up in which real shopping center?",
+      "options": [
+        "King of Prussia Mall",
+        "Dixie Square Mall",
+        "Galleria at Pittsburgh Mills",
+        "Monroeville Mall"
+      ],
+      "answerIndex": 3,
+      "film": "Dawn of the Dead",
+      "year": 1978,
+      "difficulty": "hard",
+      "fact": "Monroeville Mall is near Pittsburgh, Romero's longtime home base."
+    },
+    {
+      "id": 45,
+      "question": "What is the name of the \"domesticated\" zombie in Day of the Dead?",
+      "options": ["Bub", "Chuck", "Ted", "Buddy"],
+      "answerIndex": 0,
+      "film": "Day of the Dead",
+      "year": 1985,
+      "difficulty": "medium",
+      "fact": "Dr. Logan earns the nickname \"Frankenstein\" for his experiments."
+    },
+    {
+      "id": 46,
+      "question": "In Tod Browning's Freaks, what do the performers chant at the wedding feast?",
+      "options": [
+        "\"We accept you\"",
+        "\"Gooble gobble, one of us\"",
+        "\"Welcome to the family\"",
+        "\"Drink, drink, drink\""
+      ],
+      "answerIndex": 1,
+      "film": "Freaks",
+      "year": 1932,
+      "difficulty": "easy",
+      "fact": "It was banned in the UK for about 30 years."
+    },
+    {
+      "id": 47,
+      "question": "\"It takes all kinds of critters to make Farmer Vincent's fritters.\" What does Farmer Vincent sell?",
+      "options": ["Fried chicken", "Pies", "Smoked meats", "Sausage gravy"],
+      "answerIndex": 2,
+      "film": "Motel Hell",
+      "year": 1980,
+      "difficulty": "medium",
+      "fact": "Vincent's victims are planted in a secret garden, buried up to their necks."
+    },
+    {
+      "id": 48,
+      "question": "What's the name of the burlap-sack-wearing enforcer of Halloween rules in Trick 'r Treat?",
+      "options": ["Jack", "Pumpkin", "Sam", "Shroud"],
+      "answerIndex": 2,
+      "film": "Trick 'r Treat",
+      "year": 2007,
+      "difficulty": "easy",
+      "fact": "Sam is short for Samhain."
+    },
+    {
+      "id": 49,
+      "question": "Which phrase does Ash famously botch when retrieving the Necronomicon?",
+      "options": [
+        "\"Klaatu barada nikto\"",
+        "\"Kandar estrata amantos\"",
+        "\"Ia ia Cthulhu fhtagn\"",
+        "\"Ex nihilo nihil fit\""
+      ],
+      "answerIndex": 0,
+      "film": "Army of Darkness",
+      "year": 1992,
+      "difficulty": "easy",
+      "fact": "The phrase comes from The Day the Earth Stood Still (1951)."
+    },
+    {
+      "id": 50,
+      "question": "Chucky's real name, Charles Lee Ray, borrows from which three notorious men?",
+      "options": [
+        "Charles Starkweather, Lee Harvey Oswald, Richard Ramirez",
+        "Charles Whitman, Robert E. Lee, Ted Bundy",
+        "Charles Manson, Lee Harvey Oswald, James Earl Ray",
+        "Charles Ng, Henry Lee Lucas, Gary Ray Bowles"
+      ],
+      "answerIndex": 2,
+      "film": "Child's Play",
+      "year": 1988,
+      "difficulty": "medium",
+      "fact": "Brad Dourif has voiced Chucky in every main entry of the franchise."
+    }
+  ]
+}

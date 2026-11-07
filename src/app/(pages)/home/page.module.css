@@ -1,4 +1,5 @@
 .page {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 72px;
@@ -157,4 +158,131 @@
 
 .stepsStacked .step > :first-child {
   grid-row: span 2;
+}
+
+/* ---- Quiz teaser ---- */
+
+.quizCard {
+  justify-content: center;
+  padding: 32px 24px;
+  border: 2px solid var(--color-blood);
+  border-radius: 12px;
+  background: radial-gradient(circle at 50% 0%, #2a0000 0%, var(--color-surface) 70%);
+}
+
+.quizText {
+  max-width: 420px;
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.quizLeaders {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: min(100%, 340px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.quizLeaders li {
+  display: grid;
+  grid-template-columns: 1.5rem minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: var(--color-surface-raised);
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.quizLeaderName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.quizLeaderTime {
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Beating heart in the top-right corner ---- */
+
+/* Top-right corner of the homepage, scrolls away with the page */
+.beatingHeart {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: radial-gradient(circle, #2a0000 0%, #000 70%);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--color-blood) 55%, transparent);
+  cursor: pointer;
+  animation: heartbeat 1.6s ease-in-out infinite;
+}
+
+.beatingHeart:hover,
+.beatingHeart:focus-visible {
+  animation-duration: 0.8s;
+}
+
+.beatingHeart:focus-visible {
+  outline: 2px solid var(--color-blood-light);
+  outline-offset: 4px;
+}
+
+/* Two quick thumps then a rest, like a real heartbeat */
+@keyframes heartbeat {
+  0%,
+  40%,
+  100% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(1.15);
+  }
+  20% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .beatingHeart {
+    animation: none;
+  }
+}
+
+.heartsDialog {
+  width: min(90vw, 480px);
+}
+
+.heartsContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 40px 24px 28px;
+  color: var(--color-text);
+}
+
+.quizLeadersTitle {
+  margin: 0 0 -12px;
+  color: var(--color-warning);
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }

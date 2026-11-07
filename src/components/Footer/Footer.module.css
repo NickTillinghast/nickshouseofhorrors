@@ -1,0 +1,159 @@
+/* margin-top: auto pins it to the bottom of short pages (body is a full-height column) */
+.footer {
+  margin-top: auto;
+  padding: 48px 24px 24px;
+  border-top: 2px solid var(--color-blood);
+  background: #000;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) repeat(2, minmax(0, 1fr));
+  gap: 32px;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.name {
+  width: fit-content;
+  color: var(--color-blood);
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.tagline {
+  max-width: 360px;
+  line-height: 1.6;
+}
+
+.heading {
+  margin-bottom: 12px;
+  color: var(--color-text);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style: none;
+}
+
+.socials {
+  display: flex;
+  gap: 12px;
+  list-style: none;
+}
+
+.socials li {
+  /* Room for the drop's point above the icon */
+  padding-top: 6px;
+}
+
+/* Blood drops: a square with three round corners, turned so the sharp corner points up.
+   The icon inside turns back the other way so it stays upright */
+.social {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--color-blood);
+  border-radius: 0 50% 50% 50%;
+  background: color-mix(in srgb, var(--color-blood) 25%, transparent);
+  color: var(--color-text);
+  rotate: 45deg;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    transform 0.2s;
+}
+
+.social .icon {
+  rotate: -45deg;
+}
+
+/* Hover: the drop fills with blood and swells, like it's about to fall */
+a.social:hover,
+a.social:focus-visible {
+  background: var(--color-blood);
+  transform: scale(1.1);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--color-blood) 60%, transparent);
+}
+
+a.social:focus-visible {
+  outline: 2px solid var(--color-blood-light);
+  outline-offset: 2px;
+}
+
+.socialSoon {
+  border-color: var(--color-border);
+  background: none;
+  color: var(--color-text-muted);
+  opacity: 0.5;
+  cursor: default;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.list a,
+.bottom a {
+  transition: color 0.15s;
+}
+
+.list a:hover,
+.list a:focus-visible,
+.bottom a:hover,
+.bottom a:focus-visible {
+  color: var(--color-blood-light);
+}
+
+.bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 1080px;
+  margin: 40px auto 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.bottom a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* below md (768px): brand on top, links side by side underneath */
+@media (max-width: 767px) {
+  .columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .brand {
+    grid-column: 1 / -1;
+  }
+}

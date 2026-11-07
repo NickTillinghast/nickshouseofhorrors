@@ -260,7 +260,14 @@ function CommentForm({ placeholder, autoFocus, onSubmit, onCancel }: CommentForm
   );
 }
 
-function UsernameForm({ onSaved }: { onSaved: (username: string) => void }) {
+// Also used by the quiz, so scores show a username instead of a real name
+export function UsernameForm({
+  onSaved,
+  label = "Pick a username to start commenting",
+}: {
+  onSaved: (username: string) => void;
+  label?: string;
+}) {
   const [value, setValue] = useState("");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string>();
@@ -278,7 +285,7 @@ function UsernameForm({ onSaved }: { onSaved: (username: string) => void }) {
   return (
     <form className={styles.usernameForm} onSubmit={submit}>
       <label htmlFor="username" className={styles.usernameLabel}>
-        Pick a username to start commenting
+        {label}
       </label>
       <p className={styles.usernameHint}>
         It shows on everything you post. Don&apos;t use your real name. 3 to 20 letters, numbers or

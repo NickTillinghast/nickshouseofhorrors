@@ -1,0 +1,1076 @@
+{
+  "title": "Nick's House of Horrors Trivia: Level 2",
+  "version": 1,
+  "questions": [
+    {
+      "id": 1,
+      "question": "What is the real name of Angus Scrimm, who played the Tall Man?",
+      "options": ["Reggie Bannister", "Angus MacLeod", "Lawrence Rory Guy", "Robert Scrimshaw"],
+      "answerIndex": 2,
+      "film": "Phantasm",
+      "year": 1979,
+      "difficulty": "expert",
+      "fact": "He also wrote Grammy-winning liner notes under his real name."
+    },
+    {
+      "id": 2,
+      "question": "What was The Evil Dead's working title during production?",
+      "options": ["Book of the Dead", "The Deadites", "Into the Woods", "Cabin Fever"],
+      "answerIndex": 0,
+      "film": "The Evil Dead",
+      "year": 1981,
+      "difficulty": "hard",
+      "fact": "Distributors thought \"Book of the Dead\" sounded too much like homework."
+    },
+    {
+      "id": 3,
+      "question": "Sam Raimi's yellow car, \"The Classic,\" appears in nearly all his films. What is it?",
+      "options": [
+        "1968 Chevy Impala",
+        "1974 Dodge Dart",
+        "1973 Oldsmobile Delta 88",
+        "1971 Ford Torino"
+      ],
+      "answerIndex": 2,
+      "film": "The Evil Dead",
+      "year": 1981,
+      "difficulty": "hard",
+      "fact": "It even shows up in medieval times in Army of Darkness."
+    },
+    {
+      "id": 4,
+      "question": "In Deep Red, David Hemmings' character Marcus Daly has what job?",
+      "options": ["Crime reporter", "Art restorer", "Jazz pianist", "Psychic"],
+      "answerIndex": 2,
+      "film": "Deep Red",
+      "year": 1975,
+      "difficulty": "hard",
+      "fact": "Hemmings had starred in Antonioni's Blow-Up nine years earlier."
+    },
+    {
+      "id": 5,
+      "question": "In Inferno, which of the Three Mothers rules from New York?",
+      "options": ["Mater Tenebrarum", "Mater Sanguinis", "Mater Suspiriorum", "Mater Lachrymarum"],
+      "answerIndex": 0,
+      "film": "Inferno",
+      "year": 1980,
+      "difficulty": "expert",
+      "fact": "Mater Tenebrarum is the Mother of Darkness."
+    },
+    {
+      "id": 6,
+      "question": "In Argento's Opera, what does the killer tape beneath Betty's eyes?",
+      "options": ["A row of needles", "Shards of mirror", "Razor blades", "Fish hooks"],
+      "answerIndex": 0,
+      "film": "Opera",
+      "year": 1987,
+      "difficulty": "hard",
+      "fact": "If she blinks, the needles pierce her eyelids."
+    },
+    {
+      "id": 7,
+      "question": "In Tenebre, Peter Neal is an American visiting Rome for what reason?",
+      "options": [
+        "To direct an opera",
+        "To promote his mystery novel",
+        "To testify at a trial",
+        "To bury his brother"
+      ],
+      "answerIndex": 1,
+      "film": "Tenebre",
+      "year": 1982,
+      "difficulty": "hard",
+      "fact": "The killer is copying murders from Neal's book."
+    },
+    {
+      "id": 8,
+      "question": "What is hammered onto the witch Asa's face at the start of Black Sunday?",
+      "options": ["A burning crucifix", "A wax seal", "A silver coin", "A spiked metal mask"],
+      "answerIndex": 3,
+      "film": "Black Sunday",
+      "year": 1960,
+      "difficulty": "medium",
+      "fact": "Barbara Steele became a horror icon from this Mario Bava film."
+    },
+    {
+      "id": 9,
+      "question": "A double impalement in Friday the 13th Part 2 was lifted from which Mario Bava film?",
+      "options": ["A Bay of Blood", "Lisa and the Devil", "Shock", "Kill, Baby, Kill"],
+      "answerIndex": 0,
+      "film": "A Bay of Blood",
+      "year": 1971,
+      "difficulty": "hard",
+      "fact": "It's often called the blueprint for the American body-count slasher."
+    },
+    {
+      "id": 10,
+      "question": "Bava's Blood and Black Lace is set mostly in what kind of place?",
+      "options": ["An art gallery", "A fashion house", "A ballet school", "A convent"],
+      "answerIndex": 1,
+      "film": "Blood and Black Lace",
+      "year": 1964,
+      "difficulty": "medium",
+      "fact": "Its faceless, gloved killer became a giallo template."
+    },
+    {
+      "id": 11,
+      "question": "A priest's suicide opens a gate of hell in which town in Fulci's City of the Living Dead?",
+      "options": ["Arkham", "Salem's Lot", "Innsmouth", "Dunwich"],
+      "answerIndex": 3,
+      "film": "City of the Living Dead",
+      "year": 1980,
+      "difficulty": "hard",
+      "fact": "Dunwich is a Lovecraft reference."
+    },
+    {
+      "id": 12,
+      "question": "Who lurks in the basement in Fulci's The House by the Cemetery?",
+      "options": ["Dr. Moreau", "Dr. Butcher", "Dr. Freudstein", "Professor Kurtz"],
+      "answerIndex": 2,
+      "film": "The House by the Cemetery",
+      "year": 1981,
+      "difficulty": "hard",
+      "fact": "He survives by replacing his rotting body with victims' parts."
+    },
+    {
+      "id": 13,
+      "question": "What strange voice does the killer use in Fulci's The New York Ripper?",
+      "options": ["A robotic monotone", "A duck voice", "A baby's cry", "An opera falsetto"],
+      "answerIndex": 1,
+      "film": "The New York Ripper",
+      "year": 1982,
+      "difficulty": "expert",
+      "fact": "It was banned in the UK for decades."
+    },
+    {
+      "id": 14,
+      "question": "Lamberto Bava's Demons is set mostly inside what?",
+      "options": ["A subway train", "A movie theater", "A hospital", "A shopping mall"],
+      "answerIndex": 1,
+      "film": "Demons",
+      "year": 1985,
+      "difficulty": "medium",
+      "fact": "The demons spill out of a horror film playing at the Metropol."
+    },
+    {
+      "id": 15,
+      "question": "Who plays the cemetery caretaker Francesco Dellamorte in Cemetery Man?",
+      "options": ["Rupert Everett", "Gabriel Byrne", "Jeremy Irons", "Daniel Day-Lewis"],
+      "answerIndex": 0,
+      "film": "Cemetery Man",
+      "year": 1994,
+      "difficulty": "hard",
+      "fact": "The look of the character was based on Everett himself in the Dylan Dog comics."
+    },
+    {
+      "id": 16,
+      "question": "Who directed the Japanese cyberpunk nightmare Tetsuo: The Iron Man?",
+      "options": ["Sogo Ishii", "Takashi Miike", "Hideo Nakata", "Shinya Tsukamoto"],
+      "answerIndex": 3,
+      "film": "Tetsuo: The Iron Man",
+      "year": 1989,
+      "difficulty": "hard",
+      "fact": "Tsukamoto also plays the Metal Fetishist."
+    },
+    {
+      "id": 17,
+      "question": "How is Pinhead credited in the original Hellraiser?",
+      "options": ["Lead Cenobite", "The Priest", "Pinhead", "Hell Priest"],
+      "answerIndex": 0,
+      "film": "Hellraiser",
+      "year": 1987,
+      "difficulty": "hard",
+      "fact": "The \"Pinhead\" nickname came from the crew."
+    },
+    {
+      "id": 18,
+      "question": "What is the name of the god of Hell, shaped like a giant rotating diamond, in Hellbound: Hellraiser II?",
+      "options": ["Leviathan", "Abaddon", "Moloch", "Behemoth"],
+      "answerIndex": 0,
+      "film": "Hellbound: Hellraiser II",
+      "year": 1988,
+      "difficulty": "hard",
+      "fact": "It's the shape of the Lament Configuration's final form."
+    },
+    {
+      "id": 19,
+      "question": "Which horror director plays the killer psychiatrist Dr. Decker in Nightbreed?",
+      "options": ["Sam Raimi", "Wes Craven", "John Carpenter", "David Cronenberg"],
+      "answerIndex": 3,
+      "film": "Nightbreed",
+      "year": 1990,
+      "difficulty": "medium",
+      "fact": "The monsters hide in an underground city called Midian."
+    },
+    {
+      "id": 20,
+      "question": "Which composer wrote Candyman's haunting choral score?",
+      "options": ["Christopher Young", "Philip Glass", "John Carpenter", "Danny Elfman"],
+      "answerIndex": 1,
+      "film": "Candyman",
+      "year": 1992,
+      "difficulty": "medium",
+      "fact": "Glass reportedly disliked how the final film turned out."
+    },
+    {
+      "id": 21,
+      "question": "What is Dr. Raglan's controversial therapy called in The Brood?",
+      "options": ["Neurogenesis", "Biotransference", "Psychoplasmics", "Somafication"],
+      "answerIndex": 2,
+      "film": "The Brood",
+      "year": 1979,
+      "difficulty": "hard",
+      "fact": "Patients turn their rage into physical growths."
+    },
+    {
+      "id": 22,
+      "question": "Who plays the villain Darryl Revok in Scanners?",
+      "options": ["Michael Ironside", "Michael Rooker", "Lance Henriksen", "Jeffrey Combs"],
+      "answerIndex": 0,
+      "film": "Scanners",
+      "year": 1981,
+      "difficulty": "medium",
+      "fact": "The exploding head was done by shooting a latex head full of food scraps."
+    },
+    {
+      "id": 23,
+      "question": "Parasites spread through an apartment building in Cronenberg's Shivers. What is the building called?",
+      "options": ["The Overlook", "Starliner Towers", "Paradise Heights", "Bramford Arms"],
+      "answerIndex": 1,
+      "film": "Shivers",
+      "year": 1975,
+      "difficulty": "expert",
+      "fact": "It was Cronenberg's first commercial feature."
+    },
+    {
+      "id": 24,
+      "question": "Which adult-film star led Cronenberg's Rabid?",
+      "options": ["Traci Lords", "Linda Lovelace", "Marilyn Chambers", "Georgina Spelvin"],
+      "answerIndex": 2,
+      "film": "Rabid",
+      "year": 1977,
+      "difficulty": "hard",
+      "fact": "Cronenberg's first choice was Sissy Spacek."
+    },
+    {
+      "id": 25,
+      "question": "What is the name of Max Renn's sleazy TV station in Videodrome?",
+      "options": ["Cathode Ray Mission", "Spectacular Optical", "CIVIC-TV", "Channel Zero"],
+      "answerIndex": 2,
+      "film": "Videodrome",
+      "year": 1983,
+      "difficulty": "hard",
+      "fact": "It's Channel 83 in Toronto."
+    },
+    {
+      "id": 26,
+      "question": "Which novelty company makes the deadly masks in Halloween III: Season of the Witch?",
+      "options": ["Silver Shamrock", "Golden Harvest", "Black Lantern", "Green Clover"],
+      "answerIndex": 0,
+      "film": "Halloween III: Season of the Witch",
+      "year": 1982,
+      "difficulty": "medium",
+      "fact": "It's the only Halloween film without Michael Myers."
+    },
+    {
+      "id": 27,
+      "question": "Who composed the score for John Carpenter's The Thing?",
+      "options": ["John Carpenter", "Jerry Goldsmith", "Alan Howarth", "Ennio Morricone"],
+      "answerIndex": 3,
+      "film": "The Thing",
+      "year": 1982,
+      "difficulty": "hard",
+      "fact": "The main theme sounds so much like Carpenter that many fans assume he wrote it."
+    },
+    {
+      "id": 28,
+      "question": "Which pseudonym did John Carpenter use to write Prince of Darkness?",
+      "options": ["Frank Armitage", "Martin Quatermass", "Herbert West", "Rex Pickett"],
+      "answerIndex": 1,
+      "film": "Prince of Darkness",
+      "year": 1987,
+      "difficulty": "expert",
+      "fact": "It honors Nigel Kneale's Professor Quatermass."
+    },
+    {
+      "id": 29,
+      "question": "What was the name of the ghost ship whose crew returns in The Fog?",
+      "options": ["Elizabeth Dane", "Mary Celeste", "Demeter", "Antonio Bay"],
+      "answerIndex": 0,
+      "film": "The Fog",
+      "year": 1980,
+      "difficulty": "hard",
+      "fact": "Many character names reference Carpenter's friends and collaborators."
+    },
+    {
+      "id": 30,
+      "question": "In Tobe Hooper's Lifeforce, the space vampires are found hidden near which comet?",
+      "options": ["Shoemaker-Levy 9", "Comet Kohoutek", "Comet Hale-Bopp", "Halley's Comet"],
+      "answerIndex": 3,
+      "film": "Lifeforce",
+      "year": 1985,
+      "difficulty": "hard",
+      "fact": "It was released a year before Halley's actual 1986 return."
+    },
+    {
+      "id": 31,
+      "question": "Who does Dennis Hopper play in The Texas Chainsaw Massacre 2?",
+      "options": [
+        "A sheriff's deputy",
+        "Drayton Sawyer, the Cook",
+        "A radio DJ",
+        "Lefty Enright, a Texas Ranger"
+      ],
+      "answerIndex": 3,
+      "film": "The Texas Chainsaw Massacre 2",
+      "year": 1986,
+      "difficulty": "medium",
+      "fact": "Lefty fights Leatherface with three chainsaws."
+    },
+    {
+      "id": 32,
+      "question": "The farmhouse from The Texas Chain Saw Massacre was moved and became what?",
+      "options": ["A museum", "A church", "A bed and breakfast", "A restaurant"],
+      "answerIndex": 3,
+      "film": "The Texas Chain Saw Massacre",
+      "year": 1974,
+      "difficulty": "hard",
+      "fact": "It's now the Grand Central Café in Kingsland, Texas."
+    },
+    {
+      "id": 33,
+      "question": "In Tobe Hooper's Eaten Alive, what does the hotel owner feed his victims to?",
+      "options": ["His hogs", "A bear", "Piranhas", "A crocodile"],
+      "answerIndex": 3,
+      "film": "Eaten Alive",
+      "year": 1976,
+      "difficulty": "hard",
+      "fact": "Robert Englund's character here has a line Tarantino later quoted in Kill Bill."
+    },
+    {
+      "id": 34,
+      "question": "Who is the main character possessed by Freddy in A Nightmare on Elm Street 2: Freddy's Revenge?",
+      "options": ["Jesse Walsh", "Kristen Parker", "Glen Lantz", "Alice Johnson"],
+      "answerIndex": 0,
+      "film": "A Nightmare on Elm Street 2: Freddy's Revenge",
+      "year": 1985,
+      "difficulty": "hard",
+      "fact": "Star Mark Patton later made the documentary Scream, Queen!"
+    },
+    {
+      "id": 35,
+      "question": "Jason gets his hockey mask in Friday the 13th Part III. Who owned it?",
+      "options": [
+        "Shelly, the prankster",
+        "A security guard",
+        "Tommy Jarvis",
+        "A hockey player on a bus"
+      ],
+      "answerIndex": 0,
+      "film": "Friday the 13th Part III",
+      "year": 1982,
+      "difficulty": "hard",
+      "fact": "Part III was released in 3-D."
+    },
+    {
+      "id": 36,
+      "question": "Joe Spinell's killer Frank Zito decorates his apartment with what in Maniac?",
+      "options": [
+        "Dolls in glass jars",
+        "Mannequins wearing victims' scalps",
+        "Polaroids of the dead",
+        "Taxidermy animals"
+      ],
+      "answerIndex": 1,
+      "film": "Maniac",
+      "year": 1980,
+      "difficulty": "hard",
+      "fact": "Tom Savini did the effects and also plays a victim."
+    },
+    {
+      "id": 37,
+      "question": "What town hosts the ill-fated dance in My Bloody Valentine?",
+      "options": ["Hanniger Mines", "Harry's Hollow", "Cupid's Point", "Valentine Bluffs"],
+      "answerIndex": 3,
+      "film": "My Bloody Valentine",
+      "year": 1981,
+      "difficulty": "expert",
+      "fact": "The mining killer is Harry Warden."
+    },
+    {
+      "id": 38,
+      "question": "What is the chainsaw killer in Pieces trying to assemble?",
+      "options": ["A scarecrow", "A new mother", "A human jigsaw puzzle", "A puppet show"],
+      "answerIndex": 2,
+      "film": "Pieces",
+      "year": 1982,
+      "difficulty": "hard",
+      "fact": "Its poster tagline was \"It's exactly what you think it is!\""
+    },
+    {
+      "id": 39,
+      "question": "Where are the night-shift workers stalked in Intruder?",
+      "options": ["A bowling alley", "A supermarket", "A movie theater", "A video store"],
+      "answerIndex": 1,
+      "film": "Intruder",
+      "year": 1989,
+      "difficulty": "hard",
+      "fact": "Sam and Ted Raimi both make cameos."
+    },
+    {
+      "id": 40,
+      "question": "Linda Blair spends a fraternity hazing night in which mansion in Hell Night?",
+      "options": ["Bly Manor", "Usher Hall", "Garth Manor", "Belasco House"],
+      "answerIndex": 2,
+      "film": "Hell Night",
+      "year": 1981,
+      "difficulty": "expert",
+      "fact": "The Garth family patriarch murdered his deformed children there."
+    },
+    {
+      "id": 41,
+      "question": "Which famous magician plays a performer aboard the Terror Train?",
+      "options": ["Penn Jillette", "Doug Henning", "Harry Blackstone Jr.", "David Copperfield"],
+      "answerIndex": 3,
+      "film": "Terror Train",
+      "year": 1980,
+      "difficulty": "medium",
+      "fact": "Jamie Lee Curtis also stars."
+    },
+    {
+      "id": 42,
+      "question": "In Tobe Hooper's The Funhouse, the deformed killer hides his face behind what?",
+      "options": ["A pig mask", "A Frankenstein's monster mask", "A burlap sack", "A clown mask"],
+      "answerIndex": 1,
+      "film": "The Funhouse",
+      "year": 1981,
+      "difficulty": "hard",
+      "fact": "He is the son of the carnival barker."
+    },
+    {
+      "id": 43,
+      "question": "Which TV Western star plays the telekinetic Mr. Slausen in Tourist Trap?",
+      "options": ["Lee Majors", "Clint Walker", "James Arness", "Chuck Connors"],
+      "answerIndex": 3,
+      "film": "Tourist Trap",
+      "year": 1979,
+      "difficulty": "hard",
+      "fact": "The mannequins are moved by Slausen's mind."
+    },
+    {
+      "id": 44,
+      "question": "What is the name of the ventriloquist's dummy in the 1945 anthology Dead of Night?",
+      "options": ["Hugo", "Charlie", "Fats", "Mortimer"],
+      "answerIndex": 0,
+      "film": "Dead of Night",
+      "year": 1945,
+      "difficulty": "expert",
+      "fact": "Michael Redgrave plays the ventriloquist Maxwell Frere."
+    },
+    {
+      "id": 45,
+      "question": "Who wrote the screenplay for The Wicker Man?",
+      "options": ["Robert Bloch", "Nigel Kneale", "Richard Matheson", "Anthony Shaffer"],
+      "answerIndex": 3,
+      "film": "The Wicker Man",
+      "year": 1973,
+      "difficulty": "expert",
+      "fact": "Shaffer also wrote the play Sleuth."
+    },
+    {
+      "id": 46,
+      "question": "Vincent Price plays which real-life 1640s witch hunter in Witchfinder General?",
+      "options": ["Cotton Mather", "Matthew Hopkins", "Heinrich Kramer", "John Stearne"],
+      "answerIndex": 1,
+      "film": "Witchfinder General",
+      "year": 1968,
+      "difficulty": "hard",
+      "fact": "Director Michael Reeves died the year after its release, aged 25."
+    },
+    {
+      "id": 47,
+      "question": "In Theatre of Blood, Vincent Price's ham actor kills critics using what?",
+      "options": [
+        "Biblical plagues",
+        "Death scenes from Shakespeare",
+        "Edgar Allan Poe stories",
+        "The seven deadly sins"
+      ],
+      "answerIndex": 1,
+      "film": "Theatre of Blood",
+      "year": 1973,
+      "difficulty": "medium",
+      "fact": "His character is Edward Lionheart."
+    },
+    {
+      "id": 48,
+      "question": "Dr. Phibes models his murders on what?",
+      "options": [
+        "The signs of the zodiac",
+        "Dante's circles of Hell",
+        "The plagues of Egypt",
+        "The Stations of the Cross"
+      ],
+      "answerIndex": 2,
+      "film": "The Abominable Dr. Phibes",
+      "year": 1971,
+      "difficulty": "medium",
+      "fact": "Phibes plays a giant pipe organ between killings."
+    },
+    {
+      "id": 49,
+      "question": "William Castle's \"Emergo\" gimmick for House on Haunted Hill involved what?",
+      "options": [
+        "A skeleton flying over the audience",
+        "A fright break to leave",
+        "Nurses in the lobby",
+        "Vibrating seats"
+      ],
+      "answerIndex": 0,
+      "film": "House on Haunted Hill",
+      "year": 1959,
+      "difficulty": "hard",
+      "fact": "Kids reportedly threw popcorn and candy at the skeleton."
+    },
+    {
+      "id": 50,
+      "question": "William Castle's \"Percepto\" gimmick for The Tingler did what?",
+      "options": [
+        "Released smoke",
+        "Sprayed water at viewers",
+        "Buzzed audience members' seats",
+        "Flashed red lights"
+      ],
+      "answerIndex": 2,
+      "film": "The Tingler",
+      "year": 1959,
+      "difficulty": "hard",
+      "fact": "Vincent Price urges the audience to scream for their lives."
+    },
+    {
+      "id": 51,
+      "question": "Audiences supposedly voted on the villain's fate in Mr. Sardonicus. What was this gimmick called?",
+      "options": ["The Fate Ballot", "The Punishment Poll", "The Mercy Vote", "The Judgment Card"],
+      "answerIndex": 1,
+      "film": "Mr. Sardonicus",
+      "year": 1961,
+      "difficulty": "expert",
+      "fact": "It's widely believed only the \"no mercy\" ending was ever filmed."
+    },
+    {
+      "id": 52,
+      "question": "What degenerative condition afflicts the family in Spider Baby?",
+      "options": ["Usher's Malady", "Merrye Syndrome", "Whateley Disease", "Hartford Fever"],
+      "answerIndex": 1,
+      "film": "Spider Baby",
+      "year": 1967,
+      "difficulty": "expert",
+      "fact": "Lon Chaney Jr. sings the theme song."
+    },
+    {
+      "id": 53,
+      "question": "In H.G. Lewis's Blood Feast, Fuad Ramses prepares a feast for which goddess?",
+      "options": ["Hecate", "Kali", "Ishtar", "Isis"],
+      "answerIndex": 2,
+      "film": "Blood Feast",
+      "year": 1963,
+      "difficulty": "hard",
+      "fact": "It's often called the first gore film."
+    },
+    {
+      "id": 54,
+      "question": "Who directed Eyes Without a Face?",
+      "options": ["Jean Cocteau", "Jacques Tourneur", "Georges Franju", "Henri-Georges Clouzot"],
+      "answerIndex": 2,
+      "film": "Eyes Without a Face",
+      "year": 1960,
+      "difficulty": "hard",
+      "fact": "Billy Idol named a hit song after it."
+    },
+    {
+      "id": 55,
+      "question": "Who directed the 1922 witchcraft documentary-horror Häxan?",
+      "options": ["F.W. Murnau", "Benjamin Christensen", "Victor Sjöström", "Carl Theodor Dreyer"],
+      "answerIndex": 1,
+      "film": "Häxan",
+      "year": 1922,
+      "difficulty": "expert",
+      "fact": "Christensen plays the Devil himself."
+    },
+    {
+      "id": 56,
+      "question": "Which Danish director made the dreamlike 1932 horror Vampyr?",
+      "options": [
+        "Carl Theodor Dreyer",
+        "Nicolas Winding Refn",
+        "Benjamin Christensen",
+        "Lars von Trier"
+      ],
+      "answerIndex": 0,
+      "film": "Vampyr",
+      "year": 1932,
+      "difficulty": "hard",
+      "fact": "Its lead actor was a financier who funded the film."
+    },
+    {
+      "id": 57,
+      "question": "Universal's Spanish-language Dracula (1931) was shot how?",
+      "options": [
+        "In color",
+        "Two years later as a remake",
+        "At night on the same sets as the Lugosi version",
+        "In Mexico City with new sets"
+      ],
+      "answerIndex": 2,
+      "film": "Drácula (Spanish version)",
+      "year": 1931,
+      "difficulty": "hard",
+      "fact": "Many critics prefer its camerawork to the English version."
+    },
+    {
+      "id": 58,
+      "question": "Kate Bush sampled the line \"It's in the trees! It's coming!\" from which film?",
+      "options": ["Night of the Demon", "The Haunting", "Village of the Damned", "The Innocents"],
+      "answerIndex": 0,
+      "film": "Night of the Demon",
+      "year": 1957,
+      "difficulty": "expert",
+      "fact": "It opens her song \"Hounds of Love.\""
+    },
+    {
+      "id": 59,
+      "question": "In which declining Pennsylvania steel town does George Romero's Martin take place?",
+      "options": ["Allentown", "Braddock", "Monroeville", "Evans City"],
+      "answerIndex": 1,
+      "film": "Martin",
+      "year": 1977,
+      "difficulty": "expert",
+      "fact": "Romero said it was his favorite of his films."
+    },
+    {
+      "id": 60,
+      "question": "Who plays the farmer Jordy Verrill, who gets overgrown by meteor moss in Creepshow?",
+      "options": ["Tom Savini", "Stephen King", "George Romero", "Joe Hill"],
+      "answerIndex": 1,
+      "film": "Creepshow",
+      "year": 1982,
+      "difficulty": "medium",
+      "fact": "King's son Joe plays the comic-loving boy Billy."
+    },
+    {
+      "id": 61,
+      "question": "Tom Savini plays which biker in Dawn of the Dead?",
+      "options": ["Flyboy", "Wooley", "Spike", "Blades"],
+      "answerIndex": 3,
+      "film": "Dawn of the Dead",
+      "year": 1978,
+      "difficulty": "hard",
+      "fact": "He also did the film's makeup effects."
+    },
+    {
+      "id": 62,
+      "question": "In Peter Jackson's Bad Taste, why are aliens harvesting humans?",
+      "options": ["As fuel", "For an intergalactic fast-food chain", "For breeding", "As slaves"],
+      "answerIndex": 1,
+      "film": "Bad Taste",
+      "year": 1987,
+      "difficulty": "hard",
+      "fact": "The chain is called Crumb's Crunchy Delights."
+    },
+    {
+      "id": 63,
+      "question": "How does Tom Atkins' detective answer the phone in Night of the Creeps?",
+      "options": ["\"Talk to me.\"", "\"Make it quick.\"", "\"Speak.\"", "\"Thrill me.\""],
+      "answerIndex": 3,
+      "film": "Night of the Creeps",
+      "year": 1986,
+      "difficulty": "medium",
+      "fact": "Many characters are named after horror directors."
+    },
+    {
+      "id": 64,
+      "question": "\"Send more paramedics\" is said into a radio in which film?",
+      "options": [
+        "Day of the Dead",
+        "Night of the Comet",
+        "The Return of the Living Dead",
+        "Re-Animator"
+      ],
+      "answerIndex": 2,
+      "film": "The Return of the Living Dead",
+      "year": 1985,
+      "difficulty": "medium",
+      "fact": "The zombie had just eaten the first crew."
+    },
+    {
+      "id": 65,
+      "question": "Who directed the werewolf fairy tale The Company of Wolves?",
+      "options": ["Clive Barker", "Ken Russell", "Terry Gilliam", "Neil Jordan"],
+      "answerIndex": 3,
+      "film": "The Company of Wolves",
+      "year": 1984,
+      "difficulty": "hard",
+      "fact": "Angela Carter co-wrote it from her own stories."
+    },
+    {
+      "id": 66,
+      "question": "What is the killer robot called in Richard Stanley's Hardware?",
+      "options": ["M.A.R.K. 13", "Proteus IV", "Chopper", "ED-209"],
+      "answerIndex": 0,
+      "film": "Hardware",
+      "year": 1990,
+      "difficulty": "expert",
+      "fact": "The name comes from a Bible verse: Mark 13."
+    },
+    {
+      "id": 67,
+      "question": "What device grants eternal life in Guillermo del Toro's Cronos?",
+      "options": ["A silver locket", "A jade skull", "A clockwork heart", "A golden scarab"],
+      "answerIndex": 3,
+      "film": "Cronos",
+      "year": 1993,
+      "difficulty": "medium",
+      "fact": "It was del Toro's feature debut."
+    },
+    {
+      "id": 68,
+      "question": "What sits unexploded in the orphanage courtyard in The Devil's Backbone?",
+      "options": ["A well", "A coffin", "A statue", "A bomb"],
+      "answerIndex": 3,
+      "film": "The Devil's Backbone",
+      "year": 2001,
+      "difficulty": "medium",
+      "fact": "It's set during the Spanish Civil War."
+    },
+    {
+      "id": 69,
+      "question": "In Kiyoshi Kurosawa's Pulse (Kairo), how are the \"forbidden rooms\" sealed?",
+      "options": ["With salt lines", "With red tape", "With wax", "With paper talismans"],
+      "answerIndex": 1,
+      "film": "Pulse (Kairo)",
+      "year": 2001,
+      "difficulty": "expert",
+      "fact": "The ghosts spread through the internet."
+    },
+    {
+      "id": 70,
+      "question": "In Kurosawa's Cure, what is carved into each victim?",
+      "options": ["A circle", "A spiral", "A cross", "An X"],
+      "answerIndex": 3,
+      "film": "Cure",
+      "year": 1997,
+      "difficulty": "hard",
+      "fact": "The killers are hypnotized strangers."
+    },
+    {
+      "id": 71,
+      "question": "In Kwaidan, what part of Hoichi do the monks forget to cover with protective sutras?",
+      "options": ["His ears", "His eyes", "His hands", "His feet"],
+      "answerIndex": 0,
+      "film": "Kwaidan",
+      "year": 1964,
+      "difficulty": "hard",
+      "fact": "The ghosts can see only the ears and tear them off."
+    },
+    {
+      "id": 72,
+      "question": "Who directed Onibaba, with its terrifying demon mask?",
+      "options": ["Akira Kurosawa", "Kaneto Shindo", "Masaki Kobayashi", "Nobuo Nakagawa"],
+      "answerIndex": 1,
+      "film": "Onibaba",
+      "year": 1964,
+      "difficulty": "expert",
+      "fact": "It's set in the tall reeds of war-torn medieval Japan."
+    },
+    {
+      "id": 73,
+      "question": "In Ishiro Honda's Matango, castaways slowly turn into what?",
+      "options": ["Tree spirits", "Mushroom people", "Moss creatures", "Fish people"],
+      "answerIndex": 1,
+      "film": "Matango",
+      "year": 1963,
+      "difficulty": "hard",
+      "fact": "Honda also directed the original Godzilla."
+    },
+    {
+      "id": 74,
+      "question": "Who directed the Korean ghost story A Tale of Two Sisters?",
+      "options": ["Kim Jee-woon", "Park Chan-wook", "Bong Joon-ho", "Na Hong-jin"],
+      "answerIndex": 0,
+      "film": "A Tale of Two Sisters",
+      "year": 2003,
+      "difficulty": "hard",
+      "fact": "It's based on a Joseon-era folk tale."
+    },
+    {
+      "id": 75,
+      "question": "What is the stranger's main weapon against the pregnant Sarah in Inside (À l'intérieur)?",
+      "options": ["Knitting needles", "Scissors", "A kitchen knife", "A scalpel"],
+      "answerIndex": 1,
+      "film": "Inside",
+      "year": 2007,
+      "difficulty": "hard",
+      "fact": "It's a key film of the New French Extremity."
+    },
+    {
+      "id": 76,
+      "question": "Who wrote and directed Martyrs?",
+      "options": ["Xavier Gens", "Alexandre Aja", "Julien Maury", "Pascal Laugier"],
+      "answerIndex": 3,
+      "film": "Martyrs",
+      "year": 2008,
+      "difficulty": "hard",
+      "fact": "Laugier later made The Tall Man and Incident in a Ghostland."
+    },
+    {
+      "id": 77,
+      "question": "Let the Right One In takes place in which Stockholm suburb?",
+      "options": ["Vällingby", "Blackeberg", "Solna", "Rinkeby"],
+      "answerIndex": 1,
+      "film": "Let the Right One In",
+      "year": 2008,
+      "difficulty": "expert",
+      "fact": "Author John Ajvide Lindqvist grew up there."
+    },
+    {
+      "id": 78,
+      "question": "Which country produced Rare Exports, the dark Santa Claus origin story?",
+      "options": ["Finland", "Iceland", "Sweden", "Norway"],
+      "answerIndex": 0,
+      "film": "Rare Exports",
+      "year": 2010,
+      "difficulty": "medium",
+      "fact": "Santa is dug out of a mountain at the Russian border."
+    },
+    {
+      "id": 79,
+      "question": "Lake Mungo is a mockumentary about the drowning of which teenager?",
+      "options": ["Laura Palmer", "Alice Hart", "Alice Palmer", "Mary Shaw"],
+      "answerIndex": 2,
+      "film": "Lake Mungo",
+      "year": 2008,
+      "difficulty": "expert",
+      "fact": "It's an Australian film."
+    },
+    {
+      "id": 80,
+      "question": "What terrorizes the Australian outback in Razorback?",
+      "options": ["A dingo pack", "A feral camel", "A saltwater crocodile", "A giant wild boar"],
+      "answerIndex": 3,
+      "film": "Razorback",
+      "year": 1984,
+      "difficulty": "hard",
+      "fact": "Director Russell Mulcahy later made Highlander."
+    },
+    {
+      "id": 81,
+      "question": "How does the virus spread in Pontypool?",
+      "options": [
+        "Through words in the English language",
+        "Through eye contact",
+        "Through the water",
+        "Through radio waves"
+      ],
+      "answerIndex": 0,
+      "film": "Pontypool",
+      "year": 2009,
+      "difficulty": "hard",
+      "fact": "Most of it takes place in a small-town radio station."
+    },
+    {
+      "id": 82,
+      "question": "In Session 9, which personality on Mary Hobbes' therapy tapes is revealed last?",
+      "options": ["Billy", "Princess", "Simon", "The Hunter"],
+      "answerIndex": 2,
+      "film": "Session 9",
+      "year": 2001,
+      "difficulty": "hard",
+      "fact": "\"I live in the weak and the wounded.\""
+    },
+    {
+      "id": 83,
+      "question": "What is the name of May's beloved doll, kept in a glass case?",
+      "options": ["Suzie", "Polly", "Molly", "Annabelle"],
+      "answerIndex": 0,
+      "film": "May",
+      "year": 2002,
+      "difficulty": "hard",
+      "fact": "Lucky McKee wrote and directed."
+    },
+    {
+      "id": 84,
+      "question": "In The Loved Ones, which girl takes revenge on Brent after he turns down her prom invitation?",
+      "options": ["Holly", "Mia", "Dolly", "Lola"],
+      "answerIndex": 3,
+      "film": "The Loved Ones",
+      "year": 2009,
+      "difficulty": "expert",
+      "fact": "Her father calls her Princess."
+    },
+    {
+      "id": 85,
+      "question": "In which seaside town do tourists keep dying in Dead & Buried?",
+      "options": ["Antonio Bay", "Collinsport", "Potters Bluff", "Amity Island"],
+      "answerIndex": 2,
+      "film": "Dead & Buried",
+      "year": 1981,
+      "difficulty": "expert",
+      "fact": "Dan O'Bannon co-wrote the screenplay."
+    },
+    {
+      "id": 86,
+      "question": "What do Randy Quaid's suburban parents serve every night in Parents?",
+      "options": ["\"Mystery stew\"", "Liver and onions", "Meatloaf", "\"Leftovers\""],
+      "answerIndex": 3,
+      "film": "Parents",
+      "year": 1989,
+      "difficulty": "hard",
+      "fact": "It was the directing debut of actor Bob Balaban."
+    },
+    {
+      "id": 87,
+      "question": "What is the young hero's nickname in The People Under the Stairs?",
+      "options": ["Ace", "Trick", "Kid", "Fool"],
+      "answerIndex": 3,
+      "film": "The People Under the Stairs",
+      "year": 1991,
+      "difficulty": "hard",
+      "fact": "The villainous couple are known as \"Mommy and Daddy.\""
+    },
+    {
+      "id": 88,
+      "question": "In The Gate, the boys learn how to summon demons from an album by which fictional metal band?",
+      "options": ["Hellbound", "Sacrifyx", "Deth Rattle", "Abaddon"],
+      "answerIndex": 1,
+      "film": "The Gate",
+      "year": 1987,
+      "difficulty": "expert",
+      "fact": "It was a young Stephen Dorff's film debut."
+    },
+    {
+      "id": 89,
+      "question": "What does C.H.U.D. stand for, at least officially?",
+      "options": [
+        "Contaminated Human Underground Disposal",
+        "Creatures Hidden Under Drains",
+        "Chemically Harmed Urban Dwellers",
+        "Cannibalistic Humanoid Underground Dwellers"
+      ],
+      "answerIndex": 3,
+      "film": "C.H.U.D.",
+      "year": 1984,
+      "difficulty": "medium",
+      "fact": "Late in the film it's revealed to mean something else too."
+    },
+    {
+      "id": 90,
+      "question": "How is the opening character credited in E. Elias Merhige's Begotten?",
+      "options": ["God Killing Himself", "The First Man", "The Creator", "Father of All"],
+      "answerIndex": 0,
+      "film": "Begotten",
+      "year": 1989,
+      "difficulty": "expert",
+      "fact": "It led to Merhige directing Shadow of the Vampire."
+    },
+    {
+      "id": 91,
+      "question": "Who directed the surreal circus horror Santa Sangre?",
+      "options": ["Luis Buñuel", "Alejandro Jodorowsky", "Guillermo del Toro", "Gaspar Noé"],
+      "answerIndex": 1,
+      "film": "Santa Sangre",
+      "year": 1989,
+      "difficulty": "hard",
+      "fact": "Two of Jodorowsky's sons star in it."
+    },
+    {
+      "id": 92,
+      "question": "What is Blacula's real name before Dracula curses him?",
+      "options": ["Prince Mamuwalde", "Count Obi", "Prince Akeem", "King Manu"],
+      "answerIndex": 0,
+      "film": "Blacula",
+      "year": 1972,
+      "difficulty": "hard",
+      "fact": "He's played by Shakespearean actor William Marshall."
+    },
+    {
+      "id": 93,
+      "question": "In Happy Birthday to Me, which kitchen item is the infamous murder weapon?",
+      "options": ["A meat cleaver", "A corkscrew", "A shish kebab skewer", "A rolling pin"],
+      "answerIndex": 2,
+      "film": "Happy Birthday to Me",
+      "year": 1981,
+      "difficulty": "hard",
+      "fact": "J. Lee Thompson, director of The Guns of Navarone, made it."
+    },
+    {
+      "id": 94,
+      "question": "Which author wrote The Slumber Party Massacre as a parody of slashers?",
+      "options": ["Joyce Carol Oates", "Rita Mae Brown", "Erica Jong", "Anne Rice"],
+      "answerIndex": 1,
+      "film": "The Slumber Party Massacre",
+      "year": 1982,
+      "difficulty": "expert",
+      "fact": "Its killer uses an enormous power drill."
+    },
+    {
+      "id": 95,
+      "question": "Who directed the killer-toy film Dolls?",
+      "options": ["Stuart Gordon", "Charles Band", "Brian Yuzna", "Tom Holland"],
+      "answerIndex": 0,
+      "film": "Dolls",
+      "year": 1987,
+      "difficulty": "hard",
+      "fact": "It was shot in Italy back-to-back with From Beyond."
+    },
+    {
+      "id": 96,
+      "question": "Who plays the vicious vampire Severen in Near Dark?",
+      "options": ["Lance Henriksen", "Bill Paxton", "Adrian Pasdar", "Kiefer Sutherland"],
+      "answerIndex": 1,
+      "film": "Near Dark",
+      "year": 1987,
+      "difficulty": "medium",
+      "fact": "Severen's bar scene with spurs is the film's best-known."
+    },
+    {
+      "id": 97,
+      "question": "Which band's \"Bela Lugosi's Dead\" opens The Hunger?",
+      "options": ["Joy Division", "Bauhaus", "The Cure", "Siouxsie and the Banshees"],
+      "answerIndex": 1,
+      "film": "The Hunger",
+      "year": 1983,
+      "difficulty": "medium",
+      "fact": "Peter Murphy sings it in a cage in a nightclub."
+    },
+    {
+      "id": 98,
+      "question": "Which singer plays the vampire stripper Katrina in Vamp?",
+      "options": ["Nina Hagen", "Lene Lovich", "Tina Turner", "Grace Jones"],
+      "answerIndex": 3,
+      "film": "Vamp",
+      "year": 1986,
+      "difficulty": "hard",
+      "fact": "Keith Haring painted her body for the dance."
+    },
+    {
+      "id": 99,
+      "question": "What is the name of Jeffrey Combs' scientist in From Beyond?",
+      "options": ["Crawford Tillinghast", "Randolph Carter", "Herbert West", "Edward Pretorius"],
+      "answerIndex": 0,
+      "film": "From Beyond",
+      "year": 1986,
+      "difficulty": "medium",
+      "fact": "His machine that opens the senses is called the Resonator."
+    },
+    {
+      "id": 100,
+      "question": "What is the name of Kayako's ghostly son in Ju-On: The Grudge?",
+      "options": ["Yoichi", "Toshio", "Kenji", "Daisuke"],
+      "answerIndex": 1,
+      "film": "Ju-On: The Grudge",
+      "year": 2002,
+      "difficulty": "medium",
+      "fact": "He meows like the family's dead cat."
+    }
+  ]
+}

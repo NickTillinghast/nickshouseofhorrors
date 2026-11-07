@@ -24,7 +24,7 @@ Sign-in redirects are built from the current site address, so the code only need
 
 ### Hosting
 
-- [ ] Add every variable from `.env.local` to the host's environment settings: `TMDB_API_KEY`, `WHERE_TO_WATCH_API_KEY`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+- [ ] Add every variable from `.env.local` to the host's environment settings: `TMDB_API_KEY`, `WHERE_TO_WATCH_API_KEY`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_SECRET_KEY` (quiz leaderboard; keep it secret, never prefix it with `NEXT_PUBLIC_`)
 - [ ] Add `NEXT_PUBLIC_SITE_URL=https://<domain>` (no trailing slash). Canonical links, the sitemap, `robots.txt` and share previews all use it, and they fall back to `http://localhost:3000` without it (`src/lib/site.ts`)
 - [ ] After deploying, test Google sign-in, magic link, hearting and My Hearts on the live site
 

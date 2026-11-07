@@ -16,7 +16,9 @@
     "moviedb-promise": "^4.0.8",
     "next": "16.4.4",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "server-only": "^0.0.1",
+    "simple-icons": "^16.36.0"
   },
   "devDependencies": {
     "@types/node": "^20",

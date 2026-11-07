@@ -5,15 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useFavorites } from "../Favorites/FavoritesProvider";
+import { NAV_LINKS } from "../../lib/navigation";
 import styles from "./Navbar.module.css";
-
-const links = [
-  { href: "/home", label: "Home" },
-  { href: "/movies", label: "Movies" },
-  { href: "/search", label: "Search" },
-  { href: "/about", label: "About" },
-  { href: "/lists", label: "The Lists" },
-];
 
 function Account({ pathname }: { pathname?: string }) {
   const { user, signOut } = useFavorites();
@@ -56,7 +49,7 @@ function NavLinks({ pathname }: { pathname?: string }) {
   return (
     <nav className={styles.navbar}>
       <ul className={styles.links}>
-        {links.map(({ href, label }) => (
+        {NAV_LINKS.map(({ href, label }) => (
           <li key={href}>
             <Link href={href} className={pathname?.startsWith(href) ? styles.active : undefined}>
               {label}
