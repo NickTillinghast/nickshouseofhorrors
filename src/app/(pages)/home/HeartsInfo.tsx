@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import HeartsCta from "./HeartsCta";
+import { MY_MOVIES_LABEL } from "../../../lib/navigation";
 import modalStyles from "../../../components/MovieDetailCard/MovieModal.module.css";
 import styles from "./page.module.css";
 
@@ -16,7 +17,7 @@ const HEART_STEPS = [
     text: "Hearts belong to your account, so they follow you to any device.",
   },
   {
-    title: "Find them in My Hearts",
+    title: `Find them in ${MY_MOVIES_LABEL}`,
     text: "Every movie you've hearted sits in one grid, ready for movie night.",
   },
 ];

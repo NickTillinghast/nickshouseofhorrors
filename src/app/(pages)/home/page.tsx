@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Creepster } from "next/font/google";
 import HorrorReel from "../../../components/HorrorReel/HorrorReel";
@@ -27,7 +28,19 @@ export default async function HomePage() {
   return (
     <main className={styles.page}>
       <section className={styles.hero}>
-        <h1 className={`${styles.title} ${creepster.className}`}>Nicks House of Horrors</h1>
+        {/* The logo is the heading; its alt text keeps the site name readable for Google and screen readers */}
+        <h1 className={styles.logoHeading}>
+          <Image
+            className={styles.logo}
+            src="/assets/gore-emblem-wide.svg"
+            alt="Nicks House of Horrors"
+            width={2048}
+            height={1365}
+            sizes="(max-width: 720px) 100vw, 640px"
+            loading="eager"
+            fetchPriority="high"
+          />
+        </h1>
         <p className={styles.tagline}>
           Hunt down your next nightmare. Browse horror by subgenre, find out where to stream it, and
           keep the ones that haunt you.

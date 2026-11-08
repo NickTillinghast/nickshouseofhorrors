@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Creepster } from "next/font/google";
 import { siFacebook, siGithub, siInstagram } from "simple-icons";
-import { NAV_LINKS, SOCIAL_LINKS } from "../../lib/navigation";
+import { MY_MOVIES_LABEL, NAV_LINKS, SOCIAL_LINKS } from "../../lib/navigation";
 import { SITE_NAME } from "../../lib/site";
 import styles from "./Footer.module.css";
 
@@ -10,7 +10,7 @@ const creepster = Creepster({ weight: "400", subsets: ["latin"] });
 // The Lists has no page yet, so keep it out of the site map until it does
 const SITE_MAP = [
   ...NAV_LINKS.filter((link) => link.href !== "/lists"),
-  { href: "/profile", label: "My Hearts" },
+  { href: "/profile", label: MY_MOVIES_LABEL },
 ];
 
 // Official brand shapes from simple-icons (CC0), drawn in our own colors

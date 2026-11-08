@@ -366,6 +366,8 @@
 /* Unkillable spans the full row on top, the three shorter quizzes sit side by side below it */
 .modes li:first-child {
   grid-column: 1 / -1;
+  /* Extra breathing room so the top tier stands apart from the rest */
+  margin-bottom: 16px;
 }
 
 .modeCard {

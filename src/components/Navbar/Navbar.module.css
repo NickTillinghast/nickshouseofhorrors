@@ -7,6 +7,27 @@
   border-bottom: 2px solid var(--color-blood);
 }
 
+/* Round logo at the far left, linking home */
+.logoLink {
+  display: flex;
+  flex-shrink: 0;
+  margin-right: 24px;
+  border-radius: 50%;
+}
+
+.logo {
+  border-radius: 50%;
+  transition:
+    transform 0.2s,
+    filter 0.2s;
+}
+
+.logoLink:hover .logo,
+.logoLink:focus-visible .logo {
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 8px var(--color-blood));
+}
+
 .links {
   display: flex;
   gap: 24px;
@@ -24,10 +45,10 @@
   color: var(--color-blood-light);
 }
 
-/* Sign in, or avatar + My Hearts + Sign out, pushed to the right */
+/* Sign in, or avatar + My Movies + Sign out, on the right after the search box */
 .signIn,
 .account {
-  margin-left: auto;
+  margin-left: 20px;
 }
 
 .account {

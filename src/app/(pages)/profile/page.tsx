@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { MY_MOVIES_LABEL } from "../../../lib/navigation";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,7 +11,7 @@ import movieStyles from "../movies/page.module.css";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
-  title: "My Hearts",
+  title: MY_MOVIES_LABEL,
   robots: { index: false },
 };
 

@@ -25,6 +25,19 @@
   text-shadow: 0 0 24px color-mix(in srgb, var(--color-blood) 50%, transparent);
 }
 
+.logoHeading {
+  width: 100%;
+  max-width: 640px;
+  margin: 0;
+  line-height: 0;
+}
+
+.logo {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 0 24px color-mix(in srgb, var(--color-blood) 40%, transparent));
+}
+
 .tagline {
   max-width: 560px;
   margin: 0;

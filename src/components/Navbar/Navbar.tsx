@@ -5,7 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useFavorites } from "../Favorites/FavoritesProvider";
-import { NAV_LINKS } from "../../lib/navigation";
+import SearchBox from "../Search/SearchBox";
+import { MY_MOVIES_LABEL, NAV_LINKS } from "../../lib/navigation";
 import styles from "./Navbar.module.css";
 
 function Account({ pathname }: { pathname?: string }) {
@@ -36,7 +37,7 @@ function Account({ pathname }: { pathname?: string }) {
             {name[0].toUpperCase()}
           </span>
         )}
-        My Hearts
+        {MY_MOVIES_LABEL}
       </Link>
       <button type="button" className={styles.signOut} onClick={signOut}>
         Sign out
@@ -48,6 +49,16 @@ function Account({ pathname }: { pathname?: string }) {
 function NavLinks({ pathname }: { pathname?: string }) {
   return (
     <nav className={styles.navbar}>
+      <Link href="/home" className={styles.logoLink} aria-label="Nicks House of Horrors home">
+        <Image
+          className={styles.logo}
+          src="/assets/gore-instagram.svg"
+          alt=""
+          width={44}
+          height={44}
+          loading="eager"
+        />
+      </Link>
       <ul className={styles.links}>
         {NAV_LINKS.map(({ href, label }) => (
           <li key={href}>
@@ -57,6 +68,7 @@ function NavLinks({ pathname }: { pathname?: string }) {
           </li>
         ))}
       </ul>
+      <SearchBox />
       <Account pathname={pathname} />
     </nav>
   );

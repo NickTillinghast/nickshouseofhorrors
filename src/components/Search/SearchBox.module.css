@@ -1,0 +1,165 @@
+.container {
+  position: relative;
+  margin-left: auto;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: clamp(160px, 22vw, 260px);
+  padding: 6px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.form:focus-within {
+  border-color: var(--color-blood);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--color-blood) 45%, transparent);
+}
+
+.icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: var(--color-text-muted);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: none;
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.9rem;
+}
+
+/* Hide the browser's own clear (x) button */
+.input::-webkit-search-cancel-button {
+  appearance: none;
+}
+
+.shortcut {
+  padding: 0 6px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  color: var(--color-text-muted);
+  font-family: inherit;
+  font-size: 0.75rem;
+}
+
+.form:focus-within .shortcut {
+  display: none;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 50;
+  width: min(360px, calc(100vw - 32px));
+  max-height: 70vh;
+  overflow-y: auto;
+  /* Same curved red edge as the Popular right now box, on the bottom */
+  border: 1px solid var(--color-border);
+  border-bottom: 3px solid var(--color-blood);
+  border-radius: 12px;
+  background: var(--color-surface-raised);
+  box-shadow: 0 12px 32px rgb(0 0 0 / 0.6);
+}
+
+.status {
+  margin: 0;
+  padding: 16px;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.results {
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  transition: opacity 0.15s;
+}
+
+/* Old results fade while the next search runs */
+.stale {
+  opacity: 0.5;
+}
+
+.result {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 8px;
+  color: var(--color-text);
+  outline: none;
+}
+
+.result:hover,
+.result:focus-visible {
+  background: color-mix(in srgb, var(--color-blood) 22%, transparent);
+}
+
+.result:hover .resultTitle,
+.result:focus-visible .resultTitle {
+  color: var(--color-blood-light);
+}
+
+.poster {
+  flex-shrink: 0;
+  width: 32px;
+  height: 48px;
+  border-radius: 4px;
+  background: var(--color-surface);
+  object-fit: cover;
+}
+
+.resultTitle {
+  flex: 1;
+  font-size: 0.9rem;
+  transition: color 0.15s;
+}
+
+.year {
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+}
+
+.seeAll {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-top: 1px solid var(--color-border);
+  background: none;
+  color: var(--color-blood-light);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  outline: none;
+}
+
+.seeAll:hover,
+.seeAll:focus-visible {
+  background: color-mix(in srgb, var(--color-blood) 22%, transparent);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

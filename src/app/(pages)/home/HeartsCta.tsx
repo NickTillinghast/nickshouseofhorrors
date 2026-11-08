@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useFavorites } from "../../../components/Favorites/FavoritesProvider";
+import { MY_MOVIES_LABEL } from "../../../lib/navigation";
 import styles from "./page.module.css";
 
 // Signed out: invite them to sign in. Signed in: take them to their hearts
@@ -10,7 +11,7 @@ export default function HeartsCta() {
 
   return user ? (
     <Link href="/profile" className={styles.primaryButton}>
-      Go to My Hearts
+      Go to {MY_MOVIES_LABEL}
     </Link>
   ) : (
     <Link href="/login?next=/movies" className={styles.primaryButton}>

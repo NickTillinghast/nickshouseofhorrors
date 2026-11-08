@@ -70,3 +70,27 @@ export async function getPopularHorrorMovies(count = 50) {
     .filter((movie) => movie.id !== undefined && !seen.has(movie.id) && seen.add(movie.id))
     .slice(0, count);
 }
+
+// Title search, horror only. TMDB's search can't filter by genre, so drop the rest ourselves.
+// Cached per query, so the same search costs one TMDB call per day at most
+export async function searchHorrorMovies(query: string, pages = 1) {
+  "use cache";
+  cacheLife("days");
+
+  const results = await Promise.all(
+    Array.from({ length: pages }, (_, i) =>
+      moviedb.searchMovie({ query, page: i + 1, include_adult: false }),
+    ),
+  );
+
+  const seen = new Set<number>();
+  return results
+    .flatMap((res) => res.results ?? [])
+    .filter(
+      (movie) =>
+        movie.id !== undefined &&
+        movie.genre_ids?.includes(Number(HORROR_GENRE_ID)) &&
+        !seen.has(movie.id) &&
+        seen.add(movie.id),
+    );
+}
