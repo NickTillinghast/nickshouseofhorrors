@@ -37,4 +37,5 @@ Sign-in redirects are built from the current site address, so the code only need
 - [ ] Run a movie page (e.g. `/movies/694`) through Google's Rich Results Test to confirm the `Movie` structured data
 - [ ] Paste a movie link into Slack or iMessage to check the share preview shows the poster
 - [ ] Run PageSpeed Insights on `/` and a movie page
+- [ ] Remove `robots: { index: false }` from `/lists` once the lists have movies in them, and add it to `src/app/sitemap.ts`
 - [ ] Remove `robots: { index: false }` from `/about` once it has real content, and add it back to `src/app/sitemap.ts`

@@ -25,12 +25,20 @@ export default function QuizPage() {
       </header>
 
       <div className={styles.layout}>
-        <section aria-label="Quiz" className={styles.panel}>
-          {/* Only the size of each question bank goes to the browser, never the questions */}
-          <QuizGame bankSizes={BANK_SIZES} />
+        <section aria-labelledby="quiz-heading" className={styles.column}>
+          <h2 id="quiz-heading" className={`${styles.boardTitle} ${creepster.className}`}>
+            Take the Quiz
+          </h2>
+          <div className={styles.panel}>
+            {/* Only the size of each question bank goes to the browser, never the questions */}
+            <QuizGame bankSizes={BANK_SIZES} />
+          </div>
         </section>
 
-        <section aria-labelledby="leaderboard-heading" className={styles.boards}>
+        <section
+          aria-labelledby="leaderboard-heading"
+          className={`${styles.column} ${styles.boards}`}
+        >
           <h2 id="leaderboard-heading" className={`${styles.boardTitle} ${creepster.className}`}>
             Leaderboards
           </h2>

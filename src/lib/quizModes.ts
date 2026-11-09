@@ -47,6 +47,8 @@ export type QuizModeId = QuizMode["id"];
 
 export const FINAL_GIRL: QuizModeId = "final-girl";
 export const UNKILLABLE: QuizModeId = "unkillable";
+export const MIDNIGHT_MOVIE: QuizModeId = "midnight-movie";
+export const JUMP_SCARE: QuizModeId = "jump-scare";
 
 // Modes that award a badge, best first
 export const BADGE_MODES = QUIZ_MODES.filter((mode) => mode.badge);

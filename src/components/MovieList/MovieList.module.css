@@ -101,3 +101,20 @@
   color: var(--color-text-muted);
   font-size: 0.8rem;
 }
+
+.redBottom {
+  border-bottom: 3px solid var(--color-blood);
+}
+
+/* Holds the box open at a list-like height until movies are added */
+.empty {
+  display: grid;
+  flex: 1;
+  place-items: center;
+  min-height: 360px;
+  margin: 0;
+  padding: 24px;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  text-align: center;
+}

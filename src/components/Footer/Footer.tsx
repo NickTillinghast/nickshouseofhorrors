@@ -7,11 +7,7 @@ import styles from "./Footer.module.css";
 
 const creepster = Creepster({ weight: "400", subsets: ["latin"] });
 
-// The Lists has no page yet, so keep it out of the site map until it does
-const SITE_MAP = [
-  ...NAV_LINKS.filter((link) => link.href !== "/lists"),
-  { href: "/profile", label: MY_MOVIES_LABEL },
-];
+const SITE_MAP = [...NAV_LINKS, { href: "/profile", label: MY_MOVIES_LABEL }];
 
 // Official brand shapes from simple-icons (CC0), drawn in our own colors
 const ICONS: Record<string, { path: string }> = {

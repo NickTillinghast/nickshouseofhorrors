@@ -9,11 +9,26 @@
 }
 
 .hero {
+  position: relative;
+  /* Keeps the background below behind the hero only, not behind the rest of the page */
+  isolation: isolate;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
   text-align: center;
+}
+
+/* Full-width gore background behind the logo. It runs edge to edge even though the page
+   content is capped at 1080px, starts right under the navbar, and fades out at the bottom */
+.hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -56px calc(50% - 50vw) -48px;
+  background: url("/assets/gore-landing-background-h900.svg") center / cover no-repeat;
+  mask-image: linear-gradient(to bottom, #000 75%, transparent);
+  pointer-events: none;
 }
 
 .title {

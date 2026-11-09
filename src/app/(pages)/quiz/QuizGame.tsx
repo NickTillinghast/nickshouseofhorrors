@@ -310,8 +310,8 @@ export default function QuizGame({ bankSizes }: QuizGameProps) {
           )}
           {saveResult && mode?.badge && (
             <p className={styles.badgeEarned}>
-              🩸 You survived all {mode.count}. The {mode.badge} badge now sits next to your name on
-              every leaderboard.
+              🩸 You survived all {mode.count}. Your name is on the {mode.name} leaderboard with the{" "}
+              {mode.badge} badge.
             </p>
           )}
           {needsUsernameFor && (

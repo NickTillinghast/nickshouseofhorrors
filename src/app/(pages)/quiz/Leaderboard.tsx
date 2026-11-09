@@ -1,19 +1,31 @@
-import { getBadges, getLeaderboard } from "../../../lib/leaderboard";
+import { getLeaderboard } from "../../../lib/leaderboard";
 import { formatDuration } from "../../../lib/formatDuration";
 import { getQuizMode, type QuizModeId } from "../../../lib/quizModes";
 import styles from "./page.module.css";
 
 const MEDALS = ["🥇", "🥈", "🥉"];
 
-// The two long runs stand out: gold for Unkillable, blood red for Final Girl
+// Gold for Unkillable, blood red for Final Girl, bone for Midnight Movie, gray for Jump Scare
 const CARD_STYLE: Partial<Record<QuizModeId, string>> = {
   unkillable: styles.boardCardLegend,
   "final-girl": styles.boardCardElite,
+  "midnight-movie": styles.boardCardMidnight,
+  "jump-scare": styles.boardCardJump,
+};
+
+// Every name on a board finished that run, so each row gets that board's pill
+const PILL_STYLE: Record<QuizModeId, string> = {
+  unkillable: styles.badgeLegend,
+  "final-girl": styles.badgeElite,
+  "midnight-movie": styles.badgeMidnight,
+  "jump-scare": styles.badgeJump,
 };
 
 const BOARD_NOTE: Partial<Record<QuizModeId, string>> = {
   unkillable: "The immortals. Only those who made it through all 100 appear here.",
   "final-girl": "The hall of survivors. Only finishers of all 50 appear here.",
+  "midnight-movie": "The midnight movie survivors. Only finishers of all 25 questions appear here.",
+  "jump-scare": "The jump scare survivors. Only finishers of all 10 questions appear here.",
 };
 
 type LeaderboardProps = {
@@ -22,7 +34,7 @@ type LeaderboardProps = {
 };
 
 export default async function Leaderboard({ mode, limit = 10 }: LeaderboardProps) {
-  const [entries, badges] = await Promise.all([getLeaderboard(mode, limit), getBadges()]);
+  const entries = await getLeaderboard(mode, limit);
   const quizMode = getQuizMode(mode)!;
 
   return (
@@ -42,9 +54,6 @@ export default async function Leaderboard({ mode, limit = 10 }: LeaderboardProps
       ) : (
         <ol className={styles.board}>
           {entries.map((entry, i) => {
-            const badge = badges[entry.user_id];
-            const badgeMode = badge && getQuizMode(badge);
-
             return (
               <li key={entry.user_id} className={styles.boardRow}>
                 <span className={styles.rank}>{MEDALS[i] ?? `#${i + 1}`}</span>
@@ -54,15 +63,12 @@ export default async function Leaderboard({ mode, limit = 10 }: LeaderboardProps
                 </span>
                 <span className={styles.player}>
                   {entry.username}
-                  {/* A player's best badge follows them onto every board */}
-                  {badgeMode && (
-                    <span
-                      className={`${styles.badge} ${badge === "unkillable" ? styles.badgeLegend : styles.badgeElite}`}
-                      title={`Survived all ${badgeMode.count} questions of ${badgeMode.name}`}
-                    >
-                      {badgeMode.badge}
-                    </span>
-                  )}
+                  <span
+                    className={`${styles.badge} ${PILL_STYLE[mode]}`}
+                    title={`Survived all ${quizMode.count} questions of ${quizMode.name}`}
+                  >
+                    {quizMode.name}
+                  </span>
                 </span>
                 <span className={styles.score}>
                   {entry.correct}/{entry.total}

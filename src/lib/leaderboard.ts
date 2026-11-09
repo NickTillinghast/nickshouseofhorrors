@@ -1,6 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import { cacheLife, cacheTag } from "next/cache";
-import { BADGE_MODES, type QuizModeId } from "./quizModes";
+import type { QuizModeId } from "./quizModes";
 
 export const LEADERBOARD_TAG = "quiz-leaderboard";
 
@@ -52,28 +52,4 @@ export async function getLeaderboard(mode: QuizModeId, limit = 20): Promise<Lead
     ...score,
     username: usernames.get(score.user_id) ?? "Nameless Victim",
   }));
-}
-
-// Each player's best badge (Unkillable beats Final Girl), shown next to their name on every board
-export async function getBadges(): Promise<Record<string, QuizModeId>> {
-  "use cache";
-  cacheTag(LEADERBOARD_TAG);
-  cacheLife("hours");
-
-  const { data } = await publicClient()
-    .from("quiz_scores")
-    .select("user_id, mode")
-    .in(
-      "mode",
-      BADGE_MODES.map((mode) => mode.id),
-    );
-
-  // BADGE_MODES is best first, so the first badge a player gets is their best
-  const badges: Record<string, QuizModeId> = {};
-  for (const mode of BADGE_MODES) {
-    for (const row of data ?? []) {
-      if (row.mode === mode.id && !badges[row.user_id]) badges[row.user_id] = mode.id;
-    }
-  }
-  return badges;
 }
