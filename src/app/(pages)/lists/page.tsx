@@ -2,8 +2,8 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Creepster } from "next/font/google";
-import MovieList from "../../../components/MovieList/MovieList";
-import horrorFilters from "../../../data/horrorFilters.json";
+import MovieList from "@components/MovieList/MovieList";
+import horrorFilters from "@data/horrorFilters.json";
 import {
   formatDate,
   formatPrice,
@@ -12,7 +12,7 @@ import {
   getPromotedLists,
   getPublishedLists,
   type UserList,
-} from "../../../lib/userLists";
+} from "@lib/userLists";
 import SubgenreFilter from "../movies/SubgenreFilter";
 import styles from "./page.module.css";
 

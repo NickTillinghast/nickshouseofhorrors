@@ -3,8 +3,8 @@
 import { useRef } from "react";
 import Image from "next/image";
 import HeartsCta from "./HeartsCta";
-import { MY_MOVIES_LABEL } from "../../../lib/navigation";
-import modalStyles from "../../../components/MovieDetailCard/MovieModal.module.css";
+import { MY_MOVIES_LABEL } from "@lib/navigation";
+import modalStyles from "@components/MovieDetailCard/MovieModal.module.css";
 import styles from "./page.module.css";
 
 const HEART_STEPS = [

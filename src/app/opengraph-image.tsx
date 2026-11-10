@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { SITE_NAME } from "../lib/site";
+import { SITE_NAME } from "@lib/site";
 
 // The preview image when a link is shared (Slack, iMessage, X, Facebook).
 // Movie pages swap in their own poster instead

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { createClient } from "../../../lib/supabase/server";
-import { safeRedirect } from "../../../lib/safeRedirect";
+import { createClient } from "@lib/supabase/server";
+import { safeRedirect } from "@lib/safeRedirect";
 
 // Google and magic links both land here with a one-time code, which we swap for a session
 // GET /auth/callback?code=...&next=/movies

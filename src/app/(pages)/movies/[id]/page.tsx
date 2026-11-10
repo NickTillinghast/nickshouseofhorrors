@@ -2,8 +2,8 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { MovieResponse } from "moviedb-promise";
-import { getMovie } from "../../../../lib/tmdb";
-import { SITE_URL } from "../../../../lib/site";
+import { getMovie } from "@lib/tmdb";
+import { SITE_URL } from "@lib/site";
 import MovieDetails from "./MovieDetails";
 import styles from "../page.module.css";
 

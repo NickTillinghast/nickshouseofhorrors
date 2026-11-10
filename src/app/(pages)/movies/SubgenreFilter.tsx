@@ -2,7 +2,7 @@
 
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
-import GenreSelect from "../../../components/GenreSelect/GenreSelect";
+import GenreSelect from "@components/GenreSelect/GenreSelect";
 import styles from "./page.module.css";
 
 type SubgenreFilterProps = {

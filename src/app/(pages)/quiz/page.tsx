@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Creepster } from "next/font/google";
-import { BANK_SIZES } from "../../../lib/quiz";
-import { QUIZ_MODES } from "../../../lib/quizModes";
+import { BANK_SIZES } from "@lib/quiz";
+import { QUIZ_MODES } from "@lib/quizModes";
 import QuizGame from "./QuizGame";
 import Leaderboard from "./Leaderboard";
 import styles from "./page.module.css";

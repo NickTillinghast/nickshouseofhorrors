@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
-import { getHorrorMovies, getPopularHorrorMovies, getTopRatedHorrorMovies } from "../lib/tmdb";
-import { SITE_URL } from "../lib/site";
-import { getFeaturedList, getPublishedLists } from "../lib/userLists";
+import { getHorrorMovies, getPopularHorrorMovies, getTopRatedHorrorMovies } from "@lib/tmdb";
+import { SITE_URL } from "@lib/site";
+import { getFeaturedList, getPublishedLists } from "@lib/userLists";
 
 // How many A–Z pages of the movie feed to list, 20 movies each
 const FEED_PAGES = 10;

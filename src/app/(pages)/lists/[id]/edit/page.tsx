@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
-import { previewPromotion } from "../../../../../lib/listPurchases";
-import { formatDate, LIST_SELECT, toUserList, type ListRow } from "../../../../../lib/userLists";
+import { previewPromotion } from "@lib/listPurchases";
+import { formatDate, LIST_SELECT, toUserList, type ListRow } from "@lib/userLists";
 import { requireUser } from "../../requireUser";
 import ListBuilder from "./ListBuilder";
 import styles from "../../lists.module.css";

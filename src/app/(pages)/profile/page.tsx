@@ -1,12 +1,12 @@
 import { Suspense } from "react";
-import { MY_MOVIES_LABEL } from "../../../lib/navigation";
+import { MY_MOVIES_LABEL } from "@lib/navigation";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { connection } from "next/server";
-import MovieDetailCard from "../../../components/MovieDetailCard/MovieDetailCard";
-import { createClient } from "../../../lib/supabase/server";
+import MovieDetailCard from "@components/MovieDetailCard/MovieDetailCard";
+import { createClient } from "@lib/supabase/server";
 import movieStyles from "../movies/page.module.css";
 import styles from "./page.module.css";
 

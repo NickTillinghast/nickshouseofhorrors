@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { MovieResult } from "moviedb-promise";
-import MovieDetailCard from "../../../components/MovieDetailCard/MovieDetailCard";
+import MovieDetailCard from "@components/MovieDetailCard/MovieDetailCard";
 import { loadHorrorMovies } from "./actions";
 import styles from "./page.module.css";
 

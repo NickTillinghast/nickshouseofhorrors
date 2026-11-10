@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import horrorFilters from "../../data/horrorFilters.json";
+import horrorFilters from "@data/horrorFilters.json";
 import styles from "./GenreSelect.module.css";
 
 // "All horror" first, then every subgenre A to Z

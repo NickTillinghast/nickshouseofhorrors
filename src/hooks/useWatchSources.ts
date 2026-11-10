@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { WatchSource } from "../lib/watchmode";
+import type { WatchSource } from "@lib/watchmode";
 
 export type WatchState = ReturnType<typeof useWatchSources>;
 

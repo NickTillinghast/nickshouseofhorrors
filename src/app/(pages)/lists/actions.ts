@@ -2,17 +2,17 @@
 
 import { updateTag } from "next/cache";
 import { redirect } from "next/navigation";
-import horrorFilters from "../../../data/horrorFilters.json";
-import { completePurchase, getListOffer, PROMOTE_OFFER } from "../../../lib/listPurchases";
-import { createAdminClient } from "../../../lib/supabase/admin";
-import { createClient } from "../../../lib/supabase/server";
+import horrorFilters from "@data/horrorFilters.json";
+import { completePurchase, getListOffer, PROMOTE_OFFER } from "@lib/listPurchases";
+import { createAdminClient } from "@lib/supabase/admin";
+import { createClient } from "@lib/supabase/server";
 import {
   LIST_SIZE,
   LIST_TITLE_MAX,
   MAX_LIST_GENRES,
   USER_LISTS_TAG,
   type UserListMovie,
-} from "../../../lib/userLists";
+} from "@lib/userLists";
 
 // Errors come back as values, thrown errors lose their message in production
 type Result = { error?: string };

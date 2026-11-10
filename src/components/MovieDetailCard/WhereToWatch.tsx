@@ -1,7 +1,7 @@
 "use client";
 
-import type { WatchSource } from "../../lib/watchmode";
-import type { WatchState } from "../../hooks/useWatchSources";
+import type { WatchSource } from "@lib/watchmode";
+import type { WatchState } from "@hooks/useWatchSources";
 import styles from "./WhereToWatch.module.css";
 
 const TYPE_LABELS: Record<WatchSource["type"], string> = {

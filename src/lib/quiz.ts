@@ -1,6 +1,6 @@
 import "server-only";
-import classicQuiz from "../data/horror-quiz.json";
-import hardQuiz from "../data/horror-quiz-hard.json";
+import classicQuiz from "@data/horror-quiz.json";
+import hardQuiz from "@data/horror-quiz-hard.json";
 import type { QuestionBank } from "./quizModes";
 
 // The answers live here and never go to the browser, so nobody can read them from dev tools

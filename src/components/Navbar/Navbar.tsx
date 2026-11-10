@@ -4,9 +4,9 @@ import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useFavorites } from "../Favorites/FavoritesProvider";
-import SearchBox from "../Search/SearchBox";
-import { MY_MOVIES_LABEL, NAV_LINKS } from "../../lib/navigation";
+import { useFavorites } from "@components/Favorites/FavoritesProvider";
+import SearchBox from "@components/Search/SearchBox";
+import { MY_MOVIES_LABEL, NAV_LINKS } from "@lib/navigation";
 import styles from "./Navbar.module.css";
 
 function Account({ pathname }: { pathname?: string }) {

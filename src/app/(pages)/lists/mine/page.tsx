@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { formatDate, formatPrice, PROMOTE_PRICE_CENTS } from "../../../../lib/userLists";
+import { formatDate, formatPrice, PROMOTE_PRICE_CENTS } from "@lib/userLists";
 import { requireUser } from "../requireUser";
 import styles from "../lists.module.css";
 

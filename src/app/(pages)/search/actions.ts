@@ -1,6 +1,6 @@
 "use server";
 
-import { searchHorrorMovies } from "../../../lib/tmdb";
+import { searchHorrorMovies } from "@lib/tmdb";
 
 // A "use server" file can only export async functions, so these stay private
 const SEARCH_MIN_CHARS = 4;

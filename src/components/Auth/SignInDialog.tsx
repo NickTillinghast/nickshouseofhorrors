@@ -2,7 +2,7 @@
 
 import type { Ref } from "react";
 import SignInForm from "./SignInForm";
-import modalStyles from "../MovieDetailCard/MovieModal.module.css";
+import modalStyles from "@components/MovieDetailCard/MovieModal.module.css";
 import styles from "./SignInDialog.module.css";
 
 type SignInDialogProps = {

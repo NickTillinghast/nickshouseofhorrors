@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Creepster } from "next/font/google";
-import { gearByCategory } from "../../../lib/gear";
+import { gearByCategory } from "@lib/gear";
 import styles from "./page.module.css";
 
 const creepster = Creepster({ weight: "400", subsets: ["latin"] });

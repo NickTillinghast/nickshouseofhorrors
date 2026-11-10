@@ -1,16 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { createClient } from "../../lib/supabase/client";
-import { useFavorites } from "../Favorites/FavoritesProvider";
-import { setCommentCount } from "../../hooks/useCommentCount";
+import { createClient } from "@lib/supabase/client";
+import { useFavorites } from "@components/Favorites/FavoritesProvider";
+import { setCommentCount } from "@hooks/useCommentCount";
 import {
   COMMENT_COLUMNS,
   COMMENT_MAX_LENGTH,
   USERNAME_PATTERN,
   timeAgo,
   type Comment,
-} from "../../lib/comments";
+} from "@lib/comments";
 import { addComment, createProfile, deleteComment, reportComment } from "./actions";
 import styles from "./CommentSection.module.css";
 

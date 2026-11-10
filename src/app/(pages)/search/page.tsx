@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import MovieDetailCard from "../../../components/MovieDetailCard/MovieDetailCard";
-import { searchHorrorMovies } from "../../../lib/tmdb";
+import MovieDetailCard from "@components/MovieDetailCard/MovieDetailCard";
+import { searchHorrorMovies } from "@lib/tmdb";
 import movieStyles from "../movies/page.module.css";
 
 export const metadata: Metadata = {

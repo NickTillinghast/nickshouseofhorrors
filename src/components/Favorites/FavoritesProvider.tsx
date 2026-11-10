@@ -3,10 +3,10 @@
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import type { User } from "@supabase/supabase-js";
-import { createClient } from "../../lib/supabase/client";
-import type { FavoriteMovie } from "../../lib/favorites";
-import { addFavorite, removeFavorite } from "../../app/(pages)/profile/actions";
-import SignInDialog from "../Auth/SignInDialog";
+import { createClient } from "@lib/supabase/client";
+import type { FavoriteMovie } from "@lib/favorites";
+import { addFavorite, removeFavorite } from "@app/(pages)/profile/actions";
+import SignInDialog from "@components/Auth/SignInDialog";
 
 type FavoritesContextValue = {
   user: User | null;

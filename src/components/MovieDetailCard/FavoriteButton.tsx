@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useFavorites } from "../Favorites/FavoritesProvider";
-import { toFavoriteMovie, type FavoriteSource } from "../../lib/favorites";
+import { useFavorites } from "@components/Favorites/FavoritesProvider";
+import { toFavoriteMovie, type FavoriteSource } from "@lib/favorites";
 import styles from "./FavoriteButton.module.css";
 
 type FavoriteButtonProps = {

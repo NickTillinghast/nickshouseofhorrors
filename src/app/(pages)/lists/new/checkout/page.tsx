@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import { getListOffer } from "../../../../../lib/listPurchases";
-import { formatPrice } from "../../../../../lib/userLists";
+import { getListOffer } from "@lib/listPurchases";
+import { formatPrice } from "@lib/userLists";
 import { buyList } from "../../actions";
 import FakeCheckout from "../../FakeCheckout";
 import { requireUser } from "../../requireUser";

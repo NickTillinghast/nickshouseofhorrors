@@ -1,7 +1,7 @@
 import "server-only";
 import { redirect } from "next/navigation";
 import { connection } from "next/server";
-import { createClient } from "../../../lib/supabase/server";
+import { createClient } from "@lib/supabase/server";
 
 // For pages only signed-in people can see. Sends everyone else to sign in, then back here
 export async function requireUser(next: string) {

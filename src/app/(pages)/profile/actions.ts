@@ -1,8 +1,8 @@
 "use server";
 
 import { refresh } from "next/cache";
-import { createClient } from "../../../lib/supabase/server";
-import type { FavoriteMovie } from "../../../lib/favorites";
+import { createClient } from "@lib/supabase/server";
+import type { FavoriteMovie } from "@lib/favorites";
 
 // Server Actions can be called with anything, so check the shape before it reaches the database
 function isValidMovie(movie: FavoriteMovie) {

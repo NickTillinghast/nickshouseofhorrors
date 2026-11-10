@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { quickSearch } from "../app/(pages)/search/actions";
+import { quickSearch } from "@app/(pages)/search/actions";
 
 // Wait for the user to stop typing this long before searching, so a whole word is one call
 const PAUSE_MS = 700;

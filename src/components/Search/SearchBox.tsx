@@ -3,8 +3,8 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import MovieModal, { MovieModalTrigger } from "../MovieDetailCard/MovieModal";
-import { SEARCH_MIN_CHARS as MIN_CHARS, useMovieSearch } from "../../hooks/useMovieSearch";
+import MovieModal, { MovieModalTrigger } from "@components/MovieDetailCard/MovieModal";
+import { SEARCH_MIN_CHARS as MIN_CHARS, useMovieSearch } from "@hooks/useMovieSearch";
 import styles from "./SearchBox.module.css";
 
 export default function SearchBox() {

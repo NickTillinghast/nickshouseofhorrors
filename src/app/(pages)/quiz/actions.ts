@@ -2,11 +2,11 @@
 
 import { updateTag } from "next/cache";
 import type { User } from "@supabase/supabase-js";
-import { createAdminClient } from "../../../lib/supabase/admin";
-import { createClient } from "../../../lib/supabase/server";
-import { BANK_SIZES, getAnswer, shuffledQuestionIds, toPublicQuestion } from "../../../lib/quiz";
-import { LEADERBOARD_TAG } from "../../../lib/leaderboard";
-import { getQuizMode, type QuizModeId } from "../../../lib/quizModes";
+import { createAdminClient } from "@lib/supabase/admin";
+import { createClient } from "@lib/supabase/server";
+import { BANK_SIZES, getAnswer, shuffledQuestionIds, toPublicQuestion } from "@lib/quiz";
+import { LEADERBOARD_TAG } from "@lib/leaderboard";
+import { getQuizMode, type QuizModeId } from "@lib/quizModes";
 
 // The server keeps score and the clock. The browser only ever sees one question at a time
 // and learns the answer after it has locked one in.

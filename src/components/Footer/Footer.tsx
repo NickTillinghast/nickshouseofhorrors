@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { Creepster } from "next/font/google";
 import { siFacebook, siGithub, siInstagram } from "simple-icons";
-import { MY_MOVIES_LABEL, NAV_LINKS, SOCIAL_LINKS } from "../../lib/navigation";
-import { SITE_NAME } from "../../lib/site";
+import { MY_MOVIES_LABEL, NAV_LINKS, SOCIAL_LINKS } from "@lib/navigation";
+import { SITE_NAME } from "@lib/site";
 import styles from "./Footer.module.css";
 
 const creepster = Creepster({ weight: "400", subsets: ["latin"] });

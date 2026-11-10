@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useSyncExternalStore } from "react";
-import { createClient } from "../lib/supabase/client";
+import { createClient } from "@lib/supabase/client";
 
 // Comment counts shared by every bubble on the page, so posting in the modal updates the card too
 const counts = new Map<string, number>();

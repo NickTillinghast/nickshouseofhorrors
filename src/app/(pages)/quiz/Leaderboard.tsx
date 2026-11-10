@@ -1,6 +1,6 @@
-import { getLeaderboard } from "../../../lib/leaderboard";
-import { formatDuration } from "../../../lib/formatDuration";
-import { getQuizMode, type QuizModeId } from "../../../lib/quizModes";
+import { getLeaderboard } from "@lib/leaderboard";
+import { formatDuration } from "@lib/formatDuration";
+import { getQuizMode, type QuizModeId } from "@lib/quizModes";
 import styles from "./page.module.css";
 
 const MEDALS = ["🥇", "🥈", "🥉"];

@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useFavorites } from "../../../components/Favorites/FavoritesProvider";
-import { formatDuration } from "../../../lib/formatDuration";
-import { QUIZ_MODES, getQuizMode, type QuestionBank } from "../../../lib/quizModes";
-import { UsernameForm } from "../../../components/Comments/CommentSection";
+import { useFavorites } from "@components/Favorites/FavoritesProvider";
+import { formatDuration } from "@lib/formatDuration";
+import { QUIZ_MODES, getQuizMode, type QuestionBank } from "@lib/quizModes";
+import { UsernameForm } from "@components/Comments/CommentSection";
 import { abandonQuiz, answerQuestion, nextQuestion, saveScore, startQuiz } from "./actions";
 import styles from "./page.module.css";
 

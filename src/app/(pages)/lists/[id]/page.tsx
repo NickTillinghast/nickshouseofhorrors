@@ -2,9 +2,9 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import MovieList from "../../../../components/MovieList/MovieList";
-import horrorFilters from "../../../../data/horrorFilters.json";
-import { formatDate, getList } from "../../../../lib/userLists";
+import MovieList from "@components/MovieList/MovieList";
+import horrorFilters from "@data/horrorFilters.json";
+import { formatDate, getList } from "@lib/userLists";
 import styles from "../lists.module.css";
 
 const GENRE_NAMES = new Map(horrorFilters.subgenres.map((genre) => [genre.id, genre.name]));

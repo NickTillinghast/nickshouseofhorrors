@@ -1,4 +1,4 @@
-import { getWatchSources } from "../../../lib/watchmode";
+import { getWatchSources } from "@lib/watchmode";
 
 // GET /api/watch?id=<tmdb movie id>
 export async function GET(request: Request) {

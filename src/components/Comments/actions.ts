@@ -1,7 +1,7 @@
 "use server";
 
-import { createClient } from "../../lib/supabase/server";
-import { COMMENT_MAX_LENGTH, THREAD_PATTERN, USERNAME_PATTERN } from "../../lib/comments";
+import { createClient } from "@lib/supabase/server";
+import { COMMENT_MAX_LENGTH, THREAD_PATTERN, USERNAME_PATTERN } from "@lib/comments";
 
 // Errors come back as values, thrown errors lose their message in production
 type Result = { error?: string };

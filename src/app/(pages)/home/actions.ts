@@ -1,6 +1,6 @@
 "use server";
 
-import { getHorrorMovies } from "../../../lib/tmdb";
+import { getHorrorMovies } from "@lib/tmdb";
 
 const REEL_SIZE = 10;
 // Deep pages are mostly obscure titles, keep the reel to recognizable movies

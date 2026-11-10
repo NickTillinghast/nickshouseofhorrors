@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { getLeaderboard } from "../../../lib/leaderboard";
-import { formatDuration } from "../../../lib/formatDuration";
-import { FINAL_GIRL, UNKILLABLE } from "../../../lib/quizModes";
+import { getLeaderboard } from "@lib/leaderboard";
+import { formatDuration } from "@lib/formatDuration";
+import { FINAL_GIRL, UNKILLABLE } from "@lib/quizModes";
 import styles from "./page.module.css";
 
 const MEDALS = ["🥇", "🥈", "🥉"];

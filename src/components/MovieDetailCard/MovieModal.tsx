@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useRef, useState, type ReactNode 
 import Link from "next/link";
 import type { MovieResponse } from "moviedb-promise";
 import MovieDetailCard from "./MovieDetailCard";
-import useWatchSources from "../../hooks/useWatchSources";
+import useWatchSources from "@hooks/useWatchSources";
 import styles from "./MovieModal.module.css";
 
 type OpenOptions = {

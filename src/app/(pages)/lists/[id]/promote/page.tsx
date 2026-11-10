@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { previewPromotion, PROMOTE_OFFER } from "../../../../../lib/listPurchases";
-import { formatDate, formatPrice } from "../../../../../lib/userLists";
+import { previewPromotion, PROMOTE_OFFER } from "@lib/listPurchases";
+import { formatDate, formatPrice } from "@lib/userLists";
 import { promoteList } from "../../actions";
 import FakeCheckout from "../../FakeCheckout";
 import { requireUser } from "../../requireUser";

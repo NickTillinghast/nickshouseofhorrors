@@ -3,10 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import type { MovieResult } from "moviedb-promise";
-import MovieModal, { MovieModalTrigger } from "../MovieDetailCard/MovieModal";
-import { getReelMovies } from "../../app/(pages)/home/actions";
-import GenreSelect from "../GenreSelect/GenreSelect";
-import watchStyles from "../MovieDetailCard/WhereToWatch.module.css";
+import MovieModal, { MovieModalTrigger } from "@components/MovieDetailCard/MovieModal";
+import { getReelMovies } from "@app/(pages)/home/actions";
+import GenreSelect from "@components/GenreSelect/GenreSelect";
+import watchStyles from "@components/MovieDetailCard/WhereToWatch.module.css";
 import styles from "./HorrorReel.module.css";
 
 // Speeds are in cards per second

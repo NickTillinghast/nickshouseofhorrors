@@ -1,7 +1,7 @@
 "use client";
 
-import useCommentCount from "../../hooks/useCommentCount";
-import { MovieModalTrigger } from "../MovieDetailCard/MovieModal";
+import useCommentCount from "@hooks/useCommentCount";
+import { MovieModalTrigger } from "@components/MovieDetailCard/MovieModal";
 import styles from "./CommentBubble.module.css";
 
 type CommentBubbleProps = {

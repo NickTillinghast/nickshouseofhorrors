@@ -19,14 +19,14 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import horrorFilters from "../../../../../data/horrorFilters.json";
-import { SEARCH_MIN_CHARS, useMovieSearch } from "../../../../../hooks/useMovieSearch";
+import horrorFilters from "@data/horrorFilters.json";
+import { SEARCH_MIN_CHARS, useMovieSearch } from "@hooks/useMovieSearch";
 import {
   LIST_SIZE,
   LIST_TITLE_MAX,
   MAX_LIST_GENRES,
   type UserListMovie,
-} from "../../../../../lib/userListShared";
+} from "@lib/userListShared";
 import { publishList, saveList, type ListDraft } from "../../actions";
 import styles from "../../lists.module.css";
 

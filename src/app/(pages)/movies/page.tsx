@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import { getHorrorMovies, getTopRatedHorrorMovies } from "../../../lib/tmdb";
-import horrorFilters from "../../../data/horrorFilters.json";
+import { getHorrorMovies, getTopRatedHorrorMovies } from "@lib/tmdb";
+import horrorFilters from "@data/horrorFilters.json";
 import MovieFeed from "./MovieFeed";
 import SubgenreFilter from "./SubgenreFilter";
 import styles from "./page.module.css";
