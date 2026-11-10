@@ -29,7 +29,8 @@ type MovieDetailCardProps = {
   whereToWatch?: WatchState;
   // Top rated movies get a red border to stand out in the grid
   featured?: boolean;
-  // Show the comment section (full cards only)
+  // Show the comments under the card. Only the movie's own page does this,
+  // in the modal the comment bubble switches to the comments view instead
   showComments?: boolean;
   commentsId?: string;
 };
@@ -92,7 +93,7 @@ export default function MovieDetailCard({
               <CommentBubble
                 thread={movieThread(movie.id)}
                 title={movie.title}
-                scrollTo={full ? commentsId : undefined}
+                scrollTo={showComments ? commentsId : undefined}
               />
             )}
             <FavoriteButton movie={movie} />
@@ -133,9 +134,9 @@ export default function MovieDetailCard({
           )}
         </div>
 
-        {/* {full && showComments && movie.id !== undefined && (
+        {showComments && movie.id !== undefined && (
           <CommentSection thread={movieThread(movie.id)} id={commentsId} />
-        )} */}
+        )}
       </div>
     </article>
   );

@@ -156,15 +156,40 @@
   align-items: stretch;
 }
 
-@media (min-width: 900px) {
+/* Tablets: the quiz across the top, the two lists side by side under it */
+@media (min-width: 700px) {
   .split {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  /* The list takes no height of its own, so it stretches to the heart steps and scrolls inside */
-  .split > :last-child {
+  .split > :first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Wide screens: quiz, Nick's Picks and Popular in one row */
+@media (min-width: 1100px) {
+  .split {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1fr);
+    /* Wider than the rest of the page so three columns have room */
+    width: min(1320px, 100vw - 40px);
+    align-self: center;
+  }
+
+  .split > :first-child {
+    grid-column: auto;
+  }
+
+  /* The lists take no height of their own, so they match the quiz card and scroll inside */
+  .splitList {
     contain: size;
   }
+}
+
+.splitList {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 
 /* Next to the list, the steps sit in one column with the heart beside the text */

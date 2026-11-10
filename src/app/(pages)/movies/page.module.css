@@ -5,6 +5,17 @@
   padding: 20px;
 }
 
+/* A movie's own page: readable width, centered (the modal has its own size) */
+.moviePage {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.movieWrap {
+  position: relative;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 480px), 1fr));

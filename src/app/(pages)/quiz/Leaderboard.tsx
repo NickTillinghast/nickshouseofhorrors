@@ -62,7 +62,7 @@ export default async function Leaderboard({ mode, limit = 10 }: LeaderboardProps
                   {entry.username[0]?.toUpperCase()}
                 </span>
                 <span className={styles.player}>
-                  {entry.username}
+                  <span className={styles.playerName}>{entry.username}</span>
                   <span
                     className={`${styles.badge} ${PILL_STYLE[mode]}`}
                     title={`Survived all ${quizMode.count} questions of ${quizMode.name}`}

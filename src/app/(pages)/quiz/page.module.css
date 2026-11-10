@@ -28,7 +28,8 @@
 /* Game on the left, leaderboard on the right; stacked on phones */
 .layout {
   display: grid;
-  grid-template-columns: 1fr;
+  /* minmax(0, …) so long content can't push the column wider than the screen */
+  grid-template-columns: minmax(0, 1fr);
   gap: 24px;
   align-items: start;
 }
@@ -373,6 +374,13 @@
   list-style: none;
 }
 
+/* below md (768px): every quiz gets its own full-width row */
+@media (max-width: 767px) {
+  .modes {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Unkillable spans the full row on top, the three shorter quizzes sit side by side below it */
 .modes li:first-child {
   grid-column: 1 / -1;
@@ -531,7 +539,6 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  min-width: max-content;
 }
 
 .boardCard {
@@ -630,4 +637,55 @@
 .boardCardElite .boardName {
   color: var(--color-blood-light);
   font-size: 1.2rem;
+}
+
+/* Long usernames get cut off with "…" instead of widening the row */
+.playerName {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---- Small phones (down to 360px) ---- */
+@media (max-width: 480px) {
+  .page {
+    padding: 32px 12px 64px;
+  }
+
+  .panel {
+    padding: 16px;
+  }
+
+  .boardCard,
+  .boardCardLegend {
+    padding: 14px 12px;
+  }
+
+  /* No avatar, and the badge sits under the name, so the name has room */
+  .boardRow {
+    grid-template-columns: 1.75rem minmax(0, 1fr) auto auto;
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .boardRow .avatar {
+    display: none;
+  }
+
+  .player {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .player,
+  .playerName {
+    max-width: 100%;
+  }
+
+  .score,
+  .time {
+    font-size: 0.85rem;
+  }
 }

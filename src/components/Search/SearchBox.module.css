@@ -163,3 +163,22 @@
   clip-path: inset(50%);
   white-space: nowrap;
 }
+
+/* Small screens: the search box takes the space between the logo and the menu button */
+@media (max-width: 959px) {
+  .container {
+    flex: 1;
+    min-width: 0;
+    margin-left: 0;
+  }
+
+  .form {
+    width: 100%;
+    max-width: 360px;
+    margin-left: auto;
+  }
+
+  .shortcut {
+    display: none;
+  }
+}

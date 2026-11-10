@@ -5,6 +5,7 @@ import { Creepster } from "next/font/google";
 import HorrorReel from "@components/HorrorReel/HorrorReel";
 import MovieList from "@components/MovieList/MovieList";
 import { getPopularHorrorMovies, getTopRatedHorrorMovies } from "@lib/tmdb";
+import { getFeaturedList } from "@lib/userLists";
 import HeartsInfo from "./HeartsInfo";
 import QuizTeaser from "./QuizTeaser";
 import styles from "./page.module.css";
@@ -20,9 +21,10 @@ export const metadata: Metadata = {
 
 export default async function HomePage() {
   // The reel starts with the best-loved classics, "New movies" swaps in a random set
-  const [reelMovies, popularMovies] = await Promise.all([
+  const [reelMovies, popularMovies, nicksPicks] = await Promise.all([
     getTopRatedHorrorMovies(10),
     getPopularHorrorMovies(50),
+    getFeaturedList(),
   ]);
 
   return (
@@ -50,15 +52,30 @@ export default async function HomePage() {
         </Link>
       </section>
 
-      {/* Quiz on the left, a scrolling top 50 on the right (stacked on phones) */}
+      {/* Quiz, Nick's Picks and a scrolling top 50 side by side (stacked on smaller screens) */}
       <div className={styles.split}>
         <QuizTeaser titleClassName={creepster.className} />
 
-        <MovieList
-          title="Popular right now"
-          description="The 50 horror movies everyone's watching this week"
-          movies={popularMovies}
-        />
+        <div className={styles.splitList}>
+          <MovieList
+            title={nicksPicks?.title ?? "Nick's Picks"}
+            titleHref={nicksPicks ? `/lists/${nicksPicks.id}` : "/lists"}
+            description="Nick's all-time Top 10"
+            badge="Nick's picks"
+            movies={nicksPicks?.movies ?? []}
+            redBottom
+            emptyText="Coming soon. Nick is still arguing with himself about number 1."
+          />
+        </div>
+
+        <div className={styles.splitList}>
+          <MovieList
+            title="Popular right now"
+            description="The 50 horror movies everyone's watching this week"
+            movies={popularMovies}
+            redBottom
+          />
+        </div>
       </div>
 
       <section className={styles.section} aria-labelledby="reel-heading">

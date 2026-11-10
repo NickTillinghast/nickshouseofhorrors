@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import type { MovieResponse } from "moviedb-promise";
 import { getMovie } from "@lib/tmdb";
 import { SITE_URL } from "@lib/site";
+import CloseButton from "./CloseButton";
 import MovieDetails from "./MovieDetails";
 import styles from "../page.module.css";
 
@@ -72,7 +73,7 @@ function movieJsonLd(movie: MovieResponse) {
 
 export default function MovieDetailPage(props: PageProps<"/movies/[id]">) {
   return (
-    <main className={styles.page}>
+    <main className={`${styles.page} ${styles.moviePage}`}>
       {/* The id comes from the URL at request time, so it has to sit inside Suspense */}
       <Suspense fallback={<p>Loading movie…</p>}>
         <Movie params={props.params} />
@@ -94,7 +95,11 @@ async function Movie({ params }: Pick<PageProps<"/movies/[id]">, "params">) {
           __html: JSON.stringify(movieJsonLd(movie)).replace(/</g, "\\u003c"),
         }}
       />
-      <MovieDetails movie={movie} />
+      {/* Same spot as the modal's close button, the card leaves room for it */}
+      <div className={styles.movieWrap}>
+        <CloseButton />
+        <MovieDetails movie={movie} />
+      </div>
     </>
   );
 }

@@ -48,3 +48,55 @@
 .close:hover {
   background: var(--color-blood);
 }
+
+/* The comments view is a fixed height, so its list scrolls and the comment box stays put */
+.dialogComments {
+  flex-direction: column;
+  height: min(90vh, 760px);
+  overflow: hidden;
+}
+
+/* Only while open, so a closed dialog stays hidden */
+.dialogComments[open] {
+  display: flex;
+}
+
+.view {
+  animation: viewIn 0.2s ease-out;
+}
+
+.commentsView {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.view[hidden] {
+  display: none;
+}
+
+@keyframes viewIn {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .view {
+    animation: none;
+  }
+}
+
+/* Phones: the comments take the whole screen, easier to read and type */
+@media (max-width: 600px) {
+  .dialogComments {
+    width: 100vw;
+    max-width: 100vw;
+    height: 100dvh;
+    max-height: 100dvh;
+    border: none;
+    border-radius: 0;
+  }
+}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createClient } from "@lib/supabase/client";
 import { useFavorites } from "@components/Favorites/FavoritesProvider";
 import { setCommentCount } from "@hooks/useCommentCount";
@@ -27,9 +27,13 @@ async function fetchComments(thread: string) {
 type CommentSectionProps = {
   thread: string;
   id?: string;
+  // "inline" sits at the bottom of a page. "panel" fills the movie modal:
+  // the comments scroll and the box to add one stays pinned at the bottom
+  variant?: "inline" | "panel";
 };
 
-export default function CommentSection({ thread, id }: CommentSectionProps) {
+export default function CommentSection({ thread, id, variant = "inline" }: CommentSectionProps) {
+  const scrollerRef = useRef<HTMLDivElement>(null);
   const { user, openSignIn } = useFavorites();
   const [comments, setComments] = useState<Comment[] | null>(null);
   const [loadError, setLoadError] = useState(false);
@@ -83,6 +87,8 @@ export default function CommentSection({ thread, id }: CommentSectionProps) {
     if (!result.error) {
       setReplyingTo(null);
       await load();
+      // New conversations show first, so bring them into view
+      if (parentId === null) scrollerRef.current?.scrollTo({ top: 0, behavior: "smooth" });
     }
     return result;
   }
@@ -157,23 +163,24 @@ export default function CommentSection({ thread, id }: CommentSectionProps) {
     );
   }
 
-  return (
-    <section id={id} className={styles.section} aria-label="Comments">
-      <h3 className={styles.heading}>
-        Comments {comments && <span className={styles.total}>{comments.length}</span>}
-      </h3>
+  const composer = !user ? (
+    <button type="button" className={styles.signIn} onClick={openSignIn}>
+      Sign in to join the conversation
+    </button>
+  ) : username === null ? (
+    <UsernameForm onSaved={setUsername} />
+  ) : username ? (
+    <CommentForm
+      placeholder="What did you think?"
+      rows={variant === "panel" ? 2 : 3}
+      onSubmit={(body) => post(body)}
+    />
+  ) : null;
 
-      {!user ? (
-        <button type="button" className={styles.signIn} onClick={openSignIn}>
-          Sign in to join the conversation
-        </button>
-      ) : username === null ? (
-        <UsernameForm onSaved={setUsername} />
-      ) : username ? (
-        <CommentForm placeholder="What did you think?" onSubmit={(body) => post(body)} />
-      ) : null}
-
+  const conversation = (
+    <>
       {loadError && <p className={styles.error}>Couldn&apos;t load comments.</p>}
+      {comments === null && !loadError && <p className={styles.empty}>Loading comments…</p>}
       {comments?.length === 0 && <p className={styles.empty}>No comments yet. Be the first.</p>}
 
       <ol className={styles.list}>
@@ -196,12 +203,34 @@ export default function CommentSection({ thread, id }: CommentSectionProps) {
                 </li>
               )}
               {replyingTo === comment.id && user && username === null && (
-                <li className={styles.empty}>Pick a username above to reply.</li>
+                <li className={styles.empty}>Pick a username below to reply.</li>
               )}
             </ol>
           </li>
         ))}
       </ol>
+    </>
+  );
+
+  if (variant === "panel") {
+    return (
+      <section id={id} className={styles.panel} aria-label="Comments">
+        {/* tabIndex lets keyboard users scroll the comments with the arrow keys */}
+        <div ref={scrollerRef} className={styles.scroller} tabIndex={0}>
+          {conversation}
+        </div>
+        <div className={styles.composer}>{composer}</div>
+      </section>
+    );
+  }
+
+  return (
+    <section id={id} className={styles.section} aria-label="Comments">
+      <h3 className={styles.heading}>
+        Comments {comments && <span className={styles.total}>{comments.length}</span>}
+      </h3>
+      {composer}
+      {conversation}
     </section>
   );
 }
@@ -209,11 +238,12 @@ export default function CommentSection({ thread, id }: CommentSectionProps) {
 type CommentFormProps = {
   placeholder: string;
   autoFocus?: boolean;
+  rows?: number;
   onSubmit: (body: string) => Promise<{ error?: string }>;
   onCancel?: () => void;
 };
 
-function CommentForm({ placeholder, autoFocus, onSubmit, onCancel }: CommentFormProps) {
+function CommentForm({ placeholder, autoFocus, rows = 3, onSubmit, onCancel }: CommentFormProps) {
   const [body, setBody] = useState("");
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string>();
@@ -238,7 +268,7 @@ function CommentForm({ placeholder, autoFocus, onSubmit, onCancel }: CommentForm
         placeholder={placeholder}
         aria-label={placeholder}
         maxLength={COMMENT_MAX_LENGTH}
-        rows={3}
+        rows={rows}
         autoFocus={autoFocus}
         required
       />

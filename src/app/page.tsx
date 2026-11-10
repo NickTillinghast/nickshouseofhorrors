@@ -9,7 +9,7 @@ const creepster = Creepster({ weight: "400", subsets: ["latin"] });
 const DESKTOP_SRC = "/assets/gore-enter-guts-layered-lighter.svg";
 const { props: mobileImage } = getImageProps({
   src: "/assets/enter-guts-mobile-1170x2532.png",
-  alt: "",
+  alt: "logo and gory gutz image",
   width: 1170,
   height: 2532,
   sizes: "100vw",

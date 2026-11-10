@@ -7,11 +7,12 @@ import styles from "./CommentBubble.module.css";
 type CommentBubbleProps = {
   thread: string;
   title?: string;
-  // When the comments are already on screen (modal, movie page), scroll to this element instead
+  // On the movie's own page the comments are already below, scroll to this element instead
   scrollTo?: string;
 };
 
-// Speech bubble with the comment count, opens the movie's modal at its comments
+// Speech bubble with the comment count. Opens the movie modal on its comments view
+// (or switches to it when the modal is already open)
 export default function CommentBubble({ thread, title, scrollTo }: CommentBubbleProps) {
   const count = useCommentCount(thread);
   const label =
