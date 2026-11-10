@@ -4,42 +4,15 @@ import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import MovieModal, { MovieModalTrigger } from "../MovieDetailCard/MovieModal";
-import { quickSearch } from "../../app/(pages)/search/actions";
+import { SEARCH_MIN_CHARS as MIN_CHARS, useMovieSearch } from "../../hooks/useMovieSearch";
 import styles from "./SearchBox.module.css";
-
-// Wait for the user to stop typing this long before searching, so a whole word is one call
-const PAUSE_MS = 700;
-// 3 characters or fewer never searches
-const MIN_CHARS = 4;
-
-type Result = Awaited<ReturnType<typeof quickSearch>>[number];
 
 export default function SearchBox() {
   const router = useRouter();
-  const [query, setQuery] = useState("");
-  const [results, setResults] = useState<Result[] | null>(null);
-  const [loading, setLoading] = useState(false);
+  const { query, trimmed, results, loading, changeQuery } = useMovieSearch();
   const [open, setOpen] = useState(false);
-  // Each search gets a number; answers for anything but the latest one are ignored
-  const latestSearch = useRef(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-
-  const trimmed = query.trim();
-
-  // Search once typing pauses
-  useEffect(() => {
-    if (trimmed.length < MIN_CHARS) return;
-    const searchId = ++latestSearch.current;
-    const timer = setTimeout(async () => {
-      setLoading(true);
-      const movies = await quickSearch(trimmed).catch(() => []);
-      if (searchId !== latestSearch.current) return;
-      setResults(movies);
-      setLoading(false);
-    }, PAUSE_MS);
-    return () => clearTimeout(timer);
-  }, [trimmed]);
 
   // Click anywhere else closes the dropdown. The movie modal lives inside it, so clicks there don't count
   useEffect(() => {
@@ -65,14 +38,8 @@ export default function SearchBox() {
   }, []);
 
   function onChange(value: string) {
-    setQuery(value);
+    changeQuery(value);
     setOpen(true);
-    if (value.trim().length < MIN_CHARS) {
-      // Too short to search: cancel anything in flight and clear the list
-      latestSearch.current++;
-      setResults(null);
-      setLoading(false);
-    }
   }
 
   function submit() {

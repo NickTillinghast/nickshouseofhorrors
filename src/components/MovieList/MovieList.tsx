@@ -1,13 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { MovieResult } from "moviedb-promise";
 import styles from "./MovieList.module.css";
 
-// Only what a row shows, so search results, discover results and full movie details all fit
-type ListMovie = Pick<
-  MovieResult,
-  "id" | "title" | "poster_path" | "release_date" | "vote_average"
->;
+// Only what a row shows, so search results, discover results, full movie details
+// and fan lists (which store null for missing values) all fit
+type ListMovie = {
+  id?: number;
+  title?: string;
+  poster_path?: string | null;
+  release_date?: string | null;
+  vote_average?: number | null;
+};
 
 type MovieListProps = {
   title: string;
@@ -17,6 +20,10 @@ type MovieListProps = {
   redBottom?: boolean;
   // Shown in place of the rows while the list has no movies
   emptyText?: string;
+  // Makes the title a link, e.g. to a fan list's own page
+  titleHref?: string;
+  // A small label above the title, e.g. "Promoted"
+  badge?: string;
 };
 
 // A ranked list in a fixed-height box that scrolls, e.g. a top 50
@@ -26,6 +33,8 @@ export default function MovieList({
   movies,
   redBottom = false,
   emptyText = "No movies yet.",
+  titleHref,
+  badge,
 }: MovieListProps) {
   return (
     <section
@@ -33,7 +42,16 @@ export default function MovieList({
       aria-label={title}
     >
       <header className={styles.header}>
-        <h2 className={styles.title}>{title}</h2>
+        {badge && <span className={styles.badge}>{badge}</span>}
+        <h2 className={styles.title}>
+          {titleHref ? (
+            <Link href={titleHref} className={styles.titleLink}>
+              {title}
+            </Link>
+          ) : (
+            title
+          )}
+        </h2>
         {description && <p className={styles.description}>{description}</p>}
       </header>
 

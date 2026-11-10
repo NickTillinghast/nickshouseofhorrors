@@ -2,43 +2,36 @@
 
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
-import horrorFilters from "../../../data/horrorFilters.json";
+import GenreSelect from "../../../components/GenreSelect/GenreSelect";
 import styles from "./page.module.css";
-
-const SUBGENRES = [...horrorFilters.subgenres].sort((a, b) => a.name.localeCompare(b.name));
 
 type SubgenreFilterProps = {
   selectedId?: number;
+  // Reused on /lists, which filters with ?genre= instead
+  path?: string;
+  param?: string;
+  label?: string;
 };
 
-export default function SubgenreFilter({ selectedId }: SubgenreFilterProps) {
+export default function SubgenreFilter({
+  selectedId,
+  path = "/movies",
+  param = "subgenre",
+  label = "Filter",
+}: SubgenreFilterProps) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
-  // The choice lives in the URL (?subgenre=12339) so a filtered page can be shared or bookmarked
-  function select(id: string) {
+  // The choice lives in the URL (e.g. ?subgenre=12339) so a filtered page can be shared or bookmarked
+  function select(id: number | undefined) {
     startTransition(() => {
-      router.push(id ? `/movies?subgenre=${id}` : "/movies");
+      router.push(id ? `${path}?${param}=${id}` : path);
     });
   }
 
   return (
     <div className={styles.filter}>
-      <label htmlFor="subgenre">Filter</label>
-      <select
-        id="subgenre"
-        className={styles.select}
-        value={selectedId ?? ""}
-        onChange={(e) => select(e.target.value)}
-        disabled={isPending}
-      >
-        <option value="">All horror</option>
-        {SUBGENRES.map((subgenre) => (
-          <option key={subgenre.id} value={subgenre.id}>
-            {subgenre.name}
-          </option>
-        ))}
-      </select>
+      <GenreSelect label={label} value={selectedId} onChange={select} disabled={isPending} />
       {isPending && <span className={styles.pending}>Loading…</span>}
     </div>
   );

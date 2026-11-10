@@ -5,11 +5,10 @@ import Image from "next/image";
 import type { MovieResult } from "moviedb-promise";
 import MovieModal, { MovieModalTrigger } from "../MovieDetailCard/MovieModal";
 import { getReelMovies } from "../../app/(pages)/home/actions";
-import horrorFilters from "../../data/horrorFilters.json";
+import GenreSelect from "../GenreSelect/GenreSelect";
 import watchStyles from "../MovieDetailCard/WhereToWatch.module.css";
 import styles from "./HorrorReel.module.css";
 
-const GENRES = [...horrorFilters.subgenres].sort((a, b) => a.name.localeCompare(b.name));
 // Speeds are in cards per second
 const DRIFT_SPEED = 0.35;
 const SPIN_MS = 4500;
@@ -155,8 +154,7 @@ export default function HorrorReel({ initialMovies }: HorrorReelProps) {
     }
   }
 
-  function changeGenre(value: string) {
-    const id = value ? Number(value) : undefined;
+  function changeGenre(id: number | undefined) {
     setGenreId(id);
     refill(id);
   }
@@ -166,21 +164,7 @@ export default function HorrorReel({ initialMovies }: HorrorReelProps) {
   return (
     <div className={styles.reelArea}>
       <div className={styles.controls}>
-        <label htmlFor="reel-genre">Genre</label>
-        <select
-          id="reel-genre"
-          className={styles.select}
-          value={genreId ?? ""}
-          onChange={(e) => changeGenre(e.target.value)}
-          disabled={busy}
-        >
-          <option value="">All horror</option>
-          {GENRES.map((genre) => (
-            <option key={genre.id} value={genre.id}>
-              {genre.name}
-            </option>
-          ))}
-        </select>
+        <GenreSelect label="Genre" value={genreId} onChange={changeGenre} disabled={busy} />
         <button
           type="button"
           className={watchStyles.button}

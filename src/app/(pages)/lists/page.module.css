@@ -55,3 +55,77 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
+
+.headerLinks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.create {
+  padding: 10px 22px;
+  border-radius: 999px;
+  background: var(--color-blood);
+  color: var(--color-text);
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.create:hover,
+.create:focus-visible {
+  background: var(--color-blood-light);
+}
+
+.mine {
+  color: var(--color-text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.mine:hover,
+.mine:focus-visible {
+  color: var(--color-blood-light);
+}
+
+.loading {
+  margin: 0;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+/* Nick's list plus the 2 promoted spots: 3 across on desktop, stacked on phones */
+.topRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 900px) {
+  .topRow {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.allLists {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.allHeader {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-border);
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: 1.5rem;
+}

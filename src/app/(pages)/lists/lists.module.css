@@ -1,0 +1,526 @@
+/* Shared by the list builder, checkout, a list's own page and My lists */
+
+.narrowPage,
+.builderPage {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+
+.narrowPage {
+  max-width: 640px;
+}
+
+.builderPage {
+  max-width: 1100px;
+}
+
+.pageTitle {
+  margin: 0;
+  font-size: clamp(1.75rem, 5vw, 2.25rem);
+}
+
+.muted {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  font-weight: normal;
+}
+
+.error {
+  margin: 0;
+  color: var(--color-blood-light);
+}
+
+/* Form bits */
+
+.field,
+.fieldLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: bold;
+}
+
+.fieldRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-background);
+  color: var(--color-text);
+  font: inherit;
+  font-weight: normal;
+}
+
+.input:focus-visible {
+  border-color: var(--color-blood);
+  outline: none;
+}
+
+.primary,
+.primaryLink,
+.secondary,
+.small {
+  border-radius: 999px;
+  font: inherit;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+
+.primary,
+.primaryLink {
+  align-self: flex-start;
+  padding: 10px 22px;
+  border: none;
+  background: var(--color-blood);
+  color: var(--color-text);
+  font-weight: bold;
+}
+
+.primary:hover:not(:disabled),
+.primaryLink:hover,
+.primaryLink:focus-visible {
+  background: var(--color-blood-light);
+}
+
+.secondary,
+.small {
+  border: 1px solid var(--color-blood);
+  background: none;
+  color: var(--color-text);
+}
+
+.secondary {
+  padding: 9px 20px;
+}
+
+.small {
+  flex-shrink: 0;
+  padding: 5px 14px;
+  font-size: 0.85rem;
+}
+
+.secondary:hover:not(:disabled),
+.small:hover:not(:disabled) {
+  background: var(--color-blood);
+}
+
+.primary:disabled,
+.secondary:disabled,
+.small:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Fake checkout */
+
+.checkout {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.testBanner {
+  margin: 0;
+  padding: 10px 14px;
+  border: 1px dashed var(--color-warning);
+  border-radius: 8px;
+  color: var(--color-warning);
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.summary,
+.card,
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 20px;
+  border: 1px solid var(--color-border);
+  border-top: 3px solid var(--color-blood);
+  border-radius: 12px;
+  background: var(--color-surface);
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.summaryItem {
+  font-weight: bold;
+}
+
+.price {
+  color: var(--color-blood-light);
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.summaryDetail {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.cardLegend {
+  padding: 0 6px;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+/* Builder */
+
+.builder {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.builderColumns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+/* Your list first on phones, it's what you're building */
+.builderColumns > :last-child {
+  order: -1;
+}
+
+@media (min-width: 860px) {
+  .builderColumns {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  }
+
+  .builderColumns > :last-child {
+    order: 0;
+  }
+}
+
+.panelTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.count {
+  color: var(--color-blood-light);
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.genrePicker {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.chip {
+  padding: 4px 12px;
+  border: 1px solid var(--color-blood);
+  border-radius: 999px;
+  background: none;
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.chipOn {
+  background: var(--color-blood);
+  font-weight: bold;
+}
+
+.chip:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* Search results scroll inside the panel, like the list boxes */
+.results,
+.ranked {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.results {
+  max-height: 440px;
+  overflow-y: auto;
+  scrollbar-color: var(--color-blood-dark) transparent;
+  scrollbar-width: thin;
+}
+
+.resultRow,
+.rankedRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 4px;
+}
+
+.resultRow + .resultRow {
+  border-top: 1px solid var(--color-border);
+}
+
+.rankedRow {
+  position: relative;
+  border-radius: 8px;
+  background: var(--color-surface);
+}
+
+.rankedRow + .rankedRow {
+  margin-top: 4px;
+}
+
+/* The row being dragged floats above the others */
+.dragging {
+  z-index: 1;
+  background: var(--color-surface-raised);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.6);
+}
+
+.handle {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 28px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  color: var(--color-text-muted);
+  cursor: grab;
+  /* Lets a finger drag the row instead of scrolling the page */
+  touch-action: none;
+}
+
+.handle svg {
+  width: 12px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.handle:hover,
+.handle:focus-visible {
+  background: var(--color-surface-raised);
+  color: var(--color-text);
+}
+
+.rank {
+  flex-shrink: 0;
+  width: 2ch;
+  color: var(--color-blood);
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.thumb {
+  flex-shrink: 0;
+  width: 40px;
+  height: 60px;
+  border-radius: 4px;
+  background: var(--color-surface-raised);
+  object-fit: cover;
+}
+
+.movieText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.movieTitle {
+  overflow: hidden;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rowButtons {
+  display: flex;
+  flex-shrink: 0;
+  gap: 4px;
+}
+
+.iconButton {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: none;
+  color: var(--color-text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.iconButton:hover:not(:disabled) {
+  border-color: var(--color-blood);
+}
+
+.iconButton:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* Save and Publish stay in reach while scrolling a long page */
+.actionBar {
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border: 1px solid var(--color-border);
+  border-bottom: 3px solid var(--color-blood);
+  border-radius: 12px;
+  background: var(--color-surface);
+}
+
+.status {
+  flex: 1;
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.status.error {
+  color: var(--color-blood-light);
+}
+
+.confirm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  border: 2px solid var(--color-blood);
+  border-radius: 12px;
+  background: var(--color-surface);
+}
+
+.confirmTitle {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: bold;
+}
+
+.promoNote {
+  margin: 0;
+  color: var(--color-bone);
+}
+
+.confirmButtons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* A list's own page */
+
+.back {
+  align-self: flex-start;
+  color: var(--color-text-muted);
+}
+
+.back:hover,
+.back:focus-visible {
+  color: var(--color-blood-light);
+}
+
+.listMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.listMeta:empty {
+  display: none;
+}
+
+.listMeta .chip {
+  cursor: default;
+}
+
+.promoted {
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--color-blood);
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+/* My lists */
+
+.myLists {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.myList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-blood);
+  border-radius: 12px;
+  background: var(--color-surface);
+}
+
+.myListInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.myListActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

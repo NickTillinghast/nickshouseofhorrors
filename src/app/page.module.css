@@ -6,56 +6,28 @@
   min-height: 100vh;
   min-height: 100dvh;
   overflow: hidden;
-  background: #0b0303;
+  /* Same dark red as the artwork's own background */
+  background: #500000;
 }
 
-/* Matches the image's 3:2 shape and fits the screen, so the text stays in the mouth */
+/* The artwork fills the screen, cropping a little off the edges when the shape doesn't match */
 .scene {
-  position: relative;
-  width: min(100vw, 150dvh);
-  aspect-ratio: 3 / 2;
-  flex-shrink: 0;
-  container-type: inline-size;
-}
-
-/* Phones held upright: zoom in on the middle so the sign and clown fill the width.
-   The curtains on the sides get cropped and the top and bottom edges fade into the background. */
-@media (orientation: portrait) {
-  .scene {
-    width: min(167vw, 150dvh);
-    mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
-  }
-}
-
-/* Centered in the clown's mouth */
-.enter {
   position: absolute;
-  left: 50%;
-  top: 67%;
-  transform: translate(-50%, -50%);
-  color: #ff1a1a;
-  font-size: 6cqw;
-  line-height: 0.95;
-  text-align: center;
-  text-transform: uppercase;
-  text-shadow:
-    0 0 0.15em #ff0000,
-    0 0 0.4em #8b0000,
-    0 0.05em 0.05em #000;
-  transition:
-    color 0.2s,
-    text-shadow 0.2s,
-    transform 0.2s;
+  inset: 0;
+  display: block;
+  cursor: pointer;
 }
 
-.enter:hover,
-.enter:focus-visible {
-  color: #ff4d4d;
-  text-shadow:
-    0 0 0.25em #ff0000,
-    0 0 0.8em #ff0000,
-    0 0.05em 0.05em #000;
-  transform: translate(-50%, -50%) scale(1.06);
+.sceneImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.scene:focus-visible {
+  outline: 3px solid #ff4d4d;
+  outline-offset: -6px;
 }
 
 /* A small strip of real text along the bottom, over a fade so it never fights the artwork */
