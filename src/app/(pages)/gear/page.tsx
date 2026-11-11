@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
-import { Creepster } from "next/font/google";
 import { gearByCategory } from "@lib/gear";
 import styles from "./page.module.css";
-
-const creepster = Creepster({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Horror Gear",
@@ -15,7 +12,7 @@ export default function GearPage() {
   return (
     <main className={styles.page}>
       <header className={styles.header}>
-        <h1 className={`${styles.title} ${creepster.className}`}>Horror Gear</h1>
+        <h1 className={`${styles.title} font-heading`}>Horror Gear</h1>
         <p className={styles.intro}>
           Merch, decor and movie-night essentials for people who sleep with the lights on.
         </p>

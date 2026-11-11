@@ -1,0 +1,207 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1320px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+
+.intro h1 {
+  margin: 0;
+}
+
+.intro p {
+  max-width: 640px;
+  margin: 8px 0 0;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.groupTitle {
+  margin: 24px 0 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-border);
+  font-size: 1.4rem;
+}
+
+.combos,
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 400px), 1fr));
+  gap: 20px;
+}
+
+.combo,
+.sample {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px;
+  border: 1px solid var(--color-border);
+  border-top: 3px solid var(--color-blood);
+  border-bottom: 3px solid var(--color-blood);
+  border-radius: 12px;
+  background: var(--color-surface);
+}
+
+.comboName,
+.sampleName {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.comboName span {
+  display: block;
+  margin-top: 2px;
+  font-weight: normal;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.heroTitle,
+.sectionTitle,
+.sampleBig,
+.sampleMedium {
+  margin: 0;
+  line-height: 1.1;
+}
+
+.heroTitle {
+  color: var(--color-blood);
+  font-size: 3rem;
+  text-shadow: 0 0 24px color-mix(in srgb, var(--color-blood) 50%, transparent);
+}
+
+.sectionTitle {
+  color: var(--color-text);
+  font-size: 1.6rem;
+}
+
+.sampleBig {
+  color: var(--color-blood);
+  font-size: 2.4rem;
+}
+
+.sampleMedium {
+  font-size: 1.4rem;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.badge {
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--color-blood);
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.badgeGold {
+  background: var(--color-warning);
+  color: #000;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  border: 2px solid var(--color-blood);
+  border-radius: 12px;
+  background: var(--color-background);
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.cardTitle span {
+  color: var(--color-text-muted);
+  font-weight: normal;
+}
+
+.tagline {
+  margin: 0;
+  color: var(--color-blood);
+  font-style: italic;
+}
+
+.body {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.small {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.primary,
+.secondary {
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-weight: bold;
+}
+
+.primary {
+  background: var(--color-blood);
+}
+
+.secondary {
+  border: 1px solid var(--color-blood);
+  font-weight: normal;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  padding: 12px 14px;
+  border-bottom: 2px solid var(--color-blood);
+  background: #000;
+  border-radius: 8px;
+}
+
+.navActive {
+  color: var(--color-blood-light);
+}
+
+.sampleLabelRow {
+  margin: 0;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.credits {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+}
+
+.credits strong {
+  color: var(--color-text);
+}

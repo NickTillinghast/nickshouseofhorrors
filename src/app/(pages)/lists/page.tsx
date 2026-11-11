@@ -1,7 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Creepster } from "next/font/google";
 import MovieList from "@components/MovieList/MovieList";
 import horrorFilters from "@data/horrorFilters.json";
 import {
@@ -15,8 +14,6 @@ import {
 } from "@lib/userLists";
 import SubgenreFilter from "../movies/SubgenreFilter";
 import styles from "./page.module.css";
-
-const creepster = Creepster({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "The Lists: Fans' Top 10 Horror Movies",
@@ -38,7 +35,7 @@ export default function ListsPage(props: PageProps<"/lists">) {
   return (
     <main className={styles.page}>
       <header className={styles.header}>
-        <h1 className={`${styles.title} ${creepster.className}`}>The Lists</h1>
+        <h1 className={`${styles.title} font-heading`}>The Lists</h1>
         <p className={styles.intro}>
           Top 10 horror movies, picked by Nick and by fans. Make your own Top 10 and it&apos;s
           promoted at the top of this page for 2 weeks.

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Creepster } from "next/font/google";
 import HorrorReel from "@components/HorrorReel/HorrorReel";
 import MovieList from "@components/MovieList/MovieList";
 import { getPopularHorrorMovies, getTopRatedHorrorMovies } from "@lib/tmdb";
@@ -9,8 +8,6 @@ import { getFeaturedList } from "@lib/userLists";
 import HeartsInfo from "./HeartsInfo";
 import QuizTeaser from "./QuizTeaser";
 import styles from "./page.module.css";
-
-const creepster = Creepster({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Popular Horror Movies, Random Picks & Where to Watch",
@@ -54,7 +51,7 @@ export default async function HomePage() {
 
       {/* Quiz, Nick's Picks and a scrolling top 50 side by side (stacked on smaller screens) */}
       <div className={styles.split}>
-        <QuizTeaser titleClassName={creepster.className} />
+        <QuizTeaser titleClassName="font-heading" />
 
         <div className={styles.splitList}>
           <MovieList
@@ -79,7 +76,7 @@ export default async function HomePage() {
       </div>
 
       <section className={styles.section} aria-labelledby="reel-heading">
-        <h2 id="reel-heading" className={`${styles.heading} ${creepster.className}`}>
+        <h2 id="reel-heading" className={`${styles.heading} font-heading`}>
           Can&apos;t decide? Spin the reel
         </h2>
         <p className={styles.sectionText}>

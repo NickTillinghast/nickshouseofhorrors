@@ -1,9 +1,6 @@
 import { getImageProps } from "next/image";
 import Link from "next/link";
-import { Creepster } from "next/font/google";
 import styles from "./page.module.css";
-
-const creepster = Creepster({ weight: "400", subsets: ["latin"] });
 
 // Wide screens get the SVG, phones held upright get the tall PNG (resized by Next for each phone)
 const DESKTOP_SRC = "/assets/gore-enter-guts-layered-lighter.svg";
@@ -30,7 +27,7 @@ export default function SplashPage() {
 
       {/* Real text and links, so search engines know what the site is about */}
       <footer className={styles.intro}>
-        <h1 className={`${styles.introTitle} ${creepster.className}`}>Nicks House of Horrors</h1>
+        <h1 className={`${styles.introTitle} font-heading`}>Nicks House of Horrors</h1>
         <p className={styles.introText}>
           Find your next horror movie: browse by subgenre, see where to stream it, and spin the reel
           for a random scare.

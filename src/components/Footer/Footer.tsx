@@ -1,11 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Creepster } from "next/font/google";
 import { siFacebook, siGithub, siInstagram } from "simple-icons";
 import { MY_MOVIES_LABEL, NAV_LINKS, SOCIAL_LINKS } from "@lib/navigation";
 import { SITE_NAME } from "@lib/site";
 import styles from "./Footer.module.css";
-
-const creepster = Creepster({ weight: "400", subsets: ["latin"] });
 
 const SITE_MAP = [...NAV_LINKS, { href: "/profile", label: MY_MOVIES_LABEL }];
 
@@ -21,7 +19,7 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={styles.columns}>
         <div className={styles.brand}>
-          <Link href="/home" className={`${styles.name} ${creepster.className}`}>
+          <Link href="/home" className={`${styles.name} font-heading`}>
             {SITE_NAME}
           </Link>
           <p className={styles.tagline}>
@@ -87,7 +85,21 @@ export default function Footer() {
 
       <div className={styles.bottom}>
         <p>© 2026 {SITE_NAME}</p>
-        {/* Both data providers ask for credit in their terms of use */}
+        {/* Both data providers ask for credit in their terms of use. TMDB also asks for its logo */}
+        <a
+          href="https://www.themoviedb.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.tmdbLogo}
+        >
+          <Image
+            src="/assets/tmdb-logo.svg"
+            alt="The Movie Database (TMDB)"
+            width={137}
+            height={18}
+            unoptimized
+          />
+        </a>
         <p>
           Movie data from{" "}
           <a href="https://www.themoviedb.org/" target="_blank" rel="noopener noreferrer">

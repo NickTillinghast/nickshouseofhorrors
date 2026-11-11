@@ -157,3 +157,16 @@ a.social:focus-visible {
     grid-column: 1 / -1;
   }
 }
+
+/* TMDB's logo above the credit line, as their attribution rules ask */
+.tmdbLogo {
+  align-self: flex-start;
+  margin-bottom: 4px;
+  line-height: 0;
+  transition: opacity 0.15s;
+}
+
+.tmdbLogo:hover,
+.tmdbLogo:focus-visible {
+  opacity: 0.8;
+}
