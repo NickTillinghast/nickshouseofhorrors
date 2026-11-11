@@ -27,8 +27,7 @@
   --color-success: #3a9a5b;
   --color-warning: #d9a400;
 
-  /* Fonts (loaded in src/lib/fonts.ts).
-     Heading: big page titles. Swap to var(--font-creepster) to go back to the drippy one */
+  /* Fonts (loaded in src/lib/fonts.ts). Heading: big page titles */
   --font-heading: var(--font-creepster), cursive;
   --font-text: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
