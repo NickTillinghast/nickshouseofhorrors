@@ -136,6 +136,17 @@ jobs:
               "SupabaseSecretKey=$SUPABASE_SECRET_KEY" \
               "OriginVerifySecret=$ORIGIN_VERIFY_SECRET"
 
+      # Static pages are cached at CloudFront for up to a year, so drop them after every deploy
+      # or visitors keep getting the old version. "/*" counts as one path (1,000 a month are free).
+      # Hashed /_next/static files get re-cached quickly and never change, so clearing them is harmless
+      - name: Clear CloudFront's cache
+        run: |
+          DIST="$(aws cloudformation describe-stack-resources --stack-name "$APP_STACK" \
+            --logical-resource-id Distribution \
+            --query "StackResources[0].PhysicalResourceId" --output text)"
+          aws cloudfront create-invalidation --distribution-id "$DIST" --paths "/*" \
+            --query "Invalidation.Id" --output text
+
       - name: Site address
         run: |
           aws cloudformation describe-stacks --stack-name "$APP_STACK" \
