@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { fontVariables } from "@lib/fonts";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@lib/site";
 import "./globals.css";
@@ -20,6 +20,13 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
   },
+};
+
+// Always dark: tints the phone's status bar / browser bar black, and tells the
+// browser not to switch anything to light mode
+export const viewport: Viewport = {
+  themeColor: "#000000",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

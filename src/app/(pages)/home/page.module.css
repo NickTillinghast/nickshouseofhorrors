@@ -192,6 +192,22 @@
   min-width: 0;
 }
 
+/* Phones: the quiz card and lists a little narrower than the screen, centered */
+@media (max-width: 699px) {
+  .split {
+    gap: 24px;
+  }
+
+  .split > * {
+    width: calc(100% - 24px);
+    justify-self: center;
+  }
+
+  .quizCard {
+    padding: 24px 18px;
+  }
+}
+
 /* Next to the list, the steps sit in one column with the heart beside the text */
 .stepsStacked {
   grid-template-columns: 1fr;

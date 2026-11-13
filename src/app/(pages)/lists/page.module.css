@@ -129,3 +129,12 @@
   margin: 0;
   font-size: 1.5rem;
 }
+
+/* Phones: list boxes a little narrower than the screen, centered */
+@media (max-width: 699px) {
+  .topRow > *,
+  .grid > * {
+    width: calc(100% - 24px);
+    justify-self: center;
+  }
+}

@@ -136,3 +136,14 @@
   font-size: 0.9rem;
   text-align: center;
 }
+
+/* Phones: a shorter box, so the page doesn't turn into one long list */
+@media (max-width: 699px) {
+  .scroller {
+    max-height: 380px;
+  }
+
+  .empty {
+    min-height: 220px;
+  }
+}

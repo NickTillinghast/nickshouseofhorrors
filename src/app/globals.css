@@ -1,19 +1,17 @@
 @import "../layout/variables.css";
 
+/* The site is always dark, whatever light/dark setting the phone or computer uses.
+   color-scheme makes form controls, scrollbars and the page behind it dark too */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: var(--color-background);
+  --foreground: var(--color-text);
+  color-scheme: dark;
 }
 
 html {
   height: 100%;
+  /* Behind the page when iOS bounces past the top or bottom */
+  background: var(--background);
 }
 
 html,
@@ -42,12 +40,6 @@ body {
 a {
   color: inherit;
   text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
 }
 
 /* Big horror titles (page headings, footer name). The font itself is --font-heading */
