@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getHorrorMovies, getPopularHorrorMovies, getTopRatedHorrorMovies } from "@lib/tmdb";
 import { SITE_URL } from "@lib/site";
+import { SUBGENRES, subgenreHref } from "@lib/subgenres";
 import { getFeaturedList, getPublishedLists } from "@lib/userLists";
 
 // How many A–Z pages of the movie feed to list, 20 movies each
@@ -26,6 +27,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     { url: `${SITE_URL}/home`, changeFrequency: "daily", priority: 1 },
     { url: `${SITE_URL}/movies`, changeFrequency: "daily", priority: 0.9 },
+    // One page per subgenre: "best slasher movies", "folk horror movies to stream" and so on
+    ...SUBGENRES.map((subgenre) => ({
+      url: `${SITE_URL}${subgenreHref(subgenre)}`,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    })),
     { url: `${SITE_URL}/quiz`, changeFrequency: "weekly", priority: 0.8 },
     { url: `${SITE_URL}/gear`, changeFrequency: "weekly", priority: 0.6 },
     { url: `${SITE_URL}/lists`, changeFrequency: "daily", priority: 0.8 },

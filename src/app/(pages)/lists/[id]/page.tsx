@@ -2,7 +2,9 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import JsonLd from "@components/JsonLd/JsonLd";
 import MovieList from "@components/MovieList/MovieList";
+import { SITE_URL } from "@lib/site";
 import horrorFilters from "@data/horrorFilters.json";
 import { formatDate, getList } from "@lib/userLists";
 import styles from "../lists.module.css";
@@ -53,8 +55,25 @@ async function List({ params }: Pick<PageProps<"/lists/[id]">, "params">) {
 
   const genres = list.genreIds.map((id) => GENRE_NAMES.get(id)).filter(Boolean);
 
+  // A ranked list Google understands: each movie in order, linking to its page
+  const listJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: `${list.title}: ${list.username}'s Top 10 Horror Movies`,
+    url: `${SITE_URL}/lists/${list.id}`,
+    numberOfItems: list.movies.length,
+    itemListOrder: "https://schema.org/ItemListOrderAscending",
+    itemListElement: list.movies.map((movie, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      url: `${SITE_URL}/movies/${movie.id}`,
+      name: movie.title,
+    })),
+  };
+
   return (
     <>
+      <JsonLd data={listJsonLd} />
       <Link href="/lists" className={styles.back}>
         ← The Lists
       </Link>

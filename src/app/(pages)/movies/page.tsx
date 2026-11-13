@@ -1,16 +1,38 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { getHorrorMovies, getTopRatedHorrorMovies } from "@lib/tmdb";
-import horrorFilters from "@data/horrorFilters.json";
+import {
+  SUBGENRES,
+  findSubgenre,
+  subgenreDescription,
+  subgenreHeading,
+  subgenreHref,
+  subgenreTitle,
+} from "@lib/subgenres";
 import MovieFeed from "./MovieFeed";
 import SubgenreFilter from "./SubgenreFilter";
 import styles from "./page.module.css";
 
-export const metadata: Metadata = {
-  title: "Horror Movies A–Z by Subgenre",
-  description:
-    "Browse horror movies from slashers and zombies to folk horror and found footage. Filter by subgenre and find out where to stream each one.",
-};
+// Each subgenre gets its own title, description and canonical address, so
+// "/movies?subgenre=12339" can show up in Google as "Best Slasher Movies & Where to Stream Them"
+export async function generateMetadata({ searchParams }: MoviesPageProps): Promise<Metadata> {
+  const subgenre = findSubgenre((await searchParams).subgenre);
+  if (!subgenre) {
+    return {
+      title: "Horror Movies A–Z by Subgenre",
+      description:
+        "Browse horror movies from slashers and zombies to folk horror and found footage. Filter by subgenre and find out where to stream each one.",
+      alternates: { canonical: "/movies" },
+    };
+  }
+  return {
+    title: subgenreTitle(subgenre),
+    description: subgenreDescription(subgenre),
+    alternates: { canonical: subgenreHref(subgenre) },
+    openGraph: { title: subgenreTitle(subgenre), description: subgenreDescription(subgenre) },
+  };
+}
 
 // TMDB pages hold 20 movies, so start with the first two pages
 const INITIAL_PAGES = 2;
@@ -23,20 +45,33 @@ type MoviesPageProps = {
 export default function MoviesPage({ searchParams }: MoviesPageProps) {
   return (
     <main className={styles.page}>
-      <h1>Horror Movies</h1>
-
       {/* Reading the URL happens at request time, so it has to sit inside Suspense */}
       <Suspense fallback={<p>Loading movies…</p>}>
         <Movies searchParams={searchParams} />
       </Suspense>
+
+      {/* Plain links Google can follow to every subgenre page (the dropdown above is JavaScript) */}
+      <nav className={styles.subgenreLinks} aria-labelledby="subgenre-links">
+        <h2 id="subgenre-links" className={styles.subgenreLinksTitle}>
+          Browse horror by subgenre
+        </h2>
+        <ul>
+          {SUBGENRES.map((subgenre) => (
+            <li key={subgenre.id}>
+              <Link href={subgenreHref(subgenre)} prefetch={false}>
+                {subgenre.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </main>
   );
 }
 
 async function Movies({ searchParams }: MoviesPageProps) {
-  const { subgenre } = await searchParams;
-  // Only accept subgenres from our list, anything else shows all horror
-  const subgenreId = horrorFilters.subgenres.find((s) => s.id === Number(subgenre))?.id;
+  const subgenre = findSubgenre((await searchParams).subgenre);
+  const subgenreId = subgenre?.id;
 
   const [topRated, ...pages] = await Promise.all([
     getTopRatedHorrorMovies(TOP_RATED_COUNT, subgenreId),
@@ -45,6 +80,7 @@ async function Movies({ searchParams }: MoviesPageProps) {
 
   return (
     <>
+      <h1>{subgenre ? subgenreHeading(subgenre) : "Horror Movies"}</h1>
       <SubgenreFilter selectedId={subgenreId} />
 
       <MovieFeed

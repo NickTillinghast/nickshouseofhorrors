@@ -2,12 +2,39 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import HorrorReel from "@components/HorrorReel/HorrorReel";
+import JsonLd from "@components/JsonLd/JsonLd";
 import MovieList from "@components/MovieList/MovieList";
+import { SOCIAL_LINKS } from "@lib/navigation";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@lib/site";
 import { getPopularHorrorMovies, getTopRatedHorrorMovies } from "@lib/tmdb";
 import { getFeaturedList } from "@lib/userLists";
 import HeartsInfo from "./HeartsInfo";
 import QuizTeaser from "./QuizTeaser";
 import styles from "./page.module.css";
+
+// Tells Google the site's name (shown above results) and links its social profiles
+const siteJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      name: SITE_NAME,
+      alternateName: ["Nick's House of Horrors", "nickshouseofhorrors.com"],
+      url: `${SITE_URL}/home`,
+      description: SITE_DESCRIPTION,
+      publisher: { "@id": `${SITE_URL}/#organization` },
+    },
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: SITE_NAME,
+      url: `${SITE_URL}/home`,
+      logo: `${SITE_URL}/apple-icon.png`,
+      sameAs: SOCIAL_LINKS.map((link) => link.href).filter(Boolean),
+    },
+  ],
+};
 
 export const metadata: Metadata = {
   title: "Popular Horror Movies, Random Picks & Where to Watch",
@@ -26,6 +53,7 @@ export default async function HomePage() {
 
   return (
     <main className={styles.page}>
+      <JsonLd data={siteJsonLd} />
       <section className={styles.hero}>
         {/* The logo is the heading; its alt text keeps the site name readable for Google and screen readers */}
         <h1 className={styles.logoHeading}>

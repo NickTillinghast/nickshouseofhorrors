@@ -7,6 +7,10 @@ Parameters:
   DomainName:
     Type: String
     Default: nickshouseofhorrors.com
+  # Proves to Google Search Console that we own the domain. Not a secret: anyone can look it up
+  GoogleSiteVerification:
+    Type: String
+    Default: google-site-verification=IrME_ug0NpgYm3Qnen7zdch5xwf26ssvCF9FiAyiNgc
 
 Resources:
   HostedZone:
@@ -15,6 +19,17 @@ Resources:
       Name: !Ref DomainName
       HostedZoneConfig:
         Comment: Nicks House of Horrors (registered at Wix, DNS here)
+
+  # TXT records on the bare domain. Add other verifications (Bing, email providers) to this list
+  RootTxt:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId: !Ref HostedZone
+      Name: !Ref DomainName
+      Type: TXT
+      TTL: "300"
+      ResourceRecords:
+        - !Sub '"${GoogleSiteVerification}"'
 
 Outputs:
   HostedZoneId:
