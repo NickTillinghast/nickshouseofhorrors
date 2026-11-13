@@ -26,6 +26,11 @@ const nextConfig: NextConfig = {
     // Lambda's disk is read-only, so keep refreshed pages in memory instead of writing them
     isrFlushToDisk: false,
   },
+  // The old splash page is gone, the home page is the front door.
+  // Temporary (307), so a splash page could come back later without browsers remembering this
+  async redirects() {
+    return [{ source: "/", destination: "/home", permanent: false }];
+  },
   cacheComponents: true,
   partialPrefetching: true,
   reactCompiler: true,
