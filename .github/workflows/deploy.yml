@@ -1,0 +1,140 @@
+# Every push to main: check the code, build the Docker image, ship it to AWS.
+# One-time AWS setup comes first, see infra/README.md
+
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  # "Run workflow" button in the Actions tab, e.g. to redeploy after changing a secret
+  workflow_dispatch:
+
+# OIDC sign-in to AWS needs id-token; nothing here writes to the repo
+permissions:
+  id-token: write
+  contents: read
+
+# One deploy at a time, and never cancel one halfway through a CloudFormation update
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+env:
+  AWS_REGION: us-east-1
+  APP_STACK: nickshouseofhorrors-app
+  BOOTSTRAP_STACK: nickshouseofhorrors-bootstrap
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npx tsc --noEmit
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.13"
+      - name: Lint CloudFormation
+        run: |
+          pip install --quiet cfn-lint
+          cfn-lint --regions us-east-1 -- infra/*.yml
+
+  deploy:
+    needs: check
+    # Skipped until the one-time AWS setup is done (infra/README.md step 6)
+    if: vars.AWS_DEPLOY_ROLE_ARN != ''
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Sign in to AWS
+        uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
+        with:
+          role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Look up the image repository and static files bucket
+        run: |
+          output() {
+            aws cloudformation describe-stacks --stack-name "$BOOTSTRAP_STACK" \
+              --query "Stacks[0].Outputs[?OutputKey=='$1'].OutputValue" --output text
+          }
+          REPO="$(output ImageRepositoryUri)"
+          echo "IMAGE=$REPO:${GITHUB_SHA}" >> "$GITHUB_ENV"
+          echo "REGISTRY=${REPO%%/*}" >> "$GITHUB_ENV"
+          echo "BUCKET=$(output AssetsBucketName)" >> "$GITHUB_ENV"
+
+      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+
+      - name: Build the image
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+          SUPABASE_URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ vars.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
+          SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL }}
+        # provenance=false: Lambda only accepts plain single-platform images
+        run: |
+          docker buildx build \
+            --platform linux/amd64 \
+            --provenance=false \
+            --secret id=tmdb_api_key,env=TMDB_API_KEY \
+            --build-arg "NEXT_PUBLIC_SUPABASE_URL=$SUPABASE_URL" \
+            --build-arg "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=$SUPABASE_PUBLISHABLE_KEY" \
+            --build-arg "NEXT_PUBLIC_SITE_URL=$SITE_URL" \
+            --build-arg NEXT_DEPLOYMENT_ID="${GITHUB_SHA}" \
+            --tag "$IMAGE" \
+            --load \
+            .
+
+      - name: Push the image
+        run: |
+          aws ecr get-login-password | docker login --username AWS --password-stdin "$REGISTRY"
+          docker push "$IMAGE"
+
+      # Before switching the server over, so the new pages never ask for files that aren't there yet.
+      # Old files are kept (no --delete) so tabs opened before this deploy keep working
+      - name: Upload static files
+        run: |
+          container="$(docker create "$IMAGE")"
+          docker cp "$container:/app/.next/static" ./static
+          docker cp "$container:/app/public/assets" ./assets
+          docker rm "$container"
+          aws s3 sync ./static "s3://$BUCKET/_next/static" \
+            --cache-control "public,max-age=31536000,immutable"
+          aws s3 sync ./assets "s3://$BUCKET/assets" \
+            --cache-control "public,max-age=86400"
+
+      # Secrets come in as env vars (not pasted into the script) and GitHub masks them in the log.
+      # The first run creates the stack; CloudFront takes 5-15 minutes the first time
+      - name: Deploy the app stack
+        env:
+          SUPABASE_URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ vars.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+          WHERE_TO_WATCH_API_KEY: ${{ secrets.WHERE_TO_WATCH_API_KEY }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          ORIGIN_VERIFY_SECRET: ${{ secrets.ORIGIN_VERIFY_SECRET }}
+        run: |
+          aws cloudformation deploy \
+            --stack-name "$APP_STACK" \
+            --template-file infra/app.yml \
+            --no-fail-on-empty-changeset \
+            --parameter-overrides \
+              "ImageUri=$IMAGE" \
+              "NextPublicSupabaseUrl=$SUPABASE_URL" \
+              "NextPublicSupabasePublishableKey=$SUPABASE_PUBLISHABLE_KEY" \
+              "TmdbApiKey=$TMDB_API_KEY" \
+              "WhereToWatchApiKey=$WHERE_TO_WATCH_API_KEY" \
+              "SupabaseSecretKey=$SUPABASE_SECRET_KEY" \
+              "OriginVerifySecret=$ORIGIN_VERIFY_SECRET"
+
+      - name: Site address
+        run: |
+          aws cloudformation describe-stacks --stack-name "$APP_STACK" \
+            --query "Stacks[0].Outputs" --output table

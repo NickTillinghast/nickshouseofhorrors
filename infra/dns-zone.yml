@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >-
+  Nicks House of Horrors, one-time: the Route 53 hosted zone. Finishes right away.
+  Copy the NameServers output into Wix ("Use custom nameservers"), then deploy dns-cert.yml.
+
+Parameters:
+  DomainName:
+    Type: String
+    Default: nickshouseofhorrors.com
+
+Resources:
+  HostedZone:
+    Type: AWS::Route53::HostedZone
+    Properties:
+      Name: !Ref DomainName
+      HostedZoneConfig:
+        Comment: Nicks House of Horrors (registered at Wix, DNS here)
+
+Outputs:
+  HostedZoneId:
+    Value: !Ref HostedZone
+    Export:
+      Name: nickshouseofhorrors-hosted-zone-id
+  NameServers:
+    Description: Paste these 4 into Wix
+    Value: !Join [", ", !GetAtt HostedZone.NameServers]

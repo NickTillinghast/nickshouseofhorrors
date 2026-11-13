@@ -1,0 +1,281 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >-
+  Nicks House of Horrors, one-time setup (deploy by hand, as an admin).
+  Everything the every-push deploy needs but must not be able to create itself:
+  the GitHub deploy role, the Lambda's role, the image repository, the static files
+  bucket and the shared cache table. Keeping IAM here means a push to main can never
+  create new roles.
+
+Parameters:
+  GitHubRepo:
+    Type: String
+    Default: NickTillinghast/nickshouseofhorrors
+    Description: owner/repo allowed to deploy (only its main branch)
+  ExistingGitHubOidcProviderArn:
+    Type: String
+    Default: ""
+    Description: >-
+      Leave empty to create the GitHub OIDC provider. If this AWS account already has one
+      for token.actions.githubusercontent.com, paste its ARN here (an account can only have one).
+
+Conditions:
+  CreateOidcProvider: !Equals [!Ref ExistingGitHubOidcProviderArn, ""]
+
+Resources:
+  # Lets GitHub Actions sign in to AWS with short-lived tokens, no stored AWS keys
+  GitHubOidcProvider:
+    Type: AWS::IAM::OIDCProvider
+    Condition: CreateOidcProvider
+    Properties:
+      Url: https://token.actions.githubusercontent.com
+      ClientIdList:
+        - sts.amazonaws.com
+
+  # Docker images of the site, one per commit
+  ImageRepository:
+    Type: AWS::ECR::Repository
+    Properties:
+      RepositoryName: nickshouseofhorrors
+      ImageScanningConfiguration:
+        ScanOnPush: true
+      LifecyclePolicy:
+        LifecyclePolicyText: |
+          {
+            "rules": [
+              {
+                "rulePriority": 1,
+                "description": "Keep the last 10 images, enough to roll back",
+                "selection": {
+                  "tagStatus": "any",
+                  "countType": "imageCountMoreThan",
+                  "countNumber": 10
+                },
+                "action": { "type": "expire" }
+              }
+            ]
+          }
+      # Lambda pulls the image itself, so it needs read access to this repository
+      RepositoryPolicyText:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: LambdaPull
+            Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action:
+              - ecr:BatchGetImage
+              - ecr:GetDownloadUrlForLayer
+            Condition:
+              StringLike:
+                aws:sourceArn: !Sub arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:*
+
+  # /_next/static and /assets, served by CloudFront (never public on its own)
+  AssetsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerEnforced
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+
+  # Shared "use cache" entries and tag invalidations (see cache-handler.mjs).
+  # Items delete themselves via the ttl attribute
+  CacheTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: pk
+          AttributeType: S
+        - AttributeName: sk
+          AttributeType: S
+      KeySchema:
+        - AttributeName: pk
+          KeyType: HASH
+        - AttributeName: sk
+          KeyType: RANGE
+      TimeToLiveSpecification:
+        AttributeName: ttl
+        Enabled: true
+
+  # What the site itself runs as: write logs, use the cache table, nothing else
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - !Sub arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: cache-table
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - dynamodb:GetItem
+                  - dynamodb:PutItem
+                  - dynamodb:Query
+                Resource: !GetAtt CacheTable.Arn
+
+  # GitHub Actions assumes this on every push to main. It can deploy the app stack and
+  # nothing more: it can't create IAM roles, only hand the one Lambda role above to Lambda
+  DeployRole:
+    Type: AWS::IAM::Role
+    Properties:
+      MaxSessionDuration: 3600
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Federated: !If
+                - CreateOidcProvider
+                - !Ref GitHubOidcProvider
+                - !Ref ExistingGitHubOidcProviderArn
+            Action: sts:AssumeRoleWithWebIdentity
+            Condition:
+              StringEquals:
+                token.actions.githubusercontent.com:aud: sts.amazonaws.com
+                token.actions.githubusercontent.com:sub: !Sub repo:${GitHubRepo}:ref:refs/heads/main
+      Policies:
+        - PolicyName: deploy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Sid: EcrLogin
+                Effect: Allow
+                Action: ecr:GetAuthorizationToken
+                Resource: "*"
+              - Sid: EcrPushPull
+                Effect: Allow
+                Action:
+                  - ecr:BatchCheckLayerAvailability
+                  - ecr:InitiateLayerUpload
+                  - ecr:UploadLayerPart
+                  - ecr:CompleteLayerUpload
+                  - ecr:PutImage
+                  - ecr:BatchGetImage
+                  - ecr:GetDownloadUrlForLayer
+                  - ecr:DescribeImages
+                  - ecr:GetRepositoryPolicy
+                Resource: !GetAtt ImageRepository.Arn
+              - Sid: StaticFiles
+                Effect: Allow
+                Action:
+                  - s3:PutObject
+                  - s3:GetObject
+                Resource: !Sub ${AssetsBucket.Arn}/*
+              - Sid: StaticFilesBucket
+                Effect: Allow
+                Action:
+                  - s3:ListBucket
+                  - s3:GetBucketPolicy
+                  - s3:PutBucketPolicy
+                  - s3:DeleteBucketPolicy
+                Resource: !GetAtt AssetsBucket.Arn
+              - Sid: AppStack
+                Effect: Allow
+                Action:
+                  - cloudformation:CreateStack
+                  - cloudformation:UpdateStack
+                  - cloudformation:DescribeStacks
+                  - cloudformation:DescribeStackEvents
+                  - cloudformation:DescribeStackResources
+                  - cloudformation:GetTemplate
+                  - cloudformation:CreateChangeSet
+                  - cloudformation:DescribeChangeSet
+                  - cloudformation:ExecuteChangeSet
+                  - cloudformation:DeleteChangeSet
+                Resource: !Sub arn:${AWS::Partition}:cloudformation:${AWS::Region}:${AWS::AccountId}:stack/nickshouseofhorrors-app/*
+              - Sid: ReadOtherStacks
+                Effect: Allow
+                Action:
+                  - cloudformation:DescribeStacks
+                  - cloudformation:ListExports
+                  - cloudformation:GetTemplateSummary
+                  - cloudformation:ValidateTemplate
+                Resource: "*"
+              - Sid: SiteFunction
+                Effect: Allow
+                Action: lambda:*
+                Resource: !Sub arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:nickshouseofhorrors-*
+              - Sid: PassOnlyTheLambdaRole
+                Effect: Allow
+                Action: iam:PassRole
+                Resource: !GetAtt LambdaExecutionRole.Arn
+                Condition:
+                  StringEquals:
+                    iam:PassedToService: lambda.amazonaws.com
+              - Sid: SiteLogs
+                Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:DeleteLogGroup
+                  - logs:PutRetentionPolicy
+                  - logs:DeleteRetentionPolicy
+                  - logs:TagResource
+                  - logs:UntagResource
+                  - logs:ListTagsForResource
+                Resource: !Sub arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/nickshouseofhorrors-*
+              - Sid: DescribeLogs
+                Effect: Allow
+                Action: logs:DescribeLogGroups
+                Resource: "*"
+              # CloudFront has no per-resource names to scope to before they exist
+              - Sid: Cdn
+                Effect: Allow
+                Action: cloudfront:*
+                Resource: "*"
+              - Sid: Dns
+                Effect: Allow
+                Action:
+                  - route53:ChangeResourceRecordSets
+                  - route53:GetHostedZone
+                  - route53:ListResourceRecordSets
+                  - route53:GetChange
+                Resource:
+                  - !Sub arn:${AWS::Partition}:route53:::hostedzone/*
+                  - !Sub arn:${AWS::Partition}:route53:::change/*
+
+Outputs:
+  DeployRoleArn:
+    Description: Put this in the GitHub repo variable AWS_DEPLOY_ROLE_ARN
+    Value: !GetAtt DeployRole.Arn
+  ImageRepositoryUri:
+    Value: !GetAtt ImageRepository.RepositoryUri
+    Export:
+      Name: nickshouseofhorrors-image-repository-uri
+  AssetsBucketName:
+    Value: !Ref AssetsBucket
+    Export:
+      Name: nickshouseofhorrors-assets-bucket
+  AssetsBucketArn:
+    Value: !GetAtt AssetsBucket.Arn
+    Export:
+      Name: nickshouseofhorrors-assets-bucket-arn
+  AssetsBucketDomain:
+    Value: !GetAtt AssetsBucket.RegionalDomainName
+    Export:
+      Name: nickshouseofhorrors-assets-bucket-domain
+  CacheTableName:
+    Value: !Ref CacheTable
+    Export:
+      Name: nickshouseofhorrors-cache-table
+  LambdaExecutionRoleArn:
+    Value: !GetAtt LambdaExecutionRole.Arn
+    Export:
+      Name: nickshouseofhorrors-lambda-role-arn

@@ -1,0 +1,361 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >-
+  Nicks House of Horrors, the site itself. Deployed by GitHub Actions on every push
+  to main (stack name nickshouseofhorrors-app). Lambda runs the Next.js server,
+  CloudFront sits in front, S3 serves the static files. Creates no IAM roles.
+
+Parameters:
+  ImageUri:
+    Type: String
+    Description: ECR image for this commit, e.g. <repo uri>:<git sha>
+  DomainName:
+    Type: String
+    Default: nickshouseofhorrors.com
+  NextPublicSupabaseUrl:
+    Type: String
+  NextPublicSupabasePublishableKey:
+    Type: String
+  TmdbApiKey:
+    Type: String
+    NoEcho: true
+  WhereToWatchApiKey:
+    Type: String
+    NoEcho: true
+  SupabaseSecretKey:
+    Type: String
+    NoEcho: true
+  OriginVerifySecret:
+    Type: String
+    NoEcho: true
+    MinLength: 32
+    Description: Random string CloudFront sends with every request, the app rejects anything without it
+  ReservedConcurrency:
+    Type: Number
+    Default: 0
+    Description: >-
+      Cost cap on how many copies can run at once. 0 = no cap. Only set this if the account's
+      Lambda concurrency quota is 1000 or more (new accounts often have 10, which is already a cap).
+
+Conditions:
+  HasReservedConcurrency: !Not [!Equals [!Ref ReservedConcurrency, 0]]
+
+Resources:
+  # ---- The Next.js server ----
+
+  LogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /aws/lambda/nickshouseofhorrors-web
+      RetentionInDays: 14
+
+  WebFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: nickshouseofhorrors-web
+      PackageType: Image
+      Code:
+        ImageUri: !Ref ImageUri
+      Role: !ImportValue nickshouseofhorrors-lambda-role-arn
+      Architectures:
+        - x86_64
+      MemorySize: 1024
+      # Same as CloudFront's default origin timeout
+      Timeout: 30
+      ReservedConcurrentExecutions: !If
+        - HasReservedConcurrency
+        - !Ref ReservedConcurrency
+        - !Ref AWS::NoValue
+      LoggingConfig:
+        LogGroup: !Ref LogGroup
+      Environment:
+        Variables:
+          NEXT_PUBLIC_SITE_URL: !Sub https://${DomainName}
+          NEXT_PUBLIC_SUPABASE_URL: !Ref NextPublicSupabaseUrl
+          NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: !Ref NextPublicSupabasePublishableKey
+          TMDB_API_KEY: !Ref TmdbApiKey
+          WHERE_TO_WATCH_API_KEY: !Ref WhereToWatchApiKey
+          SUPABASE_SECRET_KEY: !Ref SupabaseSecretKey
+          ORIGIN_VERIFY_SECRET: !Ref OriginVerifySecret
+          CACHE_TABLE: !ImportValue nickshouseofhorrors-cache-table
+
+  # Public URL, locked in practice by the secret header CloudFront adds (checked in src/proxy.ts).
+  # CloudFront's OAC signing can't be used: it breaks POST bodies, and Server Actions are POSTs
+  WebFunctionUrl:
+    Type: AWS::Lambda::Url
+    Properties:
+      TargetFunctionArn: !GetAtt WebFunction.Arn
+      AuthType: NONE
+      InvokeMode: RESPONSE_STREAM
+
+  # Since Oct 2025 a public function URL needs both of these
+  WebFunctionUrlPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref WebFunction
+      Action: lambda:InvokeFunctionUrl
+      Principal: "*"
+      FunctionUrlAuthType: NONE
+
+  WebFunctionInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref WebFunction
+      Action: lambda:InvokeFunction
+      Principal: "*"
+      InvokedViaFunctionUrl: true
+
+  # ---- CloudFront ----
+
+  # Runs on every request: sends www to the bare domain, and passes the real host to the
+  # server (the Lambda URL needs its own Host header, so the original one travels as x-forwarded-host)
+  ViewerRequestFunction:
+    Type: AWS::CloudFront::Function
+    Properties:
+      Name: nickshouseofhorrors-viewer-request
+      AutoPublish: true
+      FunctionConfig:
+        Comment: www redirect + x-forwarded-host
+        Runtime: cloudfront-js-2.0
+      FunctionCode: |
+        function handler(event) {
+          var request = event.request;
+          var host = request.headers.host ? request.headers.host.value : "";
+
+          if (host.indexOf("www.") === 0) {
+            var query = [];
+            for (var key in request.querystring) {
+              var param = request.querystring[key];
+              var values = param.multiValue ? param.multiValue : [param];
+              for (var i = 0; i < values.length; i++) {
+                query.push(values[i].value === "" ? key : key + "=" + values[i].value);
+              }
+            }
+            return {
+              statusCode: 301,
+              statusDescription: "Moved Permanently",
+              headers: {
+                location: {
+                  value: "https://" + host.substring(4) + request.uri + (query.length ? "?" + query.join("&") : "")
+                }
+              }
+            };
+          }
+
+          request.headers["x-forwarded-host"] = { value: host };
+          return request;
+        }
+
+  # Pages and server data. CloudFront ignores Vary, so the keys Next varies on are listed here:
+  # every query string (incl. _rsc) and the router headers. No cookies or Host in the key;
+  # cookies still reach the server through the origin request policy.
+  # Default TTL 0: only cached when Next itself says a response is public
+  PagesCachePolicy:
+    Type: AWS::CloudFront::CachePolicy
+    Properties:
+      CachePolicyConfig:
+        Name: nickshouseofhorrors-pages
+        DefaultTTL: 0
+        MinTTL: 0
+        MaxTTL: 31536000
+        ParametersInCacheKeyAndForwardedToOrigin:
+          EnableAcceptEncodingGzip: true
+          EnableAcceptEncodingBrotli: true
+          CookiesConfig:
+            CookieBehavior: none
+          QueryStringsConfig:
+            QueryStringBehavior: all
+          HeadersConfig:
+            HeaderBehavior: whitelist
+            Headers:
+              - RSC
+              - Next-Router-Prefetch
+              - Next-Router-State-Tree
+              - Next-Router-Segment-Prefetch
+
+  # Resized images: one copy per source, width, quality and format (Accept picks AVIF/WebP)
+  ImagesCachePolicy:
+    Type: AWS::CloudFront::CachePolicy
+    Properties:
+      CachePolicyConfig:
+        Name: nickshouseofhorrors-images
+        DefaultTTL: 0
+        MinTTL: 0
+        MaxTTL: 31536000
+        ParametersInCacheKeyAndForwardedToOrigin:
+          EnableAcceptEncodingGzip: false
+          EnableAcceptEncodingBrotli: false
+          CookiesConfig:
+            CookieBehavior: none
+          QueryStringsConfig:
+            QueryStringBehavior: whitelist
+            QueryStrings:
+              - url
+              - w
+              - q
+          HeadersConfig:
+            HeaderBehavior: whitelist
+            Headers:
+              - Accept
+
+  AssetsOriginAccessControl:
+    Type: AWS::CloudFront::OriginAccessControl
+    Properties:
+      OriginAccessControlConfig:
+        Name: nickshouseofhorrors-assets
+        OriginAccessControlOriginType: s3
+        SigningBehavior: always
+        SigningProtocol: sigv4
+
+  Distribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Enabled: true
+        Comment: Nicks House of Horrors
+        Aliases:
+          - !Ref DomainName
+          - !Sub www.${DomainName}
+        ViewerCertificate:
+          AcmCertificateArn: !ImportValue nickshouseofhorrors-certificate-arn
+          SslSupportMethod: sni-only
+          MinimumProtocolVersion: TLSv1.2_2021
+        HttpVersion: http2and3
+        IPV6Enabled: true
+        # North America and Europe edges only, the cheapest tier
+        PriceClass: PriceClass_100
+        Origins:
+          - Id: server
+            DomainName: !Select [2, !Split ["/", !GetAtt WebFunctionUrl.FunctionUrl]]
+            CustomOriginConfig:
+              OriginProtocolPolicy: https-only
+              HTTPSPort: 443
+              OriginSSLProtocols:
+                - TLSv1.2
+              OriginReadTimeout: 30
+            OriginCustomHeaders:
+              - HeaderName: X-Origin-Verify
+                HeaderValue: !Ref OriginVerifySecret
+          - Id: assets
+            DomainName: !ImportValue nickshouseofhorrors-assets-bucket-domain
+            OriginAccessControlId: !GetAtt AssetsOriginAccessControl.Id
+            S3OriginConfig:
+              OriginAccessIdentity: ""
+        DefaultCacheBehavior:
+          TargetOriginId: server
+          ViewerProtocolPolicy: redirect-to-https
+          AllowedMethods: [GET, HEAD, OPTIONS, PUT, PATCH, POST, DELETE]
+          CachedMethods: [GET, HEAD]
+          Compress: true
+          CachePolicyId: !Ref PagesCachePolicy
+          # Managed "AllViewerExceptHostHeader"
+          OriginRequestPolicyId: b689b0a8-53d0-40ab-baf2-68738e2966ac
+          FunctionAssociations:
+            - EventType: viewer-request
+              FunctionARN: !GetAtt ViewerRequestFunction.FunctionMetadata.FunctionARN
+        CacheBehaviors:
+          # Hashed build files: cached for a year, never change
+          - PathPattern: /_next/static/*
+            TargetOriginId: assets
+            ViewerProtocolPolicy: redirect-to-https
+            AllowedMethods: [GET, HEAD]
+            CachedMethods: [GET, HEAD]
+            Compress: true
+            # Managed "CachingOptimized"
+            CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6
+            FunctionAssociations:
+              - EventType: viewer-request
+                FunctionARN: !GetAtt ViewerRequestFunction.FunctionMetadata.FunctionARN
+          # public/assets: logos, splash art
+          - PathPattern: /assets/*
+            TargetOriginId: assets
+            ViewerProtocolPolicy: redirect-to-https
+            AllowedMethods: [GET, HEAD]
+            CachedMethods: [GET, HEAD]
+            Compress: true
+            CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6
+            FunctionAssociations:
+              - EventType: viewer-request
+                FunctionARN: !GetAtt ViewerRequestFunction.FunctionMetadata.FunctionARN
+          - PathPattern: /_next/image*
+            TargetOriginId: server
+            ViewerProtocolPolicy: redirect-to-https
+            AllowedMethods: [GET, HEAD, OPTIONS]
+            CachedMethods: [GET, HEAD]
+            Compress: false
+            CachePolicyId: !Ref ImagesCachePolicy
+            OriginRequestPolicyId: b689b0a8-53d0-40ab-baf2-68738e2966ac
+            FunctionAssociations:
+              - EventType: viewer-request
+                FunctionARN: !GetAtt ViewerRequestFunction.FunctionMetadata.FunctionARN
+
+  # Only this distribution can read the static files
+  AssetsBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !ImportValue nickshouseofhorrors-assets-bucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: CloudFrontRead
+            Effect: Allow
+            Principal:
+              Service: cloudfront.amazonaws.com
+            Action: s3:GetObject
+            Resource: !Sub
+              - ${BucketArn}/*
+              - BucketArn: !ImportValue nickshouseofhorrors-assets-bucket-arn
+            Condition:
+              StringEquals:
+                AWS:SourceArn: !Sub arn:${AWS::Partition}:cloudfront::${AWS::AccountId}:distribution/${Distribution}
+
+  # ---- DNS: the domain and www point at CloudFront ----
+
+  ApexA:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId: !ImportValue nickshouseofhorrors-hosted-zone-id
+      Name: !Ref DomainName
+      Type: A
+      AliasTarget:
+        DNSName: !GetAtt Distribution.DomainName
+        # CloudFront's fixed hosted zone id
+        HostedZoneId: Z2FDTNDATAQYW2
+
+  ApexAAAA:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId: !ImportValue nickshouseofhorrors-hosted-zone-id
+      Name: !Ref DomainName
+      Type: AAAA
+      AliasTarget:
+        DNSName: !GetAtt Distribution.DomainName
+        HostedZoneId: Z2FDTNDATAQYW2
+
+  WwwA:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId: !ImportValue nickshouseofhorrors-hosted-zone-id
+      Name: !Sub www.${DomainName}
+      Type: A
+      AliasTarget:
+        DNSName: !GetAtt Distribution.DomainName
+        HostedZoneId: Z2FDTNDATAQYW2
+
+  WwwAAAA:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId: !ImportValue nickshouseofhorrors-hosted-zone-id
+      Name: !Sub www.${DomainName}
+      Type: AAAA
+      AliasTarget:
+        DNSName: !GetAtt Distribution.DomainName
+        HostedZoneId: Z2FDTNDATAQYW2
+
+Outputs:
+  SiteUrl:
+    Value: !Sub https://${DomainName}
+  CloudFrontDomain:
+    Value: !GetAtt Distribution.DomainName
+  FunctionUrl:
+    Description: Direct Lambda address, should answer 403 to anyone but CloudFront
+    Value: !GetAtt WebFunctionUrl.FunctionUrl
