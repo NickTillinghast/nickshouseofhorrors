@@ -7,10 +7,21 @@ Description: >-
   create new roles.
 
 Parameters:
-  GitHubRepo:
+  GitHubOwner:
     Type: String
-    Default: NickTillinghast/nickshouseofhorrors
-    Description: owner/repo allowed to deploy (only its main branch)
+    Default: NickTillinghast
+  GitHubRepoName:
+    Type: String
+    Default: nickshouseofhorrors
+  # GitHub's sign-in token names the repo with these permanent ids too, so a renamed or
+  # re-created repo with the same name can't deploy. Find them in a failed sign-in's
+  # CloudTrail event, or https://api.github.com/repos/<owner>/<repo> (owner.id and id)
+  GitHubOwnerId:
+    Type: String
+    Default: "52227772"
+  GitHubRepoId:
+    Type: String
+    Default: "1446177800"
   ExistingGitHubOidcProviderArn:
     Type: String
     Default: ""
@@ -150,7 +161,11 @@ Resources:
             Condition:
               StringEquals:
                 token.actions.githubusercontent.com:aud: sts.amazonaws.com
-                token.actions.githubusercontent.com:sub: !Sub repo:${GitHubRepo}:ref:refs/heads/main
+                # Only the main branch. GitHub now sends the form with ids; the plain
+                # form is kept in case a repo setting switches back to it
+                token.actions.githubusercontent.com:sub:
+                  - !Sub repo:${GitHubOwner}@${GitHubOwnerId}/${GitHubRepoName}@${GitHubRepoId}:ref:refs/heads/main
+                  - !Sub repo:${GitHubOwner}/${GitHubRepoName}:ref:refs/heads/main
       Policies:
         - PolicyName: deploy
           PolicyDocument:
