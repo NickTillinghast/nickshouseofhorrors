@@ -49,6 +49,10 @@ export default function HorrorReel({ initialMovies }: HorrorReelProps) {
   const [spinning, setSpinning] = useState(false);
   const [loading, setLoading] = useState(false);
   const [winner, setWinner] = useState<MovieResult | null>(null);
+  // Why the reel didn't change, e.g. a genre with too few movies
+  const [notice, setNotice] = useState<string>();
+  // Each load gets a number; an answer for anything but the latest one is ignored
+  const latestLoad = useRef(0);
 
   const cardRefs = useRef<(HTMLLIElement | null)[]>([]);
   const blurRef = useRef<SVGFEGaussianBlurElement>(null);
@@ -139,24 +143,36 @@ export default function HorrorReel({ initialMovies }: HorrorReelProps) {
     setSpinning(true);
   }
 
+  // Loads a new set of movies. Returns false (and leaves the reel as it was) when it can't
   async function refill(nextGenreId = genreId) {
+    const loadId = ++latestLoad.current;
     setLoading(true);
     setWinner(null);
+    setNotice(undefined);
     try {
       const next = await getReelMovies(nextGenreId);
-      if (next.length >= 2) {
-        positionRef.current = 0;
-        stoppedRef.current = false;
-        setMovies(next);
+      if (loadId !== latestLoad.current) return false;
+      if (next.length < 2) {
+        setNotice("Not enough movies in that genre for the reel yet. Try another one.");
+        return false;
       }
+      positionRef.current = 0;
+      stoppedRef.current = false;
+      setMovies(next);
+      return true;
+    } catch {
+      if (loadId === latestLoad.current) setNotice("Couldn't load movies, try again.");
+      return false;
     } finally {
-      setLoading(false);
+      if (loadId === latestLoad.current) setLoading(false);
     }
   }
 
-  function changeGenre(id: number | undefined) {
+  // The dropdown only switches once the new movies are actually on the reel
+  async function changeGenre(id: number | undefined) {
+    const previous = genreId;
     setGenreId(id);
-    refill(id);
+    if (!(await refill(id))) setGenreId(previous);
   }
 
   const busy = spinning || loading;
@@ -174,6 +190,10 @@ export default function HorrorReel({ initialMovies }: HorrorReelProps) {
           {loading ? "Loading…" : "New movies"}
         </button>
       </div>
+
+      <p className={styles.notice} aria-live="polite">
+        {notice}
+      </p>
 
       {/* Horizontal-only blur for the cards while the strip is moving fast */}
       <svg className={styles.srOnly} aria-hidden="true">

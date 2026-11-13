@@ -14,6 +14,19 @@
   gap: 12px;
 }
 
+.notice {
+  min-height: 1.4em;
+  margin: -4px 0 0;
+  color: var(--color-warning);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.notice:empty {
+  min-height: 0;
+  margin: 0;
+}
+
 .result {
   display: flex;
   align-items: center;

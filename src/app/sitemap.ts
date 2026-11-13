@@ -35,6 +35,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
     { url: `${SITE_URL}/quiz`, changeFrequency: "weekly", priority: 0.8 },
     { url: `${SITE_URL}/gear`, changeFrequency: "weekly", priority: 0.6 },
+    { url: `${SITE_URL}/about`, changeFrequency: "monthly", priority: 0.5 },
     { url: `${SITE_URL}/lists`, changeFrequency: "daily", priority: 0.8 },
     ...[...(featured ? [featured] : []), ...fanLists].map((list) => ({
       url: `${SITE_URL}/lists/${list.id}`,

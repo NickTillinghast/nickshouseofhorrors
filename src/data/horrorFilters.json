@@ -42,7 +42,7 @@
     { "id": 361094, "name": "Giallo" },
     { "id": 14903, "name": "Home Invasion" },
     { "id": 50009, "name": "Survival Horror" },
-    { "id": 379671, "name": "Horror Comedy" },
+    { "id": 379671, "name": "Horror Comedy", "genreId": 35 },
     { "id": 309060, "name": "Teen Horror" },
     { "id": 325319, "name": "J-Horror" },
     { "id": 9706, "name": "Anthology" }
