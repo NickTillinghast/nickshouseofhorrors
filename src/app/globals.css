@@ -47,3 +47,27 @@ a {
   font-family: var(--font-heading);
   font-weight: normal;
 }
+
+/* Horror art behind the top of a page, edge to edge, fading out as you scroll.
+   Add className="backdrop" to a page's <main>. To use different art on a page,
+   set --backdrop-image on it, e.g. --backdrop-image: url("/assets/your-art.svg") */
+.backdrop {
+  position: relative;
+  isolation: isolate;
+  /* Short pages: stop the art at the bottom of the page instead of running into the footer.
+     Only up and down, so it still reaches the screen edges sideways */
+  overflow-y: clip;
+}
+
+.backdrop::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0 calc(50% - 50vw) auto;
+  height: 900px;
+  background: var(--backdrop-image, url("/assets/gore-about-hands-toes-jaw-background.svg")) center
+    top / cover no-repeat;
+  opacity: 0.45;
+  mask-image: linear-gradient(to bottom, #000 40%, transparent);
+  pointer-events: none;
+}

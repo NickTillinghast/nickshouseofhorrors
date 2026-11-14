@@ -46,7 +46,7 @@ const ROOMS = [
 
 export default function AboutPage() {
   return (
-    <main className={styles.page}>
+    <main className={`${styles.page} backdrop`}>
       <section className={styles.hero}>
         <div className={styles.photoFrame}>
           <Image

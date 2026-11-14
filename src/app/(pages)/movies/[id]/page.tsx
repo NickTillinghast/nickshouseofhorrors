@@ -73,7 +73,7 @@ function movieJsonLd(movie: MovieResponse) {
 
 export default function MovieDetailPage(props: PageProps<"/movies/[id]">) {
   return (
-    <main className={`${styles.page} ${styles.moviePage}`}>
+    <main className={`${styles.page} ${styles.moviePage} backdrop`}>
       {/* The id comes from the URL at request time, so it has to sit inside Suspense */}
       <Suspense fallback={<p>Loading movie…</p>}>
         <Movie params={props.params} />

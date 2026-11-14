@@ -1,6 +1,4 @@
 .page {
-  position: relative;
-  isolation: isolate;
   display: flex;
   flex-direction: column;
   gap: 64px;
@@ -8,20 +6,6 @@
   width: 100%;
   margin: 0 auto;
   padding: 56px 20px 80px;
-}
-
-/* Background art behind the top of the page, edge to edge, fading out.
-   To use your own: drop it in public/assets and change the url below */
-.page::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: 0 calc(50% - 50vw) auto;
-  height: 900px;
-  background: url("/assets/gore-about-hands-toes-jaw-background.svg") center top / cover no-repeat;
-  opacity: 0.45;
-  mask-image: linear-gradient(to bottom, #000 40%, transparent);
-  pointer-events: none;
 }
 
 /* ---- Photo + intro ---- */

@@ -142,6 +142,7 @@
 .overview {
   margin: 0;
   line-height: 1.6;
+  text-align: left;
 }
 
 /* below md (768px) */
