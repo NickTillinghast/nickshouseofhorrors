@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import BattleCard from "@components/Battle/BattleCard";
+import BattleVotesProvider from "@components/Battle/BattleVotesProvider";
 import HorrorReel from "@components/HorrorReel/HorrorReel";
 import JsonLd from "@components/JsonLd/JsonLd";
 import MovieList from "@components/MovieList/MovieList";
+import { BATTLES_LABEL, BATTLES_PATH, getBattles } from "@lib/battles";
 import { SOCIAL_LINKS } from "@lib/navigation";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@lib/site";
 import { getPopularHorrorMovies, getTopRatedHorrorMovies } from "@lib/tmdb";
@@ -45,11 +48,13 @@ export const metadata: Metadata = {
 
 export default async function HomePage() {
   // The reel starts with the best-loved classics, "New movies" swaps in a random set
-  const [reelMovies, popularMovies, nicksPicks] = await Promise.all([
+  const [reelMovies, popularMovies, nicksPicks, battles] = await Promise.all([
     getTopRatedHorrorMovies(10),
     getPopularHorrorMovies(50),
     getFeaturedList(),
+    getBattles(),
   ]);
+  const newestBattle = battles[0];
 
   return (
     <main className={styles.page}>
@@ -102,6 +107,23 @@ export default async function HomePage() {
           />
         </div>
       </div>
+
+      {newestBattle && (
+        <section className={styles.section} aria-labelledby="battle-heading">
+          <h2 id="battle-heading" className={`${styles.heading} font-heading`}>
+            Who would win?
+          </h2>
+          <p className={styles.sectionText}>
+            The newest fight in the {BATTLES_LABEL}. Pick your killer and make your case.
+          </p>
+          <BattleVotesProvider battleIds={[newestBattle.id]}>
+            <BattleCard battle={newestBattle} headingLevel="h3" />
+          </BattleVotesProvider>
+          <Link href={BATTLES_PATH} className={styles.primaryButton}>
+            More battles in the {BATTLES_LABEL}
+          </Link>
+        </section>
+      )}
 
       <section className={styles.section} aria-labelledby="reel-heading">
         <h2 id="reel-heading" className={`${styles.heading} font-heading`}>

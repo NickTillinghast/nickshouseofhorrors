@@ -1,5 +1,11 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Guides
+
+- [Blood Bathroom: adding a battle](docs/blood-bathroom.md)
+- [Hosting on AWS](infra/README.md)
+- [To do](TODO.md)
+
 ## Getting Started
 
 First, run the development server:

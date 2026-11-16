@@ -3,6 +3,7 @@ import { getHorrorMovies, getPopularHorrorMovies, getTopRatedHorrorMovies } from
 import { SITE_URL } from "@lib/site";
 import { SUBGENRES, subgenreHref } from "@lib/subgenres";
 import { getFeaturedList, getPublishedLists } from "@lib/userLists";
+import { BATTLES_PATH, battleHref, getBattles } from "@lib/battles";
 
 // How many A–Z pages of the movie feed to list, 20 movies each
 const FEED_PAGES = 10;
@@ -10,9 +11,10 @@ const FEED_PAGES = 10;
 // Lists every page we want in search results, so Google finds movie pages
 // even ones no link points to yet. Built from cached TMDB calls
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [featured, fanLists, popular, topRated, ...feedPages] = await Promise.all([
+  const [featured, fanLists, battles, popular, topRated, ...feedPages] = await Promise.all([
     getFeaturedList(),
     getPublishedLists(),
+    getBattles(),
     getPopularHorrorMovies(50),
     getTopRatedHorrorMovies(20),
     ...Array.from({ length: FEED_PAGES }, (_, i) => getHorrorMovies(i + 1)),
@@ -40,6 +42,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...[...(featured ? [featured] : []), ...fanLists].map((list) => ({
       url: `${SITE_URL}/lists/${list.id}`,
       changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
+    { url: `${SITE_URL}${BATTLES_PATH}`, changeFrequency: "daily", priority: 0.8 },
+    ...battles.map((battle) => ({
+      url: `${SITE_URL}${battleHref(battle)}`,
+      changeFrequency: "weekly" as const,
       priority: 0.6,
     })),
     ...[...movieIds].map((id) => ({

@@ -48,6 +48,13 @@ The site is live at https://nickshouseofhorrors.com on AWS (Lambda + CloudFront,
 - [ ] Paste a movie link and `/about` into iMessage to check the share previews
 - [ ] Run PageSpeed Insights on `/home` and a movie page
 
+### Blood Bathroom (battles)
+
+How to add a battle: [docs/blood-bathroom.md](docs/blood-bathroom.md)
+
+- [x] Run `supabase/migrations/006_battles.sql` in the Supabase SQL editor (creates the tables and the first battle, Jason vs Michael)
+- [ ] Later: move fighter images to a public Supabase Storage bucket, so new fighters don't need a push. Put the image's public URL in `battle_fighters.image`
+
 ### Other
 
 - [ ] Amazon affiliate links: `/gear` already shows the required disclosure. Any affiliate link added elsewhere needs it too (or move it into the footer)

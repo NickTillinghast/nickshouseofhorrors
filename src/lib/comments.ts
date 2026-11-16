@@ -1,8 +1,15 @@
-// Shared by the browser and server actions, see supabase/migrations/002 and 003
+// Shared by the browser and server actions, see supabase/migrations/002, 003 and 006
 
 export const COMMENT_MAX_LENGTH = 1000;
 export const USERNAME_PATTERN = /^[A-Za-z0-9_]{3,20}$/;
-export const THREAD_PATTERN = /^(movie:[0-9]+|list:[a-z0-9-]+)$/;
+export const THREAD_PATTERN = /^(movie:[0-9]+|list:[a-z0-9-]+|battle:([0-9]+|suggestions))$/;
+
+// Matchup ideas for the Blood Bathroom
+export const BATTLE_SUGGESTIONS_THREAD = "battle:suggestions";
+
+export function battleThread(battleId: number) {
+  return `battle:${battleId}`;
+}
 
 export type Comment = {
   id: number;

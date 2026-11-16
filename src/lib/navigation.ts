@@ -9,6 +9,7 @@ export const NAV_LINKS = [
   { href: "/gear", label: "Horror Gear" },
   { href: "/about", label: "About" },
   { href: "/lists", label: "The Lists" },
+  { href: "/blood-bathroom", label: "Blood Bathroom" },
 ];
 
 // Footer social icons. An empty href shows the icon greyed out as "coming soon"
