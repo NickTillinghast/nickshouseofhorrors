@@ -1,6 +1,8 @@
 .card {
   display: flex;
   gap: 24px;
+  /* Lets the card shrink to its grid column instead of growing to fit a long title */
+  min-width: 0;
   padding: 24px;
   border-radius: 12px;
   background: var(--color-surface);
@@ -27,16 +29,16 @@
   letter-spacing: 0.05em;
 }
 
-/* Title on the left, heart pinned to the top right */
+/* Comment bubble and heart float in the top right and the title wraps around them.
+   A word too long to fit beside them drops below, where the title gets the full width */
 .titleContainer {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
+  display: flow-root;
 }
 
 /* Comment bubble and heart, side by side */
 .cardActions {
+  float: right;
+  margin: 4px 0 4px 16px;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -96,6 +98,7 @@
   display: flex;
   flex: 1;
   flex-direction: column;
+  min-width: 0;
   gap: 12px;
 }
 
@@ -151,15 +154,17 @@
     flex-direction: column;
   }
 
+  /* A small centered poster, so the title and description show without much scrolling */
   .poster,
   .posterButton {
-    width: 100%;
+    width: 45%;
+    max-width: 160px;
+    align-self: center;
   }
 
-  /* In the modal, a smaller centered poster so the details show without much scrolling */
-  .cardFull .poster {
-    width: 50%;
-    max-width: 180px;
-    align-self: center;
+  /* Inside the button, the poster fills it */
+  .posterButton .poster {
+    width: 100%;
+    max-width: none;
   }
 }

@@ -76,18 +76,7 @@ export default function MovieDetailCard({
           )}
       <div className={styles.info}>
         <div className={`${styles.titleContainer} ${full ? styles.titleContainerFull : ""}`}>
-          <div>
-            <h2 className={styles.title}>
-              {full ? (
-                movie.title
-              ) : (
-                <MovieModalTrigger className={styles.titleButton} href={movieHref}>
-                  {movie.title}
-                </MovieModalTrigger>
-              )}{" "}
-              {year && <span className={styles.year}>({year})</span>}
-            </h2>
-          </div>
+          {/* First, so it floats in the top right and the title wraps around it */}
           <div className={styles.cardActions}>
             {movie.id !== undefined && (
               <CommentBubble
@@ -98,6 +87,16 @@ export default function MovieDetailCard({
             )}
             <FavoriteButton movie={movie} />
           </div>
+          <h2 className={styles.title}>
+            {full ? (
+              movie.title
+            ) : (
+              <MovieModalTrigger className={styles.titleButton} href={movieHref}>
+                {movie.title}
+              </MovieModalTrigger>
+            )}{" "}
+            {year && <span className={styles.year}>({year})</span>}
+          </h2>
         </div>
         {movie.tagline && <p className={styles.tagline}>{movie.tagline}</p>}
 
