@@ -71,3 +71,4 @@ The list checkout is fake right now (`provider: 'fake'`). Stripe Checkout is the
 - [ ] Add `src/app/api/stripe/webhook/route.ts` that calls `completePurchase` (`src/lib/listPurchases.ts`) with `provider: 'stripe'` once Stripe confirms the payment, plus refund/dispute handling
 - [ ] Prices live in `src/lib/userListShared.ts`
 - [ ] Clear out test lists and payments made with the fake checkout
+- [ ] Turn list sales back on: set `LIST_SALES_OPEN = true` in `src/lib/userListShared.ts` (off for now, the checkout pages say "coming soon")

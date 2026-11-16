@@ -7,6 +7,7 @@ import { completePurchase, getListOffer, PROMOTE_OFFER } from "@lib/listPurchase
 import { createAdminClient } from "@lib/supabase/admin";
 import { createClient } from "@lib/supabase/server";
 import {
+  LIST_SALES_OPEN,
   LIST_SIZE,
   LIST_TITLE_MAX,
   MAX_LIST_GENRES,
@@ -36,6 +37,7 @@ async function hasUsername(userId: string) {
 
 // Fake checkout for a new list. The price is worked out here, never taken from the browser
 export async function buyList(): Promise<Result> {
+  if (!LIST_SALES_OPEN) return { error: "Making a Top 10 is coming soon." };
   const { userId } = await getSignedInUserId();
   if (!userId) return { error: "Sign in first." };
   if (!(await hasUsername(userId))) return { error: "Pick a username first." };
@@ -176,6 +178,7 @@ export async function publishList(listId: number): Promise<Result> {
 
 // Fake checkout for 30 more promoted days on a published list
 export async function promoteList(listId: number): Promise<Result> {
+  if (!LIST_SALES_OPEN) return { error: "Promoting a list is coming soon." };
   if (!Number.isInteger(listId)) return { error: "Unknown list." };
   const { userId } = await getSignedInUserId();
   if (!userId) return { error: "Sign in first." };

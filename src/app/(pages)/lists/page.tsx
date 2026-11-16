@@ -7,6 +7,7 @@ import {
   formatDate,
   formatPrice,
   FIRST_LIST_PRICE_CENTS,
+  LIST_SALES_OPEN,
   getFeaturedList,
   getPromotedLists,
   getPublishedLists,
@@ -37,12 +38,15 @@ export default function ListsPage(props: PageProps<"/lists">) {
       <header className={styles.header}>
         <h1 className={`${styles.title} font-heading`}>The Lists</h1>
         <p className={styles.intro}>
-          Top 10 horror movies, picked by Nick and by fans. Make your own Top 10 and it&apos;s
-          promoted at the top of this page for 2 weeks.
+          Top 10 horror movies, picked by Nick and by fans.{" "}
+          {LIST_SALES_OPEN
+            ? "Make your own Top 10 and it's promoted at the top of this page for 2 weeks."
+            : "Making your own Top 10 is coming soon."}
         </p>
         <div className={styles.headerLinks}>
           <Link href="/lists/new/checkout" className={styles.create}>
-            Create your Top 10 · {formatPrice(FIRST_LIST_PRICE_CENTS)}
+            Create your Top 10 ·{" "}
+            {LIST_SALES_OPEN ? formatPrice(FIRST_LIST_PRICE_CENTS) : "Coming soon"}
           </Link>
           <Link href="/lists/mine" className={styles.mine}>
             My lists

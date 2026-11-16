@@ -1,8 +1,9 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { getListOffer } from "@lib/listPurchases";
-import { formatPrice } from "@lib/userLists";
+import { formatPrice, LIST_SALES_OPEN } from "@lib/userLists";
 import { buyList } from "../../actions";
+import ComingSoon from "../../ComingSoon";
 import FakeCheckout from "../../FakeCheckout";
 import { requireUser } from "../../requireUser";
 import UsernameGate from "../../UsernameGate";
@@ -17,10 +18,14 @@ export default function NewListCheckoutPage() {
   return (
     <main className={styles.narrowPage}>
       <h1 className={styles.pageTitle}>Create your Top 10</h1>
-      {/* Reads the login cookie at request time, so it sits inside Suspense */}
-      <Suspense fallback={<p className={styles.muted}>Loading…</p>}>
-        <Checkout />
-      </Suspense>
+      {LIST_SALES_OPEN ? (
+        // Reads the login cookie at request time, so it sits inside Suspense
+        <Suspense fallback={<p className={styles.muted}>Loading…</p>}>
+          <Checkout />
+        </Suspense>
+      ) : (
+        <ComingSoon what="Making your own Top 10" />
+      )}
     </main>
   );
 }

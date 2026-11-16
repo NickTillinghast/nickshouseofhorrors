@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { formatDate, formatPrice, PROMOTE_PRICE_CENTS } from "@lib/userLists";
+import { formatDate, formatPrice, LIST_SALES_OPEN, PROMOTE_PRICE_CENTS } from "@lib/userLists";
 import { requireUser } from "../requireUser";
 import styles from "../lists.module.css";
 
@@ -95,7 +95,8 @@ async function MyLists() {
                         View
                       </Link>
                       <Link href={`/lists/${list.id}/promote`} className={styles.small}>
-                        Promote 30 days · {formatPrice(PROMOTE_PRICE_CENTS)}
+                        Promote 30 days ·{" "}
+                        {LIST_SALES_OPEN ? formatPrice(PROMOTE_PRICE_CENTS) : "Coming soon"}
                       </Link>
                     </>
                   )}

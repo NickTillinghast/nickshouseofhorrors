@@ -156,6 +156,27 @@
   background: var(--color-surface);
 }
 
+/* "Coming soon" while list sales are switched off (LIST_SALES_OPEN) */
+.comingSoonBadge {
+  align-self: flex-start;
+  margin: 0;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--color-blood);
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.comingSoonLinks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
 .summaryRow {
   display: flex;
   justify-content: space-between;

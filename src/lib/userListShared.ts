@@ -1,6 +1,10 @@
 // Prices, limits, types and formatting for Top 10 lists.
 // Kept apart from userLists.ts (cached server reads) so browser components can import them too
 
+// Off until real payments (Stripe) are set up. While false, the checkout and promote pages
+// show "coming soon" and the server refuses purchases. Flip to true to open them again
+export const LIST_SALES_OPEN = false;
+
 // Placeholder prices and durations, change them here
 export const FIRST_LIST_PRICE_CENTS = 499;
 export const EXTRA_LIST_PRICE_CENTS = 200;

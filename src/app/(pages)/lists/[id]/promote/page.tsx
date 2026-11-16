@@ -2,8 +2,9 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { previewPromotion, PROMOTE_OFFER } from "@lib/listPurchases";
-import { formatDate, formatPrice } from "@lib/userLists";
+import { formatDate, formatPrice, LIST_SALES_OPEN } from "@lib/userLists";
 import { promoteList } from "../../actions";
+import ComingSoon from "../../ComingSoon";
 import FakeCheckout from "../../FakeCheckout";
 import { requireUser } from "../../requireUser";
 import styles from "../../lists.module.css";
@@ -17,9 +18,13 @@ export default function PromoteListPage(props: PageProps<"/lists/[id]/promote">)
   return (
     <main className={styles.narrowPage}>
       <h1 className={styles.pageTitle}>Promote your list</h1>
-      <Suspense fallback={<p className={styles.muted}>Loading…</p>}>
-        <Promote params={props.params} />
-      </Suspense>
+      {LIST_SALES_OPEN ? (
+        <Suspense fallback={<p className={styles.muted}>Loading…</p>}>
+          <Promote params={props.params} />
+        </Suspense>
+      ) : (
+        <ComingSoon what="Promoting a list" />
+      )}
     </main>
   );
 }
