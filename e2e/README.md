@@ -33,14 +33,15 @@ Every push to `main` runs them before deploying (the `e2e` job in `.github/workf
 
 ## Files
 
-| File                 | What it checks                                                         |
-| -------------------- | ---------------------------------------------------------------------- |
-| `pages.spec.ts`      | Every main page loads, has its heading, no errors, no sideways scroll  |
-| `navigation.spec.ts` | Navbar links on desktop, the menu button on phones                     |
-| `movies.spec.ts`     | The subgenre filter, a card's popup and its comments                   |
-| `home.spec.ts`       | The reel's genre and spin, the newest battle                           |
-| `battles.spec.ts`    | Battles, standings, "sign in to vote", a battle's own page             |
-| `lists.spec.ts`      | "Coming soon" on Create your Top 10, Nick's list showing               |
-| `helpers.ts`         | Shared steps: open a page, catch browser errors, check sideways scroll |
+| File                 | What it checks                                                                                                                       |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `pages.spec.ts`      | Every main page loads, has its heading, no errors, no sideways scroll                                                                |
+| `navigation.spec.ts` | Navbar links on desktop, the menu button on phones                                                                                   |
+| `movies.spec.ts`     | The subgenre filter, a card's popup and its comments                                                                                 |
+| `home.spec.ts`       | The reel's genre and spin, the newest battle                                                                                         |
+| `battles.spec.ts`    | Battles, standings, "sign in to vote", a battle's own page                                                                           |
+| `lists.spec.ts`      | "Create your Top 10" (coming soon or sign in to pay, following `LIST_SALES_OPEN`), Nick's list                                       |
+| `payments.spec.ts`   | The Stripe webhook refuses unsigned or forged requests, the success page needs a real payment and sign-in, legal links in the footer |
+| `helpers.ts`         | Shared steps: open a page, catch browser errors, check sideways scroll                                                               |
 
-**When you change the site:** if a test fails because you changed something on purpose (renamed a page, turned list sales back on), update the test to match. `lists.spec.ts` expects "Coming soon" until `LIST_SALES_OPEN` is turned back on.
+**When you change the site:** if a test fails because you changed something on purpose (renamed a page, turned list sales back on), update the test to match.

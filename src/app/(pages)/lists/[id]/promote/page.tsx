@@ -5,7 +5,7 @@ import { previewPromotion, PROMOTE_OFFER } from "@lib/listPurchases";
 import { formatDate, formatPrice, LIST_SALES_OPEN } from "@lib/userLists";
 import { promoteList } from "../../actions";
 import ComingSoon from "../../ComingSoon";
-import FakeCheckout from "../../FakeCheckout";
+import CheckoutSummary from "../../CheckoutSummary";
 import { requireUser } from "../../requireUser";
 import styles from "../../lists.module.css";
 
@@ -20,7 +20,7 @@ export default function PromoteListPage(props: PageProps<"/lists/[id]/promote">)
       <h1 className={styles.pageTitle}>Promote your list</h1>
       {LIST_SALES_OPEN ? (
         <Suspense fallback={<p className={styles.muted}>Loading…</p>}>
-          <Promote params={props.params} />
+          <Promote params={props.params} searchParams={props.searchParams} />
         </Suspense>
       ) : (
         <ComingSoon what="Promoting a list" />
@@ -29,8 +29,12 @@ export default function PromoteListPage(props: PageProps<"/lists/[id]/promote">)
   );
 }
 
-async function Promote({ params }: Pick<PageProps<"/lists/[id]/promote">, "params">) {
+async function Promote({
+  params,
+  searchParams,
+}: Pick<PageProps<"/lists/[id]/promote">, "params" | "searchParams">) {
   const { id } = await params;
+  const { canceled } = await searchParams;
   if (!/^\d+$/.test(id)) notFound();
   const { supabase, user } = await requireUser(`/lists/${id}/promote`);
 
@@ -44,7 +48,7 @@ async function Promote({ params }: Pick<PageProps<"/lists/[id]/promote">, "param
   const { startsAt, endsAt, startsNow } = await previewPromotion(list.id, PROMOTE_OFFER.days);
 
   return (
-    <FakeCheckout
+    <CheckoutSummary
       item={`${PROMOTE_OFFER.days} days promoted: “${list.title}”`}
       price={formatPrice(PROMOTE_OFFER.amountCents)}
       details={[
@@ -54,6 +58,7 @@ async function Promote({ params }: Pick<PageProps<"/lists/[id]/promote">, "param
         "You get the full time either way.",
       ]}
       pay={promoteList.bind(null, list.id)}
+      canceled={canceled === "1"}
     />
   );
 }

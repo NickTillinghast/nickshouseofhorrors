@@ -61,14 +61,16 @@ How to add a battle: [docs/blood-bathroom.md](docs/blood-bathroom.md)
 
 ## Real payments for Top 10 lists
 
-The list checkout is fake right now (`provider: 'fake'`). Stripe Checkout is the plan, about a day of work. To take real money:
+Stripe Checkout is built (see [docs/payments.md](docs/payments.md)). Sales stay switched off until these are done:
 
-- [ ] Decide prices. Stripe takes 2.9% + 30¢, so the $2 extra list keeps ~$1.64 (consider $2.99, or a bundle)
-- [ ] Decide on sales tax (Stripe Tax, ~0.5%) and a refund policy
-- [ ] Add Terms, Privacy Policy and Refund policy pages (Stripe expects them)
-- [ ] Create a Stripe account; add `STRIPE_SECRET_KEY` and `STRIPE_WEBHOOK_SECRET` to `.env.local`, the GitHub secrets, and `infra/app.yml`
-- [ ] Replace `buyList` and `promoteList` in `src/app/(pages)/lists/actions.ts` with Stripe Checkout redirects, and swap `FakeCheckout` for a "Continue to payment" button
-- [ ] Add `src/app/api/stripe/webhook/route.ts` that calls `completePurchase` (`src/lib/listPurchases.ts`) with `provider: 'stripe'` once Stripe confirms the payment, plus refund/dispute handling
-- [ ] Prices live in `src/lib/userListShared.ts`
-- [ ] Clear out test lists and payments made with the fake checkout
-- [ ] Turn list sales back on: set `LIST_SALES_OPEN = true` in `src/lib/userListShared.ts` (off for now, the checkout pages say "coming soon")
+- [x] Prices: first list $4.99 (14 days promoted), extra lists $2.99, promote $4.99 for 14 days (`src/lib/userListShared.ts`)
+- [x] Terms, Privacy and Refunds pages, linked in the footer
+- [x] Stripe test keys in `.env.local` and the GitHub secrets, webhook added in the Stripe dashboard
+- [ ] Run `supabase/migrations/007_stripe_payments.sql` in the Supabase SQL editor
+- [ ] Read the Terms, Privacy and Refunds pages and change anything that isn't how you want it
+- [ ] Set `CONTACT_EMAIL` in `src/lib/site.ts` to an inbox you check (the legal pages show Instagram until then)
+- [ ] Sales tax: ask the Colorado Department of Revenue (or a CPA) whether paid list slots are taxable. If yes, get a Colorado sales tax license and turn on `STRIPE_TAX_ENABLED` in `src/lib/stripe.ts`
+- [ ] Test the whole flow locally with test cards (docs/payments.md → "Testing")
+- [ ] Finish activating the Stripe account (business details, bank account, statement descriptor)
+- [ ] Go live: swap both GitHub secrets for live keys and a live webhook, set `LIST_SALES_OPEN = true`, push
+- [ ] Hide or delete the old test lists and `provider = 'fake'` payments in Supabase

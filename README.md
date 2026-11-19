@@ -5,6 +5,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 - [Blood Bathroom: adding a battle](docs/blood-bathroom.md)
 - [Hosting on AWS](infra/README.md)
 - [Browser tests (Playwright)](e2e/README.md)
+- [Payments with Stripe](docs/payments.md)
 - [To do](TODO.md)
 
 ## Getting Started

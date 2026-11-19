@@ -7,6 +7,7 @@ import {
   formatDate,
   formatPrice,
   FIRST_LIST_PRICE_CENTS,
+  FIRST_LIST_PROMO_DAYS,
   LIST_SALES_OPEN,
   getFeaturedList,
   getPromotedLists,
@@ -40,7 +41,7 @@ export default function ListsPage(props: PageProps<"/lists">) {
         <p className={styles.intro}>
           Top 10 horror movies, picked by Nick and by fans.{" "}
           {LIST_SALES_OPEN
-            ? "Make your own Top 10 and it's promoted at the top of this page for 2 weeks."
+            ? `Make your own Top 10 and it's promoted at the top of this page for ${FIRST_LIST_PROMO_DAYS} days.`
             : "Making your own Top 10 is coming soon."}
         </p>
         <div className={styles.headerLinks}>

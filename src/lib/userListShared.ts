@@ -1,23 +1,25 @@
 // Prices, limits, types and formatting for Top 10 lists.
 // Kept apart from userLists.ts (cached server reads) so browser components can import them too
 
-// Off until real payments (Stripe) are set up. While false, the checkout and promote pages
-// show "coming soon" and the server refuses purchases. Flip to true to open them again
+// While false, the checkout and promote pages show "coming soon" and the server refuses
+// purchases. Turn on once Stripe is set up (see docs/payments.md)
 export const LIST_SALES_OPEN = false;
 
-// Placeholder prices and durations, change them here
+// Prices and durations, change them here. Stripe takes 2.9% + 30¢ of each
 export const FIRST_LIST_PRICE_CENTS = 499;
-export const EXTRA_LIST_PRICE_CENTS = 200;
-export const PROMOTE_PRICE_CENTS = 999;
+export const EXTRA_LIST_PRICE_CENTS = 299;
+export const PROMOTE_PRICE_CENTS = 499;
 // A first list comes with this many days in a promoted spot
 export const FIRST_LIST_PROMO_DAYS = 14;
 // "Promote" buys this many days
-export const PROMOTE_DAYS = 30;
+export const PROMOTE_DAYS = 14;
 export const LIST_SIZE = 10;
 export const MAX_LIST_GENRES = 3;
 export const LIST_TITLE_MAX = 60;
 
 export type ListKind = "first_list" | "extra_list";
+// Everything that can be bought. "promote" was "promote_30" when promotions were 30 days
+export type PurchaseKind = ListKind | "promote";
 
 export type UserListMovie = {
   id: number;

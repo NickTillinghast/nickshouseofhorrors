@@ -1,0 +1,52 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 760px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 48px 20px 80px;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+.title {
+  margin: 0;
+  color: var(--color-blood);
+  font-size: clamp(2.4rem, 7vw, 3.4rem);
+  font-weight: normal;
+  line-height: 1;
+}
+
+.updated {
+  margin: 0 0 12px;
+  font-size: 0.9rem;
+}
+
+.page h2 {
+  margin: 20px 0 0;
+  color: var(--color-text);
+  font-size: 1.25rem;
+}
+
+.page p,
+.page ul {
+  margin: 0;
+}
+
+.page ul {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-left: 22px;
+}
+
+.page strong {
+  color: var(--color-text);
+}
+
+.page a {
+  color: var(--color-blood-light);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

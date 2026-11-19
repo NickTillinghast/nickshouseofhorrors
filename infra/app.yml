@@ -24,6 +24,15 @@ Parameters:
   SupabaseSecretKey:
     Type: String
     NoEcho: true
+  # Stripe payments for Top 10 lists (docs/payments.md). Empty keeps checkout from starting
+  StripeSecretKey:
+    Type: String
+    NoEcho: true
+    Default: ""
+  StripeWebhookSecret:
+    Type: String
+    NoEcho: true
+    Default: ""
   OriginVerifySecret:
     Type: String
     NoEcho: true
@@ -76,6 +85,8 @@ Resources:
           WHERE_TO_WATCH_API_KEY: !Ref WhereToWatchApiKey
           SUPABASE_SECRET_KEY: !Ref SupabaseSecretKey
           ORIGIN_VERIFY_SECRET: !Ref OriginVerifySecret
+          STRIPE_SECRET_KEY: !Ref StripeSecretKey
+          STRIPE_WEBHOOK_SECRET: !Ref StripeWebhookSecret
           CACHE_TABLE: !ImportValue nickshouseofhorrors-cache-table
 
   # Public URL, locked in practice by the secret header CloudFront adds (checked in src/proxy.ts).

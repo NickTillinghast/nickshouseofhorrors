@@ -12,6 +12,13 @@ export const NAV_LINKS = [
   { href: "/blood-bathroom", label: "Blood Bathroom" },
 ];
 
+// Footer links to the legal pages Stripe and card networks expect a store to have
+export const LEGAL_LINKS = [
+  { href: "/terms", label: "Terms" },
+  { href: "/privacy", label: "Privacy" },
+  { href: "/refunds", label: "Refunds" },
+];
+
 // Footer social icons. An empty href shows the icon greyed out as "coming soon"
 // TODO: add the Facebook page link
 export const SOCIAL_LINKS = [

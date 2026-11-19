@@ -4,6 +4,10 @@ export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:30
 
 export const SITE_NAME = "Nicks House of Horrors";
 
+// Where fans reach Nick about refunds, privacy and account questions (shown on the legal pages).
+// Empty shows the Instagram link instead. TODO: set a real inbox before taking payments
+export const CONTACT_EMAIL = "nickshouseofhorrors@gmail.com";
+
 export const SITE_DESCRIPTION =
   "Find your next horror movie. Browse horror by subgenre, see where to stream it, spin the reel for a random pick, and save the ones that haunt you.";
 

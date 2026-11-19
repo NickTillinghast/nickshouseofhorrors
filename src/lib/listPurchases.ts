@@ -7,7 +7,7 @@ import {
   PROMOTE_DAYS,
   PROMOTE_PRICE_CENTS,
   type ListKind,
-} from "./userLists";
+} from "./userListShared";
 
 // Everything here runs with the secret key, so callers must check who's signed in first
 
@@ -40,10 +40,10 @@ export async function previewPromotion(listId: number, days: number) {
   return { startsAt, endsAt, startsNow };
 }
 
-type Purchase =
+export type Purchase =
   | { kind: ListKind; userId: string; amountCents: number; provider: string; providerRef?: string }
   | {
-      kind: "promote_30";
+      kind: "promote";
       userId: string;
       listId: number;
       amountCents: number;
@@ -51,13 +51,16 @@ type Purchase =
       providerRef?: string;
     };
 
-// Runs once a payment has gone through. The fake checkout calls it today,
-// a Stripe webhook will call it later with provider "stripe"
+// The same payment was already recorded (Stripe's webhook and the success page both
+// fulfill a purchase, see src/lib/stripe.ts). Nothing was created a second time
+export class AlreadyRecordedError extends Error {}
+
+// Runs once a payment has gone through, from the Stripe webhook or the checkout success page
 export async function completePurchase(purchase: Purchase): Promise<{ listId: number }> {
   const admin = createAdminClient();
 
   let listId: number;
-  if (purchase.kind === "promote_30") {
+  if (purchase.kind === "promote") {
     listId = purchase.listId;
   } else {
     // A new paid draft. A first list's promoted days wait until it's published
@@ -87,11 +90,13 @@ export async function completePurchase(purchase: Purchase): Promise<{ listId: nu
     .single();
   if (paymentError || !payment) {
     // Don't leave an unpaid list behind
-    if (purchase.kind !== "promote_30") await admin.from("user_lists").delete().eq("id", listId);
+    if (purchase.kind !== "promote") await admin.from("user_lists").delete().eq("id", listId);
+    // 23505 = unique violation on (provider, provider_ref): recorded already
+    if (paymentError?.code === "23505") throw new AlreadyRecordedError();
     throw new Error("Couldn't record the payment");
   }
 
-  if (purchase.kind === "promote_30") {
+  if (purchase.kind === "promote") {
     const { error } = await admin.rpc("book_promotion", {
       p_list_id: listId,
       p_days: PROMOTE_DAYS,

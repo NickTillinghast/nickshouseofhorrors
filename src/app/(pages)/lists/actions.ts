@@ -3,7 +3,8 @@
 import { updateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import horrorFilters from "@data/horrorFilters.json";
-import { completePurchase, getListOffer, PROMOTE_OFFER } from "@lib/listPurchases";
+import { getListOffer, PROMOTE_OFFER } from "@lib/listPurchases";
+import { createCheckoutSession } from "@lib/stripe";
 import { createAdminClient } from "@lib/supabase/admin";
 import { createClient } from "@lib/supabase/server";
 import {
@@ -23,7 +24,13 @@ const GENRE_IDS = new Set(horrorFilters.subgenres.map((genre) => genre.id));
 async function getSignedInUserId() {
   const supabase = await createClient();
   const { data } = await supabase.auth.getClaims();
-  return { supabase, userId: data?.claims?.sub };
+  const email = data?.claims?.email;
+  return {
+    supabase,
+    userId: data?.claims?.sub,
+    // Fills in the email on Stripe's page, so their receipt goes to the right place
+    email: typeof email === "string" && email ? email : undefined,
+  };
 }
 
 async function hasUsername(userId: string) {
@@ -35,26 +42,34 @@ async function hasUsername(userId: string) {
   return Boolean(data);
 }
 
-// Fake checkout for a new list. The price is worked out here, never taken from the browser
+// Sends the fan to Stripe to pay for a new list. The price is worked out here, never taken
+// from the browser. The list is created once Stripe confirms the payment (src/lib/stripe.ts)
 export async function buyList(): Promise<Result> {
   if (!LIST_SALES_OPEN) return { error: "Making a Top 10 is coming soon." };
-  const { userId } = await getSignedInUserId();
+  const { userId, email } = await getSignedInUserId();
   if (!userId) return { error: "Sign in first." };
   if (!(await hasUsername(userId))) return { error: "Pick a username first." };
 
   const offer = await getListOffer(userId);
-  let listId: number;
+  let url: string;
   try {
-    ({ listId } = await completePurchase({
+    url = await createCheckoutSession({
       kind: offer.kind,
       userId,
+      email,
       amountCents: offer.amountCents,
-      provider: "fake",
-    }));
-  } catch {
-    return { error: "The payment didn't go through, try again." };
+      name: offer.kind === "first_list" ? "Your first Top 10 list" : "Another Top 10 list",
+      description:
+        offer.kind === "first_list"
+          ? `A Top 10 horror list on Nicks House of Horrors, promoted for ${offer.promoDays} days once you publish it`
+          : "A Top 10 horror list on Nicks House of Horrors",
+      cancelPath: "/lists/new/checkout",
+    });
+  } catch (error) {
+    console.error("Couldn't start a list checkout:", error);
+    return { error: "Couldn't start the payment, try again." };
   }
-  redirect(`/lists/${listId}/edit`);
+  redirect(url);
 }
 
 export type ListDraft = {
@@ -176,33 +191,36 @@ export async function publishList(listId: number): Promise<Result> {
   redirect(`/lists/${listId}`);
 }
 
-// Fake checkout for 30 more promoted days on a published list
+// Sends the fan to Stripe to promote one of their published lists
 export async function promoteList(listId: number): Promise<Result> {
   if (!LIST_SALES_OPEN) return { error: "Promoting a list is coming soon." };
   if (!Number.isInteger(listId)) return { error: "Unknown list." };
-  const { userId } = await getSignedInUserId();
+  const { userId, email } = await getSignedInUserId();
   if (!userId) return { error: "Sign in first." };
 
   const { data: list } = await createAdminClient()
     .from("user_lists")
-    .select("user_id, status")
+    .select("user_id, status, title")
     .eq("id", listId)
     .maybeSingle();
   if (!list || list.user_id !== userId) return { error: "Unknown list." };
   if (list.status !== "published") return { error: "Only published lists can be promoted." };
 
+  let url: string;
   try {
-    await completePurchase({
-      kind: "promote_30",
+    url = await createCheckoutSession({
+      kind: "promote",
       userId,
+      email,
       listId,
       amountCents: PROMOTE_OFFER.amountCents,
-      provider: "fake",
+      name: `Promote “${list.title}” for ${PROMOTE_OFFER.days} days`,
+      description: "A promoted spot at the top of The Lists on Nicks House of Horrors",
+      cancelPath: `/lists/${listId}/promote`,
     });
-  } catch {
-    return { error: "The payment didn't go through, try again." };
+  } catch (error) {
+    console.error("Couldn't start a promotion checkout:", error);
+    return { error: "Couldn't start the payment, try again." };
   }
-
-  updateTag(USER_LISTS_TAG);
-  redirect("/lists/mine");
+  redirect(url);
 }

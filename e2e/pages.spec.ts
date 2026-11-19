@@ -13,6 +13,9 @@ const PAGES = [
   { path: "/gear", heading: "Horror Gear" },
   { path: "/about", heading: "Welcome to the House" },
   { path: "/movies/694", heading: /The Shining/ },
+  { path: "/terms", heading: "Terms of Service" },
+  { path: "/privacy", heading: "Privacy Policy" },
+  { path: "/refunds", heading: "Refund Policy" },
 ];
 
 for (const { path, heading } of PAGES) {

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { siFacebook, siGithub, siInstagram } from "simple-icons";
-import { MY_MOVIES_LABEL, NAV_LINKS, SOCIAL_LINKS } from "@lib/navigation";
+import { LEGAL_LINKS, MY_MOVIES_LABEL, NAV_LINKS, SOCIAL_LINKS } from "@lib/navigation";
 import { SITE_NAME } from "@lib/site";
 import styles from "./Footer.module.css";
 
@@ -85,6 +85,15 @@ export default function Footer() {
 
       <div className={styles.bottom}>
         <p>© 2026 {SITE_NAME}</p>
+        <nav aria-label="Legal">
+          <ul className={styles.legal}>
+            {LEGAL_LINKS.map(({ href, label }) => (
+              <li key={href}>
+                <Link href={href}>{label}</Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
         {/* Both data providers ask for credit in their terms of use. TMDB also asks for its logo */}
         <a
           href="https://www.themoviedb.org/"

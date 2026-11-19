@@ -153,6 +153,8 @@ jobs:
           WHERE_TO_WATCH_API_KEY: ${{ secrets.WHERE_TO_WATCH_API_KEY }}
           SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
           ORIGIN_VERIFY_SECRET: ${{ secrets.ORIGIN_VERIFY_SECRET }}
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+          STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
         run: |
           aws cloudformation deploy \
             --stack-name "$APP_STACK" \
@@ -165,7 +167,9 @@ jobs:
               "TmdbApiKey=$TMDB_API_KEY" \
               "WhereToWatchApiKey=$WHERE_TO_WATCH_API_KEY" \
               "SupabaseSecretKey=$SUPABASE_SECRET_KEY" \
-              "OriginVerifySecret=$ORIGIN_VERIFY_SECRET"
+              "OriginVerifySecret=$ORIGIN_VERIFY_SECRET" \
+              "StripeSecretKey=$STRIPE_SECRET_KEY" \
+              "StripeWebhookSecret=$STRIPE_WEBHOOK_SECRET"
 
       # Static pages are cached at CloudFront for up to a year, so drop them after every deploy
       # or visitors keep getting the old version. "/*" counts as one path (1,000 a month are free).
