@@ -282,10 +282,8 @@
 /* ---- Beating heart in the top-right corner ---- */
 
 /* Top-right corner of the homepage, scrolls away with the page */
+/* Centered under the logo on phones and tablets, where the corner would cover the logo */
 .beatingHeart {
-  position: absolute;
-  top: 20px;
-  right: 20px;
   z-index: 1;
   display: grid;
   place-items: center;
@@ -298,6 +296,16 @@
   box-shadow: 0 0 18px color-mix(in srgb, var(--color-blood) 55%, transparent);
   cursor: pointer;
   animation: heartbeat 1.6s ease-in-out infinite;
+}
+
+/* lg (1024px) and up: the logo leaves room, so it floats in the hero's top-right corner,
+   the same spot as the page's corner (56px above the hero, the page's top padding) */
+@media (min-width: 1024px) {
+  .beatingHeart {
+    position: absolute;
+    top: -36px;
+    right: 0;
+  }
 }
 
 .beatingHeart:hover,
@@ -336,6 +344,8 @@
 
 .heartsDialog {
   width: min(90vw, 480px);
+  /* It lives inside the centered hero, keep its text aligned the way it was */
+  text-align: start;
 }
 
 .heartsContent {

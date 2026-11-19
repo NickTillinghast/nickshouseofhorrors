@@ -73,6 +73,8 @@ export default async function HomePage() {
             fetchPriority="high"
           />
         </h1>
+        {/* Under the logo on phones and tablets, in the top-right corner on desktop */}
+        <HeartsInfo />
         <p className={styles.tagline}>
           Hunt down your next nightmare. Browse horror by subgenre, find out where to stream it, and
           keep the ones that haunt you.
@@ -134,8 +136,6 @@ export default async function HomePage() {
         </p>
         <HorrorReel initialMovies={reelMovies} />
       </section>
-
-      <HeartsInfo />
     </main>
   );
 }
