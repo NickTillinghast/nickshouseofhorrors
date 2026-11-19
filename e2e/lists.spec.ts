@@ -26,3 +26,17 @@ test("Nick's Top 10 is on The Lists", async ({ page }) => {
   await open(page, "/lists");
   await expect(page.getByText("Nick's all-time Top 10").first()).toBeVisible();
 });
+
+// Safari once sized the featured lists too short, so "All lists" slid up underneath them.
+// In CI the iPhone run uses WebKit (Safari's engine), which is the one that caught it
+test("the featured lists don't overlap All lists", async ({ page }) => {
+  await open(page, "/lists");
+  const allLists = await page.getByRole("heading", { level: 2, name: "All lists" }).boundingBox();
+  const featured = page.getByRole("region", { name: "Featured lists" }).locator(":scope > section");
+  expect(await featured.count()).toBeGreaterThan(0);
+
+  for (const box of await featured.all()) {
+    const bounds = await box.boundingBox();
+    expect(bounds!.y + bounds!.height).toBeLessThanOrEqual(allLists!.y);
+  }
+});

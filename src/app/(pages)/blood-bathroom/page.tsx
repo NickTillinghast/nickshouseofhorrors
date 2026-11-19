@@ -18,16 +18,13 @@ export default async function BloodBathroomPage() {
 
   return (
     <main className={styles.page}>
-      <header className={styles.header}>
-        <div className={styles.intro}>
-          <p className={styles.kicker}>{BATTLES_LABEL}</p>
-          <h1 className={`${styles.title} font-heading`}>Who Would Win?</h1>
-          <p className={styles.text}>
-            Two killers walk in, one walks out. Pick your fighter, see who&apos;s winning, and make
-            your case in the comments. Changed your mind? Switch sides any time.
-          </p>
-        </div>
-        <LazyComments thread={BATTLE_SUGGESTIONS_THREAD} label="Suggest a battle" />
+      <header className={styles.intro}>
+        <p className={styles.kicker}>{BATTLES_LABEL}</p>
+        <h1 className={`${styles.title} font-heading`}>Who Would Win?</h1>
+        <p className={styles.text}>
+          Two killers walk in, one walks out. Pick your fighter, see who&apos;s winning, and make
+          your case in the comments. Changed your mind? Switch sides any time.
+        </p>
       </header>
 
       {battles.length ? (
@@ -41,8 +38,15 @@ export default async function BloodBathroomPage() {
           </ol>
         </BattleVotesProvider>
       ) : (
-        <p className={styles.empty}>The first battle is being cleaned up. Check back soon.</p>
+        <p className={`${styles.battles} ${styles.empty}`}>
+          The first battle is being cleaned up. Check back soon.
+        </p>
       )}
+
+      {/* After the battles on phones, beside the intro on desktop (see page.module.css) */}
+      <section className={styles.suggestions} aria-label="Suggest a battle">
+        <LazyComments thread={BATTLE_SUGGESTIONS_THREAD} label="Suggest a battle" />
+      </section>
     </main>
   );
 }

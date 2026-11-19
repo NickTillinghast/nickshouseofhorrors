@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { open } from "./helpers";
+import { isPhone, open } from "./helpers";
 
 test("battles show with standings and comments", async ({ page }) => {
   await open(page, "/blood-bathroom");
@@ -35,4 +35,18 @@ test("a battle has its own page", async ({ page }) => {
 
   await expect(page).toHaveURL(/\/blood-bathroom\/[a-z0-9-]+$/);
   await expect(page.getByRole("heading", { level: 1, name })).toBeVisible();
+});
+
+// After the battles on phones, so the fights come first; beside the intro on desktop
+test("the suggestions box sits in the right place", async ({ page }, testInfo) => {
+  await open(page, "/blood-bathroom");
+  const suggestions = await page.getByRole("region", { name: "Suggest a battle" }).boundingBox();
+  const battles = await page.locator("main > ol").boundingBox();
+  expect(suggestions && battles).toBeTruthy();
+
+  if (isPhone(testInfo)) {
+    expect(suggestions!.y).toBeGreaterThanOrEqual(battles!.y + battles!.height);
+  } else {
+    expect(suggestions!.y + suggestions!.height).toBeLessThanOrEqual(battles!.y);
+  }
 });

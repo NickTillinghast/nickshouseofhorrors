@@ -42,3 +42,22 @@ test("a movie card opens its popup, then its comments", async ({ page }) => {
 function escape(text: string) {
   return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
+
+// Google only trusts a canonical link inside <head>. Next streams it into the <body> unless
+// the visitor is on htmlLimitedBots (next.config.ts), which Googlebot has to stay on
+test("Google gets a movie's title and canonical link in the head", async ({
+  request,
+}, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop", "a request, checked once");
+  const response = await request.get("/movies/694", {
+    headers: {
+      "user-agent":
+        "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Googlebot/2.1; +http://www.google.com/bot.html) Chrome/130 Safari/537.36",
+    },
+  });
+  expect(response.status()).toBe(200);
+  const html = await response.text();
+  const head = html.slice(0, html.indexOf("</head>"));
+  expect(head).toMatch(/<title>[^<]*The Shining/);
+  expect(head).toMatch(/<link rel="canonical" href="[^"]*\/movies\/694"/);
+});

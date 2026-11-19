@@ -8,18 +8,29 @@
   padding: 48px 16px 80px;
 }
 
-/* Intro on the left, the suggestions box on the right (stacked on phones) */
-.header {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px;
-  align-items: center;
-}
-
+/* Phones and tablets: intro, battles, then the suggestions box.
+   Desktop: the suggestions box moves up beside the intro, battles below both */
 @media (min-width: 1024px) {
-  .header {
+  .page {
+    display: grid;
     grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-    gap: 28px;
+    grid-template-areas:
+      "intro suggestions"
+      "battles battles";
+    gap: 40px 28px;
+    align-items: center;
+  }
+
+  .intro {
+    grid-area: intro;
+  }
+
+  .suggestions {
+    grid-area: suggestions;
+  }
+
+  .battles {
+    grid-area: battles;
   }
 }
 
@@ -62,7 +73,7 @@
 }
 
 /* The suggestions box is a little shorter than a battle's comments */
-.header > :last-child {
+.suggestions > * {
   height: 320px;
   min-height: 0;
 }
