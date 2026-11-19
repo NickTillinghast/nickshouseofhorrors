@@ -31,6 +31,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [{ source: "/", destination: "/home", permanent: false }];
   },
+  // Next's default list plus Googlebot. Next normally streams page titles and canonical links
+  // into the <body> for Googlebot, and Search Console then treated movie pages as duplicates
+  // (in the raw HTML every movie page has the same empty <head>). These bots get them in <head>
+  htmlLimitedBots:
+    /Googlebot|[\w-]+-Google|Google-[\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight/i,
   cacheComponents: true,
   partialPrefetching: true,
   reactCompiler: true,
