@@ -10,7 +10,7 @@ type SignInDialogProps = {
   next: string;
 };
 
-// Shown when someone logged out clicks a heart
+// Shown when someone signed out tries to heart a movie, vote in a battle or comment
 export default function SignInDialog({ ref, next }: SignInDialogProps) {
   function close(dialog: HTMLDialogElement | null) {
     dialog?.close();
@@ -33,9 +33,10 @@ export default function SignInDialog({ ref, next }: SignInDialogProps) {
       </button>
 
       <div className={styles.content}>
-        <h2 className={styles.title}>Sign in to save favorites</h2>
+        <h2 className={styles.title}>Sign in to join the House</h2>
         <p className={styles.text}>
-          Hearted movies are saved to your profile so you can find them later.
+          Heart your favorites, vote in the Blood Bathroom and join the conversation. Everything is
+          saved to your profile.
         </p>
         <SignInForm next={next} />
       </div>

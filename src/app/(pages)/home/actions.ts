@@ -3,6 +3,8 @@
 import { getHorrorMovies } from "@lib/tmdb";
 
 const REEL_SIZE = 10;
+// TMDB always returns 20 movies per page
+const PAGE_SIZE = 20;
 // Deep pages are mostly obscure titles, keep the reel to recognizable movies
 const MAX_PAGE = 25;
 // Small subgenres (Splatter, J-Horror) have only a handful of movies with 200+ votes,
@@ -18,8 +20,16 @@ export async function getReelMovies(subgenreId?: number) {
     first = await getHorrorMovies(1, subgenreId, minVotes);
   }
 
-  const page = 1 + Math.floor(Math.random() * Math.min(first.totalPages, MAX_PAGE));
-  const { movies } = page === 1 ? first : await getHorrorMovies(page, subgenreId, minVotes);
+  // Only full pages: the last page can hold a single movie (Zombie has 161 = 8 pages of 20 + 1),
+  // which would leave the reel empty
+  const fullPages = Math.max(1, Math.floor(first.totalResults / PAGE_SIZE));
+  const page = 1 + Math.floor(Math.random() * Math.min(fullPages, MAX_PAGE));
+  let { movies } = page === 1 ? first : await getHorrorMovies(page, subgenreId, minVotes);
+  // Still short (movies without posters are skipped)? Top up from the first page
+  if (page !== 1 && movies.filter((movie) => movie.poster_path).length < REEL_SIZE) {
+    const seen = new Set(movies.map((movie) => movie.id));
+    movies = [...movies, ...first.movies.filter((movie) => !seen.has(movie.id))];
+  }
 
   // Fisher–Yates shuffle, then take the first few
   const shuffled = movies.filter((movie) => movie.poster_path);

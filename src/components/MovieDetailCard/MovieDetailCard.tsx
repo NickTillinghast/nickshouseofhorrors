@@ -33,6 +33,8 @@ type MovieDetailCardProps = {
   // in the modal the comment bubble switches to the comments view instead
   showComments?: boolean;
   commentsId?: string;
+  // h1 on the movie's own page (its main heading for Google), h2 in grids and the popup
+  headingLevel?: "h1" | "h2";
 };
 
 export default function MovieDetailCard({
@@ -42,6 +44,7 @@ export default function MovieDetailCard({
   featured = false,
   showComments = false,
   commentsId,
+  headingLevel: Heading = "h2",
 }: MovieDetailCardProps) {
   const year = movie.release_date?.slice(0, 4);
   const isTruncated = !full && (movie.overview?.length ?? 0) > OVERVIEW_MAX_LENGTH;
@@ -87,7 +90,7 @@ export default function MovieDetailCard({
             )}
             <FavoriteButton movie={movie} />
           </div>
-          <h2 className={styles.title}>
+          <Heading className={styles.title}>
             {full ? (
               movie.title
             ) : (
@@ -96,7 +99,7 @@ export default function MovieDetailCard({
               </MovieModalTrigger>
             )}{" "}
             {year && <span className={styles.year}>({year})</span>}
-          </h2>
+          </Heading>
         </div>
         {movie.tagline && <p className={styles.tagline}>{movie.tagline}</p>}
 

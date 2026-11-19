@@ -12,6 +12,7 @@ export default function MovieDetails({ movie }: { movie: MovieResponse }) {
     <MovieDetailCard
       movie={movie}
       full
+      headingLevel="h1"
       whereToWatch={whereToWatch}
       showComments
       commentsId={`comments-${movie.id}`}
