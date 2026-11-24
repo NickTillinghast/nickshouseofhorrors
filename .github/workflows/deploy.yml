@@ -91,6 +91,8 @@ jobs:
         with:
           role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
+          # The repo is public, so its logs are too: show the AWS account id as ***
+          mask-aws-account-id: true
 
       - name: Look up the image repository and static files bucket
         run: |
@@ -182,7 +184,9 @@ jobs:
           aws cloudfront create-invalidation --distribution-id "$DIST" --paths "/*" \
             --query "Invalidation.Id" --output text
 
+      # Not the Lambda's own address (FunctionUrl): it only answers CloudFront, but the logs are
+      # public and there's no reason to hand it out. It's in the CloudFormation console if needed
       - name: Site address
         run: |
           aws cloudformation describe-stacks --stack-name "$APP_STACK" \
-            --query "Stacks[0].Outputs" --output table
+            --query "Stacks[0].Outputs[?OutputKey!='FunctionUrl']" --output table
