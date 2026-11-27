@@ -3,6 +3,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 ## Guides
 
 - [Blood Bathroom: adding a battle](docs/blood-bathroom.md)
+- [Nick's pick: the featured movie on the home page](docs/nicks-pick.md)
 - [Hosting on AWS](infra/README.md)
 - [Browser tests (Playwright)](e2e/README.md)
 - [Payments with Stripe](docs/payments.md)

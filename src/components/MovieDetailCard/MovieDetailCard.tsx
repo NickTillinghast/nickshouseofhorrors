@@ -27,8 +27,10 @@ type MovieDetailCardProps = {
   full?: boolean;
   // Where-to-watch state from the modal, so it can load before the modal opens
   whereToWatch?: WatchState;
-  // Top rated movies get a red border to stand out in the grid
+  // A red border and a label to stand out, e.g. top rated movies in the grid
   featured?: boolean;
+  // The featured label, "Top rated" unless told otherwise (Nick's pick on the home page)
+  badge?: string;
   // Show the comments under the card. Only the movie's own page does this,
   // in the modal the comment bubble switches to the comments view instead
   showComments?: boolean;
@@ -42,6 +44,7 @@ export default function MovieDetailCard({
   full = false,
   whereToWatch,
   featured = false,
+  badge = "Top rated",
   showComments = false,
   commentsId,
   headingLevel: Heading = "h2",
@@ -65,7 +68,7 @@ export default function MovieDetailCard({
     <article
       className={`${styles.card} ${full ? styles.cardFull : ""} ${featured ? styles.featured : ""}`}
     >
-      {featured && <span className={styles.badge}>Top rated</span>}
+      {featured && <span className={styles.badge}>{badge}</span>}
       {full
         ? poster
         : poster && (

@@ -5,9 +5,11 @@ import BattleCard from "@components/Battle/BattleCard";
 import BattleVotesProvider from "@components/Battle/BattleVotesProvider";
 import HorrorReel from "@components/HorrorReel/HorrorReel";
 import JsonLd from "@components/JsonLd/JsonLd";
+import MovieDetailCard from "@components/MovieDetailCard/MovieDetailCard";
 import MovieList from "@components/MovieList/MovieList";
 import { BATTLES_LABEL, BATTLES_PATH, getBattles } from "@lib/battles";
 import { SOCIAL_LINKS } from "@lib/navigation";
+import { getNicksPick } from "@lib/nicksPick";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@lib/site";
 import { getPopularHorrorMovies, getTopRatedHorrorMovies } from "@lib/tmdb";
 import { getFeaturedList } from "@lib/userLists";
@@ -48,11 +50,12 @@ export const metadata: Metadata = {
 
 export default async function HomePage() {
   // The reel starts with the best-loved classics, "New movies" swaps in a random set
-  const [reelMovies, popularMovies, nicksPicks, battles] = await Promise.all([
+  const [reelMovies, popularMovies, nicksPicks, battles, nicksPick] = await Promise.all([
     getTopRatedHorrorMovies(10),
     getPopularHorrorMovies(50),
     getFeaturedList(),
     getBattles(),
+    getNicksPick(),
   ]);
   const newestBattle = battles[0];
 
@@ -83,6 +86,19 @@ export default async function HomePage() {
           Browse movies
         </Link>
       </section>
+
+      {/* Nick's pick: the newest one from Supabase (docs/nicks-pick.md), hidden until there is one */}
+      {nicksPick && (
+        <section className={styles.section} aria-labelledby="pick-heading">
+          <h2 id="pick-heading" className={`${styles.heading} font-heading`}>
+            {nicksPick.heading}
+          </h2>
+          {nicksPick.note && <p className={styles.sectionText}>{nicksPick.note}</p>}
+          <div className={styles.pickCard}>
+            <MovieDetailCard movie={nicksPick.movie} featured badge="Nick's pick" />
+          </div>
+        </section>
+      )}
 
       {/* Quiz, Nick's Picks and a scrolling top 50 side by side (stacked on smaller screens) */}
       <div className={styles.split}>
