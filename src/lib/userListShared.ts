@@ -3,7 +3,7 @@
 
 // While false, the checkout and promote pages show "coming soon" and the server refuses
 // purchases. Turn on once Stripe is set up (see docs/payments.md)
-export const LIST_SALES_OPEN = false;
+export const LIST_SALES_OPEN = true;
 
 // Prices and durations, change them here. Stripe takes 2.9% + 30¢ of each
 export const FIRST_LIST_PRICE_CENTS = 499;
