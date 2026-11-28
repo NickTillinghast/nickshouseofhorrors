@@ -1,8 +1,8 @@
-# Nick's pick: the featured movie on the home page
+# Nick's picks: the featured movies on the home page
 
-One movie, right under the logo on `/home`. It's the same card as the top rated movies on `/movies`, labeled **Nick's pick**, with your own heading above it (e.g. "Best Cheesy Gore"). Picks are added in the Supabase dashboard; there's no admin page on the site.
+Your two newest picks, side by side right under the logo on `/home` (stacked on phones). Each is the same card as the top rated movies on `/movies`, labeled **Nick's pick**, with its own heading above it (e.g. "Best Cheesy Gore"). Picks are added in the Supabase dashboard; there's no admin page on the site.
 
-The section stays hidden until there's a published pick.
+With one published pick it shows on its own, centered. With none, the section stays hidden.
 
 ## One-time setup
 
@@ -23,15 +23,17 @@ Run `supabase/migrations/008_nicks_picks.sql` in Supabase → **SQL Editor**.
 
 Leave `id`, `status` and `published_at` alone; they fill themselves in.
 
-It shows on the home page within a few minutes. The **newest** published pick is the one shown, so adding a new row replaces the old one, and the old rows stay as a history.
+It shows on the home page within a few minutes. The **two newest** published picks are shown (newest on the left), so a third pick bumps the oldest one off. Old rows stay as a history.
+
+To show more or fewer than two, change `NICKS_PICKS_SHOWN` in `src/lib/nicksPick.ts`.
 
 ## Changing or removing
 
 - **Fix a heading or note:** edit the row.
-- **Take a pick down:** set its `status` to `hidden`. The previous pick shows again; hide them all and the section disappears.
+- **Take a pick down:** set its `status` to `hidden`. The next newest pick takes its place; hide them all and the section disappears.
 - **Bring an old pick back:** set its `published_at` to now.
 
-If the section doesn't show, check the `tmdb_id`. A number TMDB doesn't know hides the section instead of breaking the page, and the error shows in the CloudWatch logs.
+If a pick doesn't show, check its `tmdb_id`. A number TMDB doesn't know skips that pick instead of breaking the page, and the error shows in the CloudWatch logs.
 
 ## Heading ideas
 

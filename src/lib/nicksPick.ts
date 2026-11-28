@@ -24,9 +24,12 @@ function publicClient() {
   );
 }
 
-// The newest published pick with its movie from TMDB, or null when there's none yet.
+// How many picks the home page shows, newest first
+export const NICKS_PICKS_SHOWN = 2;
+
+// The newest published picks with their movies from TMDB, or [] when there are none yet.
 // Refreshes on its own every few minutes, so a new pick shows up without a deploy
-export async function getNicksPick(): Promise<NicksPick | null> {
+export async function getNicksPicks(): Promise<NicksPick[]> {
   "use cache";
   cacheTag(NICKS_PICK_TAG);
   cacheLife("minutes");
@@ -36,17 +39,21 @@ export async function getNicksPick(): Promise<NicksPick | null> {
     .select("tmdb_id, heading, note")
     .eq("status", "published")
     .order("published_at", { ascending: false })
-    .limit(1)
-    .maybeSingle<PickRow>();
-  // Shows up in CloudWatch, so a broken query doesn't just look like "no pick"
-  if (error) console.error("Couldn't load Nick's pick:", error.message);
-  if (!data) return null;
+    .limit(NICKS_PICKS_SHOWN)
+    .overrideTypes<PickRow[], { merge: false }>();
+  // Shows up in CloudWatch, so a broken query doesn't just look like "no picks"
+  if (error) console.error("Couldn't load Nick's picks:", error.message);
 
-  // A mistyped id (TMDB answers 404) hides the section instead of breaking the home page
-  const movie = await getMovie(String(data.tmdb_id)).catch(() => null);
-  if (!movie) {
-    console.error(`Nick's pick: TMDB has no movie ${data.tmdb_id}`);
-    return null;
-  }
-  return { heading: data.heading.trim(), note: data.note?.trim() || null, movie };
+  const picks = await Promise.all(
+    (data ?? []).map(async (row) => {
+      // A mistyped id (TMDB answers 404) skips that pick instead of breaking the home page
+      const movie = await getMovie(String(row.tmdb_id)).catch(() => null);
+      if (!movie) {
+        console.error(`Nick's pick: TMDB has no movie ${row.tmdb_id}`);
+        return null;
+      }
+      return { heading: row.heading.trim(), note: row.note?.trim() || null, movie };
+    }),
+  );
+  return picks.filter((pick) => pick !== null);
 }

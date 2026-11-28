@@ -9,7 +9,7 @@ import MovieDetailCard from "@components/MovieDetailCard/MovieDetailCard";
 import MovieList from "@components/MovieList/MovieList";
 import { BATTLES_LABEL, BATTLES_PATH, getBattles } from "@lib/battles";
 import { SOCIAL_LINKS } from "@lib/navigation";
-import { getNicksPick } from "@lib/nicksPick";
+import { getNicksPicks } from "@lib/nicksPick";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@lib/site";
 import { getPopularHorrorMovies, getTopRatedHorrorMovies } from "@lib/tmdb";
 import { getFeaturedList } from "@lib/userLists";
@@ -50,12 +50,12 @@ export const metadata: Metadata = {
 
 export default async function HomePage() {
   // The reel starts with the best-loved classics, "New movies" swaps in a random set
-  const [reelMovies, popularMovies, nicksPicks, battles, nicksPick] = await Promise.all([
+  const [reelMovies, popularMovies, nicksPicks, battles, featuredPicks] = await Promise.all([
     getTopRatedHorrorMovies(10),
     getPopularHorrorMovies(50),
     getFeaturedList(),
     getBattles(),
-    getNicksPick(),
+    getNicksPicks(),
   ]);
   const newestBattle = battles[0];
 
@@ -87,16 +87,22 @@ export default async function HomePage() {
         </Link>
       </section>
 
-      {/* Nick's pick: the newest one from Supabase (docs/nicks-pick.md), hidden until there is one */}
-      {nicksPick && (
-        <section className={styles.section} aria-labelledby="pick-heading">
-          <h2 id="pick-heading" className={`${styles.heading} font-heading`}>
-            {nicksPick.heading}
-          </h2>
-          {nicksPick.note && <p className={styles.sectionText}>{nicksPick.note}</p>}
-          <div className={styles.pickCard}>
-            <MovieDetailCard movie={nicksPick.movie} featured badge="Nick's pick" />
-          </div>
+      {/* Nick's picks: the newest ones from Supabase (docs/nicks-pick.md), each under its own
+          heading. Side by side on wide screens, stacked on phones, hidden until there's one */}
+      {featuredPicks.length > 0 && (
+        <section
+          className={`${styles.picks} ${featuredPicks.length === 1 ? styles.picksSingle : ""}`}
+          aria-label="Nick's picks"
+        >
+          {featuredPicks.map((pick) => (
+            <div key={pick.movie.id} className={styles.pick}>
+              <h2 className={`${styles.heading} font-heading`}>{pick.heading}</h2>
+              {pick.note && <p className={styles.sectionText}>{pick.note}</p>}
+              <div className={styles.pickCard}>
+                <MovieDetailCard movie={pick.movie} featured badge="Nick's pick" />
+              </div>
+            </div>
+          ))}
         </section>
       )}
 

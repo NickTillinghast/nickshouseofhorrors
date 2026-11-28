@@ -93,11 +93,41 @@
   color: var(--color-text-muted);
 }
 
-/* Nick's pick: the movies page card, a little wider than one grid column */
+/* Nick's picks: two side by side when there's room (the same column width as /movies),
+   stacked on phones. A single pick sits centered, a little wider than one column */
+.picks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr));
+  gap: 56px 24px;
+  width: 100%;
+}
+
+.picksSingle {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* One pick: its heading and note above the card */
+.pick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  min-width: 0;
+  text-align: center;
+}
+
 .pickCard {
   width: 100%;
-  max-width: 760px;
   text-align: start;
+}
+
+/* Desktop: the two picks sit side by side, so give the cards the same minimum height
+   whatever their descriptions. Only the card itself (">"), not the one in its popup */
+@media (min-width: 1024px) {
+  .pickCard > article {
+    min-height: 511px;
+  }
 }
 
 .steps {
