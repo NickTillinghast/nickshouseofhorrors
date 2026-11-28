@@ -36,7 +36,65 @@
   list-style: none;
 }
 
+/* Phone menu: the room of the house on top, the page's plain name small underneath */
+.roomLink {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.roomLabel {
+  color: var(--color-text-muted);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Desktop bar: just the plain names, so they fit. Hovering (or tabbing to) a link fades in its
+   room name on a little sign under the bar, like a plaque on a door. It floats, nothing moves */
+.links .roomLink {
+  position: relative;
+  display: inline;
+}
+
+.links .roomLabel {
+  color: inherit;
+  font-size: inherit;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.links .room {
+  position: absolute;
+  top: calc(100% + 18px);
+  left: 50%;
+  padding: 6px 12px;
+  border: 1px solid var(--color-blood);
+  border-radius: 6px;
+  background: #000;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.6);
+  color: var(--color-text);
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -4px);
+  transition:
+    opacity 0.15s,
+    transform 0.15s;
+}
+
+.links a:hover .room,
+.links a:focus-visible .room {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
 .links a {
+  /* Its box is just the name, not the hidden room sign floating below it */
+  display: inline-block;
   color: var(--color-text);
   font-size: 0.9rem;
   transition: color 0.15s;

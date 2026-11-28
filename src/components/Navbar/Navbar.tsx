@@ -87,7 +87,8 @@ function NavLinks({ pathname }: { pathname?: string }) {
     };
   }, [menuOpen]);
 
-  const links = NAV_LINKS.map(({ href, label }) => (
+  // Each page is a room of the house, with its plain name small underneath
+  const links = NAV_LINKS.map(({ href, label, room }) => (
     <li key={href}>
       <Link
         href={href}
@@ -95,7 +96,14 @@ function NavLinks({ pathname }: { pathname?: string }) {
         aria-current={pathname?.startsWith(href) ? "page" : undefined}
         onClick={close}
       >
-        {label}
+        {room ? (
+          <span className={styles.roomLink}>
+            <span className={styles.room}>{room}</span>
+            <span className={styles.roomLabel}>{label}</span>
+          </span>
+        ) : (
+          label
+        )}
       </Link>
     </li>
   ));
